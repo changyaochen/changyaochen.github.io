@@ -266,3 +266,11 @@ defaults:
       comments: # true
       share: true
       related: true
+  # Pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+      share: false
