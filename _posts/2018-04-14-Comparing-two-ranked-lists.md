@@ -3,7 +3,10 @@ layout: single
 title:  "Comparing two ranked lists"
 date:   2018-04-14 16:16:01 -0600
 published: true
+tag: algorithm
 ---
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images//assets/images/Kenenisa-Bekele.jpg)
+
 There comes times when we want to compare two rankings, for example, between my top-5 list of all time best male distance runners, and that of my friend Robin. My top 1 through 5 are:
 
 1. [Kenenisa Bekele](https://en.wikipedia.org/wiki/Kenenisa_Bekele)
@@ -30,7 +33,7 @@ An popular example for the first category is the Kendall's tau, which has a nice
 
 Then comes the intersection based measure. The idea is very simple, we simply count what is the proportion of overlapped items, among all items, as we progress the ranking depth. This will become clear in the figure shown below. 
 
-{% raw %}![lat]({{ site.url }}{{ site.baseurl }}/assets/images/rbo_example.png){% endraw %}
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/rbo_example.png)
 
 The figure above should be quite self-explanatory, in which I represent runners with the first letter in their last names. The overlap is the ratio between the length of common items set (intersection) and the total item set (union). The average overlap at each ranking depth k, is the average of all the k overlaps. The last average overlap (0.55), will be our similarity measure. A similar metric based on this idea, called rank-biased overlap (RBO), is proposed in this paper. 
 
