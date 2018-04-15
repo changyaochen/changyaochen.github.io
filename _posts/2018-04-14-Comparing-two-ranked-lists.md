@@ -5,7 +5,7 @@ date:   2018-04-14 16:16:01 -0600
 published: true
 tag: algorithm
 ---
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images//assets/images/Kenenisa-Bekele.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Kenenisa-Bekele.jpg)
 
 There comes times when we want to compare two rankings, for example, between my top-5 list of all time best male distance runners, and that of my friend Robin. My top 1 through 5 are:
 
