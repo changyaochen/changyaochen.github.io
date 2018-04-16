@@ -3,7 +3,7 @@ layout: single
 title:  "Comparing two ranked lists"
 date:   2018-04-14 16:16:01 -0600
 published: true
-tag: algorithm
+tag: [algorithm, python]
 excerpt: How similar is my top greatest movies of all time list to yours?
 header:
   teaser: /assets/images/rbo_teaser.jpeg
