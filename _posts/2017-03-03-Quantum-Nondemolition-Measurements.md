@@ -1,0 +1,21 @@
+---
+layout: single
+title:  "Quantum Nondemolition Measurements"
+date:   2017-03-03 12:00:00 -0600
+published: true
+tag: physics
+header:
+  teaser: /assets/images/quantum_nondemolition_teaser.png
+---
+
+One of the most well-known effects of quantum mechanics is the uncertainty principle. A direct consequence is that it that imposes a fundamental limit on the precision of any measurements. In Chinese, this is translated as 测不准原则 - translated back (again) to English, it literally means one will never make a precise measurement. A (bad) classical analogy is that, if you want to measure the pressure of your car tire, most likely you have to let out some of the air inside in order to make a reading, and in that process, the original pressure has changed. The very action of the measurement changes the state of system. Even looking at a object (photons bouncing off from that object) is also a measurement!
+
+Then is there a way to circumvent this limit? Let's consider a more relevant example. Say I am measuring the position of a pendulum by looking at it, hence making the measurement with light. The light beam shooting at the pendulum carries many photons, and the ponderomotive (radiation) force of the photon will exert force on the mass, however small it is. If this force is regular, i.e., not stochastic, that’s OK since I can subtract its effects later. But the random arrival of the photons (shot noise) will cause the randomness (i.e., uncertainty) in the measured position. Given this condition, one would think, OK, I will just use very few photons (low light intensity) to do the measurement, in order to reduce such uncertainty. Then you run into another type of noise (uncertainty, or stochastic force), arises from -- temperature! That’s your thermal noise. Therefore, there is a trade-off - smaller the power, you see more noise from temperature, larger the power, you see more noise from light. The optimal condition - than which you can NOT do better - is the standard quantum limit (SQL).
+
+Given the nature of such measurement, does that mean there is no practical way (at the end, we need to do some type of measurement) to reveal the very last bit of detail of the pendulum, below SQL? Braginsky says NO! The trick lies in how you do the measurement. Continuous linear measurements, in which one acquires the position of the pendulum ALL THE TIME will not work, due to the exact reason that we alluded to before. But, we can do stroboscopic measurements, illustrated as the picture below. 
+
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/quantum_nondemolition.png)
+
+The pulse train of the measurement signals is condition in such a way that the next pulse evades the perturbation to the mass due to the last pulse. The time-interval between the pulses (frequency of the pulse train) needs to be twice of the natural frequency of the pendulum. In a way, it is similar to parametric (de-)amplification. Although shot noise is a statistical concept, let me do a (bad) analogy in classical way. Let me consider a simple harmonic oscillator with frequency of 1 Hz (hence period of 1s, just to stay simple): if a photon that represents random shot noise (unwanted and not accounted for) arrives at t = 0s, and causes the unwanted perturbation, pushes the mass forward additionally (all the “good” photons will push the mass forward as well, but those are expected and accounted for). Then at t = 0.5s later, another pulse arrives, with another “shot-noise” photon. At this time, the mass will be at the opposite position, and moving backwards (carrying the additional momentum caused by the previous “shot-noise” photon). Therefore, this new “shot-noise” photon will push the mass forward again, hence cancels effect of the last “shot-noise” photon.
+
+A more rigorous explanation is provided by the [Viewpoint](physics.aps.org/articles/v8/119#c5) article: "... *by spacing the pulses by half the oscillation period, simple harmonic oscillation dictates that any uncertainty introduced by one pulse is converted, first to position uncertainty, and then back to momentum uncertainty at the arrival time of the next pulse. Thereby, each pulse experiences none of the backaction introduced by prior pulses.*" 
