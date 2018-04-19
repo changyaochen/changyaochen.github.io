@@ -23,7 +23,7 @@ Since we already know all the values of the parameters, I can just mindlessly so
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/normal_mode_coordinate.png) 
  
-Neither $$x_1$$ nor $$x_2$$ looks anything like a regular sinusoidal function, as in the uncoupled case! Although if I squeeze my eyes, I can convince myself there are still some periodicities in those figures... It turns out that, instead of looking at x_1 and x_2 individually, we I should be looking at is $$(x_1 + x_2)$$ and $$(x_1 - x_2)$$:
+Neither $$x_1$$ nor $$x_2$$ looks anything like a regular sinusoidal function, as in the uncoupled case! Although if I squeeze my eyes, I can convince myself there are still some periodicities in those figures... It turns out that, instead of looking at $$x_1$$ and $$x_2$$ individually, we I should be looking at is $$(x_1 + x_2)$$ and $$(x_1 - x_2)$$:
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/normal_mode_modal.png) 
 
