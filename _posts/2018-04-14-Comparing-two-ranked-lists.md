@@ -32,7 +32,7 @@ Before we dive in to find the proper protocols, it is best to enumerate some pro
 
 **First**, we like it to be bounded, say, between [0, 1], with 0 meaning completely different and 1 meaning identical -- we will further elaborate what does (in)different mean later. 
 
-**Second**, we like such protocol handle non-conjoint case, *i.e.*, to allow items shown in only one of the two lists. In the example above, Paul Tergat is only in my list while Mo Farah in only in Robin's list, but we should be able to handle such situations. 
+**Second**, we like such protocol handle non-conjoint case, *i.e.*, to allow items shown in only one of the two lists. In the example above, Paul Tergat is only in my list while Mo Farah is only in Robin's list, but we should be able to handle such situations. 
 
 **Third**, we like to handle lists with different lengths, *e.g.*, comparing a top-5 list and a top-10 list, or even more broadly, comparing results between two infinitely long lists (think search results of the same query returned by Google and Bing). 
 
