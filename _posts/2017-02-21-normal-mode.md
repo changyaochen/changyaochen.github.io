@@ -18,8 +18,14 @@ Let's call the motion of the left oscillator $$x_1$$, and that of the right osci
 
 Now, let's say the middle spring has a spring constant of $$k$$, and $$k$$ = 0.5. I am being sloppy with units here, but let's just assume them are all in standard SI units. Now I can write down the equation of motion that describe the motions of $$x_1$$ and $$x_2$$ as:
 
+$$
+\begin{eqnarray}
+m_1 \ddot{x}_1 &=& - k_1 x_1 + k(x_2 - x_1), \\\
+m_2 \ddot{x}_2 &=& - k_2 x_2 + k(x_1 - x_2).
+\end{eqnarray}
+$$
 
-Since we already know all the values of the parameters, I can just mindlessly solve for $$x_1(t)$$ and $$x_2(t)$$ numerically, say, with `Mathematica`. With the initial conditions of: $$x_1(0)$$ = $$x_2(0)$$ = 0, $$\dot{x_1}(0)$$ = 1, and $$\dot{x_2}(0)$$ = 0.1, below is what I get:
+Since we already know all the values of the parameters, I can just mindlessly solve for $$x_1(t)$$ and $$x_2(t)$$ numerically, say, with `Mathematica`. With the initial conditions of: $$x_1(0)$$ = $$x_2(0)$$ = 0, $$\dot{x}_1(0)$$ = 1, and $$\dot{x}_2(0)$$ = 0.1, below is what I get:
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/normal_mode_coordinate.png) 
  
