@@ -16,7 +16,7 @@ Many companies spend large sums of money on marketing, including but not limited
 
 A very appealing method is to train certain **propensity** model, which takes in each customer's attributes (age, gender, past shopping behaviors, etc.), and *predict* the probability that she will make a purchase (say, in next month). Once we have trained a reasonably good propensity model (evaluated with appropriate metrics), we than apply our marketing actions to those top prospects, to *lock in* their purchases. 
 
-However, such approach is fundamentally flawed, in that it completely disregard the effects of marketing actions. Even if we observe better performance from those customers who are treated with marketing actions, it will be merely correlation but not causation: how do we know whether they will behave the same if they are **not** treated?
+However, such approach is fundamentally flawed, in that it completely disregards the effects of marketing actions. Even if we observe better performance from those customers who are treated with marketing actions, it will be mere correlation but not causation: how do we know whether they will behave the same if they are **not** treated?
 
 ## Model to identify causal effects
 ### The goal
@@ -44,9 +44,9 @@ But how do I build such a model? More importantly, if I am handed two models, on
 ### The fundamental problem of causal inference (FPCI)
 To make things simple, let's think discretely for now: our goal is to categorize all our customers to one of the three categories (persuadable, in-different, and do-not-disturb). Imagine, for each customer, we *first* ask her: will you shop? Write down the answer (yes/no). *Secondly*, apply the marketing action to her (send her a direct mail). *Thirdly*, we observe whether she comes to shop (yes/no). In this way, we are able to assign each of our customers to one of the three types. Of course, it is impossible for us to carry out such task, especially for the first step. There is just no way to learn a customer's prior opinion / behavior explicitly. Without such knowledge, even we can observe her response (in the third step), there is no way for us to derive the causal relation.
 
-Is there a fix for the above issue? How about in the second step, instead of applying the marketing action, we will do nothing, then in the third step, the observed response can be inferred as the customer's prior behavior. This sounds very logical, however, the fallacy lies in that, we can not **simultaneously** apply and not apply the marketing action to the same person, unless someone invents a time machine. This is known as the "fundamental problem of causal inference" (FPCI).  
+Is there a fix for the above issue? How about in the second step, instead of applying the marketing action, we will do nothing, then in the third step, the observed response can be inferred as the customer's prior behavior. This sounds very logical, however, the fallacy lies in that, we can not **simultaneously** apply and not apply the marketing action to the same person, unless someone invents a time machine. This is known as the "[fundamental problem of causal inference](https://en.wikipedia.org/wiki/Rubin_causal_model)" (FPCI).  
 
-Per the same wikipedia article: "*The FPCI makes observing causal effects impossible. However, this does not make causal inference impossible. Certain techniques and assumptions allow the FPCI to be overcome.*" Here we will choose one of such technique, and derive our evaluation metric from it.
+Per the same wikipedia article: "*The FPCI makes observing causal effects impossible. However, this does not make causal inference impossible. Certain techniques and assumptions allow the FPCI to be overcome.*" Here we will choose one of such techniques, and derive our evaluation metric from it.
 
 ### Randomized treatment and control groups
 
