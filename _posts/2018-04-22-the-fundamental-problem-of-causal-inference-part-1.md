@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "The fundamental problem of causal inference"
+title:  "The fundamental problem of causal inference, part 1"
 date:   2018-04-22 12:00:01 -0600
 published: true
 tag: [algorithm]
@@ -17,6 +17,8 @@ Many companies spend large sums of money on marketing, including but not limited
 A very appealing method is to train certain **propensity** model, which takes in each customer's attributes (age, gender, past shopping behaviors, etc.), and *predict* the probability that she will make a purchase (say, in next month). Once we have trained a reasonably good propensity model (evaluated with appropriate metrics), we than apply our marketing actions to those top prospects, to *lock in* their purchases. 
 
 However, such approach is fundamentally flawed, in that it completely disregards the effects of marketing actions. Even if we observe better performance from those customers who are treated with marketing actions, it will be mere correlation but not causation: how do we know whether they will behave the same if they are **not** treated?
+
+In this post and next, I will try to illustrate how one can go about identifying the casuality, and build model to maximize the causal effects in, for instance, a marketing campaign.
 
 ## Model to identify causal effects
 ### The goal
@@ -84,8 +86,5 @@ Once we understand the best-possible scenarios when applying a model to the trea
 
 Finally, we arrive at a scheme (randomized treatment and control group), and the corresponding metric (Q coefficient) that we can use to evaluate any model that aims to answer FPCI. Now let's build a model.
 
-### A real model
-TBD.
-
 ## Conclusion
-TBD.
+In this post, we first articulate the fundamental problem of causal inference (FPCI) with a simple marketing campaign example. We have arrived at one technique (randomized treatment and control groups) that can isolate the causal relation between actions and responses, as well as a convenient metric (Q coefficient) to evaluate a causal model. In next post, we will keep traveling along this line of thought, to explore how we can build model(s).
