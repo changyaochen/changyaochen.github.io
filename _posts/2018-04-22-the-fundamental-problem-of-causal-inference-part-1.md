@@ -12,9 +12,9 @@ header:
 ---
 ## What are we talking about?
 
-Many companies spend large sums of money on marketing, including but not limited to, sending coupons, emails to some customers. It is almost true that one should not send the same message to all the customers. The reason is quite obvious: there is some unit cost associated each of the messages, either monetary or not (say, customer fatigue). For the sake of simplicity, let us assume the number of marketing messages is already determined (e.g., 5 million pieces), the central question then becomes: which 5 million from the total customer pool (say, 100 million)? 
+Many companies spend large sums of money on marketing, including but not limited to, sending coupons, emails to some customers. It is almost true that one should not send the same message to all the customers. The reason is quite obvious: there is some unit cost associated each of the messages, either monetary or not (say, customer fatigue). For the sake of simplicity, let us assume the number of marketing messages is already determined (*e.g.*, 5 million pieces), the central question then becomes: which 5 million from the total customer pool (say, 100 million)? 
 
-A very appealing method is to train certain **propensity** model, which takes in each customer's attributes (age, gender, past shopping behaviors, etc.), and *predict* the probability that she will make a purchase (say, in next month). Once we have trained a reasonably good propensity model (evaluated with appropriate metrics), we than apply our marketing actions to those top prospects, to *lock in* their purchases. 
+A very appealing method is to train certain **propensity** model, which takes in each customer's attributes (age, gender, past shopping behaviors, etc.), and *predict* the probability that she will make a purchase (say, in next month). Once we have trained a reasonably good propensity model (evaluated with appropriate metrics), we then apply our marketing actions to those top prospects, to *lock in* their purchases. 
 
 However, such approach is fundamentally flawed, in that it completely disregards the effects of marketing actions. Even if we observe better performance from those customers who are treated with marketing actions, it will be mere correlation but not causation: how do we know whether they will behave the same if they are **not** treated?
 
@@ -41,7 +41,7 @@ Let's first imagine how such a model should work. The inputs to the model should
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/black_box_model.png)
 
-But how do I build such a model? More importantly, if I am handed two models, one of which just assign a random score to each customer, how can tell which one is better (hopefully not the random number generator)? Therefore, before we dive into model building, we first need to establish a meaningful evaluation metric. Unlike binary classification problem, such metric is not so obvious, due to the "fundamental problem of causal inference".
+Then suddenly, you are handed two models, one of which just assign a random score to each customer, how can tell which one is better (hopefully not the random number generator)? Therefore, before we dive into model building, we first need to establish a meaningful evaluation metric. Unlike binary classification problem, such metric is not so obvious, due to the "fundamental problem of causal inference".
 
 ### The fundamental problem of causal inference (FPCI)
 To make things simple, let's think discretely for now: our goal is to categorize all our customers to one of the three categories (persuadable, in-different, and do-not-disturb). Imagine, for each customer, we *first* ask her: will you shop? Write down the answer (yes/no). *Secondly*, apply the marketing action to her (send her a direct mail). *Thirdly*, we observe whether she comes to shop (yes/no). In this way, we are able to assign each of our customers to one of the three types. Of course, it is impossible for us to carry out such task, especially for the first step. There is just no way to learn a customer's prior opinion / behavior explicitly. Without such knowledge, even we can observe her response (in the third step), there is no way for us to derive the causal relation.
@@ -66,15 +66,15 @@ We will have the results in, from both groups, how can we make sense of it? More
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/ranking_1.png)
 
-As we can see, both treatment and control groups consist of 10 people. Out of the 10 people in the treatment group, 6 come to shop; whereas only 3 people from the control group come to shop. Therefore, the *response rate* from the treatment group is 60%, higher than 30% from the control group. Recall that we consider the treatment group and control group are "identical", except for the marketing action (the treatment). Hence we will attribute the observed difference to the marketing action, that is, the marketing action **causes** the difference of the response rate, and in this case, to our favor.
+As we can see, both treatment and control groups consist of 10 people. Out of the 10 people in the treatment group, 6 come to shop; whereas only 3 people from the control group come to shop. Therefore, the *response rate* from the treatment group is 60%, higher than 30% from the control group. Recall that we consider the treatment group and control group are "identical", except for the marketing action (the treatment). Hence we will attribute the observed difference to the marketing action, that is, the marketing action **causes** the difference of the response rate, and in this case, to our favor. We see an absolute lift (or uplift) of 30% in the response rate.
 
 ### Evaluation metric
 
-So far we don't need any model, not even the black-box one. How can a model come into play? Imagine the company is going through some severe budget cut, and we can only apply marketing action to 5 customers. For the sake of simplicity, let us further assume that our total customer universe only contains the 10 people in the treatment group (what kind of company is that?!), then the question boils down to: which 5 to pick?
+So far we don't need any model, not even the black-box one. The random assignment gives us a 30% lift. However, **can we do better than random?** Here a model come into play. Imagine the company is going through some severe budget cut, and we can only apply marketing action to 5 customers. For the sake of simplicity, let us further assume that our total customer universe only contains the 10 people in the treatment group (what kind of company is that?!), then the question boils down to: which 5 to pick?
 
-Now the black-box model comes to play. First one up is the random number generator: it will just randomly pick 5 people, and since we are omniscient, we will know that the response rate will be 60% - it is still better than the baseline response rate of 30%!
+Now the model comes to play. First one up is the random number generator: it will just randomly pick 5 people, and since we are omniscient, we will know that the response rate will be 60% - it is still better than the baseline response rate of 30%!
 
-Then another black-box model can score the 10 customers (in the treatment group) in the fashion shown in the figure below. If we then pick the top-5 highest ranked customer to apply the marketing action, we will get a response rate of 100%! Talk about a smart algorithm!
+Then another model can score the 10 customers (in the treatment group) in the fashion shown in the figure below. If we then pick the top-5 highest ranked customer to apply the marketing action, we will get a response rate of 100%! Talk about a smart algorithm!
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/ranking_2.png)
 
