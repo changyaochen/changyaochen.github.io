@@ -70,7 +70,7 @@ As we can see, both treatment and control groups consist of 10 people. Out of th
 
 ### Evaluation metric
 
-So far we don't need any model, not even the black-box one. The random assignment gives us a 30% lift. However, **can we do better than random?** Here a model come into play. Imagine the company is going through some severe budget cut, and we can only apply marketing action to 5 customers. For the sake of simplicity, let us further assume that our total customer universe only contains the 10 people in the treatment group (what kind of company is that?!), then the question boils down to: which 5 to pick?
+So far we don't need any model, not even the black-box one. The random assignment gives us a 30% lift. However, **can we do better than random?** Imagine the company is going through some severe budget cut, and we can only apply marketing action to 5 customers. For the sake of simplicity, let us further assume that our total customer universe only contains the 10 people in the treatment group (what kind of company is that?!), then the question boils down to: which 5 to pick?
 
 Now let's consider how a model can help. First one up is the random number generator: it will just randomly pick 5 people, and since we are omniscient, we will know that the response rate will be 60% - it is still better than the baseline response rate of 30%!
 
