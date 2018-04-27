@@ -35,7 +35,7 @@ We have built a model! Now let us **evaluate** this model, with the Q coefficien
 The figure below shows the cumulative curves created according to the above procedure. The data used is the modified [Hillstrom Email marketing](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html) dataset, whereas the treatment group is sent Women's Email, and the control group is not sent any Email. The binary classifiers are both random forest (from `sklearn`), with respective AUC on the test dataset of 0.612 and 0.658. The (number of response) / (number of total) is 972 / 6417 for the test dataset of the treatment group, and 679 / 6392 for the control group.
 
 <figure>
-<a href="/assets/images/upgain_1.png"><img src="/assets/images/upgain_1.png"></a>
+<a href="/assets/images/upgain_1.png"><img src="/assets/images/upgain_two_model_diff.png"></a>
 </figure>
 
 The resulting Q coefficient is 0.02 in this case, not great, but at least positive. what is also shown as the right-most figure is the **uplift** of the cumulative gain. This curve is created by subtracting the **scaled** "control" cumulative curve from the "treatment" cumulative curve. In essence, we first scale the control group to the same size of the treatment group, therefore, the number of response will change from 679 to 681.7, and the uplift of number of response will change from (972 - 679 =) 293 to 290.3 accordingly. The uplift in the cumulative gain (or as I call it, upgain) curve can tell us, how the model will perform, as we target different portion of customers, from best to worst. Of course if we target all the customers, we will capture all the uplifts, arriving at the top-right corner of the upgain chart.
@@ -99,7 +99,28 @@ The left-hand side is exactly the quantity that we aim to maximize, namely, the 
 
 Now we are back into our comfort zone: to build a binary classifier. When handed the data from both treatment and control datasets, we first flip the class assignment in the control dataset, then concatenate both datasets, and build a binary classifier to predict \\(P(Z=1)\\). Bring out your favorite tools, be it random forest, gradient boosted trees, neural networks, go crazy. The final 'uplift score' can then be calculated in a straightforward manner, as in the above simplified case, as \\(2P(Z=1) - 1\\). If we care the relative ranking more than the absolute scores, we can even skip this final step.
 
-We still apply the same evaluation metric as what we have described in part 1, following the three steps outlined in last section. 
+We still apply the same evaluation metric as what we have described in part 1, following the three steps outlined in last section. The result is shown in the figure below. 
+<figure>
+<a href="/assets/images/upgain_class_xform.png"><img src="/assets/images/upgain_class_xform.png"></a>
+</figure>
+
+### One-model-difference approach
+There is another appealing method with fitting just one model, that is to make the treatment indicator as a feature: everyone in the treatment group will have this value set to 1, with everyone in the control group having this value set to 0. Then we will proceed to build a binary classifier, with treatment (marketing action) explicitly affecting the outcome (response). When the prediction time comes, we first set everyone's treatment indicator to 1, to predict their propensity of response when treated. Then we set everyone's treatment indicator to 0, to predict their propensity when not treated. The final score for each customer will then be calculated as the difference between her two scores.
+
+Below is the results of such a model evaluated on the same test dataset. The AUC of ROC for the underlying random forest binary classifier is 0.634.
+
+<figure>
+<a href="/assets/images/upgain_one_model_diff.png"><img src="/assets/images/upgain_one_model_diff.png"></a>
+</figure>
+
+A natural question will arise: will this method work with a linear model, say, logistic regression? Intuitively it should not work. By the nature of a linear model, the change caused by flipping the treatment indicator from 0 to 1 will be the same for all customers, therefore, everyone will get the same score. In the case of logistic regression, the change in logit for everyone is constant, and the final logistic function introduces some weak nonlinearity to spread the final scores. However, it is likely that such nonlinearity is not strong enough. Of course, we need proofs to be convinced: below are the results from a logistic regression model. The AUC for ROC for the classifier is 0.634, whereas the coefficient for treatment indicator is 0.448, with p-value less than 0.001. So far things are pointing at the right direction: the coefficient is positive (treatment increases the response probability), and statistically significant (small p-value). But the resulting Q coefficient is much smaller than any of that we have seen before, one can even argue that that Q coefficient is effectively zero. Not surprisingly, we don't observe any upgain either.
+
+<figure>
+<a href="/assets/images/upgain_one_model_diff_lr.png"><img src="/assets/images/upgain_one_model_diff_lr.png"></a>
+</figure>
+
+## Conclusion
+blah
 
 
 
