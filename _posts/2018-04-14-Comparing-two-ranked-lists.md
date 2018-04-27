@@ -8,7 +8,9 @@ excerpt: How similar is my top greatest movies of all time list to yours?
 header:
   teaser: /assets/images/rbo_teaser.jpeg
 ---
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Kenenisa-Bekele.jpg)
+<figure>
+<a href="/assets/images/Kenenisa-Bekele.jpg"><img src="/assets/images/Kenenisa-Bekele.jpg"></a>
+</figure>
 
 There comes times when we want to compare two rankings, for example, between my top-5 list of all time best male distance runners, and that of my friend Robin. My top 1 through 5 are:
 
@@ -42,7 +44,9 @@ An popular example for the first category is the [Kendall's tau](https://en.wiki
 
 Then comes the intersection based measure. The idea is very simple, we simply count what is the proportion of overlapped items, among all items, as we progress the ranking depth. Such proportion is also called [Jaccard similarity](https://en.wikipedia.org/wiki/Jaccard_index). This will become clear in the figure shown below. 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/rbo_example.png)
+<figure>
+<a href="/assets/images/rbo_example.png"><img src="/assets/images/rbo_example.png"></a>
+</figure>
 
 The figure above should be quite self-explanatory, in which I represent runners with the first letter in their last names. The overlap is the ratio between the length of common items set (intersection) and the total item set (union). The average overlap at each ranking depth $$k$$, is the average of all the $$k$$ overlaps. The last average overlap (0.55), will be our similarity measure. A similar metric based on this idea, called rank-biased overlap (RBO), is proposed in [this](http://www.williamwebber.com/research/papers/wmz10_tois.pdf) paper. 
 

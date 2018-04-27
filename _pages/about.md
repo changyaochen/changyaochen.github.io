@@ -9,7 +9,7 @@ toc_label: "Table of Contents"
 ---
 
 ### Education
-  * **Ph.D.**, Mechanical Engineering, Columbia University, 2013
+  * **Ph.D.**, Mechanical Engineering, Columbia University, 2012
   * **M.Sc.**, Mechanical Engineering, Columbia University, 2007
   * **B.S.**,   Precision Instrument, Tsinghua University, China, 2006
 
