@@ -118,7 +118,7 @@ The calculated Q coefficient is about 0.04 in this case (both the treatment and 
 ### One-model-difference approach
 There is another appealing method with fitting just one model, that is to make the **treatment indicator** as a feature: everyone in the treatment group will have this value set to 1, with everyone in the control group having this value set to 0. Then we will proceed to build a binary classifier, with treatment (marketing action) explicitly affecting the outcome (response). When the prediction time comes, we first set everyone's treatment indicator to 1, to predict their propensity of response when treated. Then we set everyone's treatment indicator to 0, to predict their propensity when not treated. The final score for each customer will then be calculated as the difference between her two scores.
 
-Below is the results of such a model evaluated on the same test dataset. The AUC of ROC for the underlying random forest binary classifier is 0.634. We would conclude this approach is not worse than any of the previous two.
+Below is the results of such a model evaluated on the same test dataset. The AUC of ROC for the underlying random forest binary classifier is 0.634. Judging from the Q coefficient and the upgain chart, we would conclude this approach is not worse than any of the previous two.
 
 <figure>
 <a href="/assets/images/upgain_one_model_diff.jpg"><img src="/assets/images/upgain_one_model_diff.png"></a>
