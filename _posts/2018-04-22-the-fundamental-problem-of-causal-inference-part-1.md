@@ -32,14 +32,18 @@ The ultimate goal of any marketing action (campaign) is to change the recipient'
 
 The above cases can be better understood with the figure shown below. Furthermore, we group the 'lost cause' and the 'sure thing' together as 'in-different', in the sense that our marketing action is indifferent to their behaviors.
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/customer_segments.png)
+<figure>
+<a href="/assets/images/customer_segments.jpg"><img src="/assets/images/customer_segments.png"></a>
+</figure>
 
 Clearly, the "persuadable"s are the subset of customers we want to identify and apply our marketing actions to. It is the job for us, **to build models to identify them** (and the "in-different"s and "do not disturb"s).
 
 ### A black-box model
 Let's first imagine how such a model should work. The inputs to the model should be all our customers, expressed with certain features (*e.g.*, total spend in previous 12 months, total number of store visits). If we have *m* customers, each expressed with *n* feature, then we can imagine the input to the model as a *m* x *n* matrix. After some number crunching, the model will assign a numerical score to each of the *m* customers (ideally a bounded score, say, between 0 and 1). A "persuadable" should have a higher score than an "in-different", whose score is higher than a "do not disturb". Then with the pre-determined budget constraint (e.g., 5 million coupons), we can just pick the top-k customers accordingly. Voila, we are done!
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/black_box_model.png)
+<figure>
+<a href="/assets/images/black_box_model.jpg"><img src="/assets/images/black_box_model.png"></a>
+</figure>
 
 Then suddenly, you are handed two models, one of which just assign a random score to each customer, how can tell which one is better (hopefully not the random number generator)? Therefore, before we dive into model building, we first need to establish a meaningful evaluation metric. Unlike binary classification problem, such metric is not so obvious, due to the "fundamental problem of causal inference".
 
@@ -60,11 +64,15 @@ Let's take yet one more step back: instead of studying each customer with her in
 
 Then we apply our marketing actions to the treatment group, and do nothing to the control group, and observe their responses, as shown in the figure below.
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/random_assignment.png)
+<figure>
+<a href="/assets/images/random_assignment.jpg"><img src="/assets/images/random_assignment.png"></a>
+</figure>
 
 We will have the results in, from both groups, how can we make sense of it? More importantly, can we use these results to evaluate a model? To illustrate this, let's consider an extremely simple case as shown below. 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/ranking_1.png)
+<figure>
+<a href="/assets/images/ranking_1.jpg"><img src="/assets/images/ranking_1.png"></a>
+</figure>
 
 As we can see, both treatment and control groups consist of 10 people. Out of the 10 people in the treatment group, 6 come to shop; whereas only 3 people from the control group come to shop. Therefore, the *response rate* from the treatment group is 60%, higher than 30% from the control group. Recall that we consider the treatment group and control group are "identical", except for the marketing action (the treatment). Hence we will attribute the observed difference to the marketing action, that is, the marketing action **causes** the difference of the response rate, and in this case, to our favor. We see an absolute lift (or uplift) of 30% in the response rate.
 
@@ -76,13 +84,17 @@ Now let's consider how a model can help. First one up is the random number gener
 
 Then another model can score the 10 customers (in the treatment group) in the fashion shown in the figure below. If we then pick the top-5 highest ranked customer to apply the marketing action, we will get a response rate of 100%! Talk about a smart algorithm!
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/ranking_2.png)
+<figure>
+<a href="/assets/images/ranking_2.jpg"><img src="/assets/images/ranking_2.png"></a>
+</figure>
 
 The same logic can be to applied to the control group: if a model can rank all the responded customers *after* those do not, that is the best we can ask for. Those responded customers do not need any marketing messages anyway.
 
 Once we understand the best-possible scenarios when applying a model to the treatment and control group, we can quantify such performance with a [cumulative gain curve](https://www.ibm.com/support/knowledgecenter/SSLVMB_23.0.0/spss/tutorials/rbf_telco_gains-lift.html). A cumulative gain curve can be used to evaluate the performance of a binary classifier (similar to a receiver operating characteristic curve), and by plotting both the "best" treatment and control curves together with curves produced by real models, we can then evaluate how far off the model from the ideal case. For example, we can calculate the area between the treatment and control curve, and compare it to the ideal cases by taking ratios. This is similar to use normalized Gini coefficient to evaluate the performance of a binary classifier, therefore, let's call this ratio as **Q coefficient**. The range of Q coefficient is bounded between -1 and 1, whereas larger value indicates better performance. 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/cumulative_gain_chart_real.png)
+<figure>
+<a href="/assets/images/cumulative_gain_chart_real.jpg"><img src="/assets/images/cumulative_gain_chart_real.png"></a>
+</figure>
 
 Finally, we arrive at a scheme (randomized treatment and control group), and the corresponding metric (Q coefficient) that we can use to evaluate any model that aims to answer FPCI. Now let's build a model.
 

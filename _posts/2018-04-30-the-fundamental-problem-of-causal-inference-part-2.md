@@ -2,7 +2,7 @@
 layout: single
 title:  "The fundamental problem of causal inference, part 2"
 date:   2018-04-30 12:00:01 -0600
-published: false
+published: true
 tag: [algorithm]
 excerpt: Now we know what a good causal model look like, how to build one?
 toc: true
@@ -35,7 +35,7 @@ We have built a model! Now let us **evaluate** this model, with the Q coefficien
 The figure below shows the cumulative curves created according to the above procedure. The data used is the modified [Hillstrom Email marketing](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html) dataset, whereas the treatment group is sent Women's Email, and the control group is not sent any Email. The binary classifiers are both random forest (from `sklearn`), with respective AUC on the test dataset of 0.612 and 0.658. The (number of response) / (number of total) is 972 / 6417 for the test dataset of the treatment group, and 679 / 6392 for the control group.
 
 <figure>
-<a href="/assets/images/upgain_1.png"><img src="/assets/images/upgain_two_model_diff.png"></a>
+<a href="/assets/images/upgain_two_model_diff.jpg"><img src="/assets/images/upgain_two_model_diff.png"></a>
 </figure>
 
 The resulting Q coefficient is 0.02 in this case, not great, but at least positive. what is also shown as the right-most figure is the **uplift** of the cumulative gain. This curve is created by subtracting the **scaled** "control" cumulative curve from the "treatment" cumulative curve. In essence, we first scale the control group to the same size of the treatment group, therefore, the number of response will change from 679 to 681.7, and the uplift of number of response will change from (972 - 679 =) 293 to 290.3 accordingly. The uplift in the cumulative gain (or as I call it, upgain) curve can tell us, how the model will perform, as we target different portion of customers, from best to worst. Of course if we target all the customers, we will capture all the uplifts, arriving at the top-right corner of the upgain chart.
@@ -101,7 +101,7 @@ Now we are back into our comfort zone: to build a binary classifier. When handed
 
 We still apply the same evaluation metric as what we have described in part 1, following the three steps outlined in last section. The result is shown in the figure below. 
 <figure>
-<a href="/assets/images/upgain_class_xform.png"><img src="/assets/images/upgain_class_xform.png"></a>
+<a href="/assets/images/upgain_class_xform.jpg"><img src="/assets/images/upgain_class_xform.png"></a>
 </figure>
 
 ### One-model-difference approach
@@ -110,13 +110,13 @@ There is another appealing method with fitting just one model, that is to make t
 Below is the results of such a model evaluated on the same test dataset. The AUC of ROC for the underlying random forest binary classifier is 0.634.
 
 <figure>
-<a href="/assets/images/upgain_one_model_diff.png"><img src="/assets/images/upgain_one_model_diff.png"></a>
+<a href="/assets/images/upgain_one_model_diff.jpg"><img src="/assets/images/upgain_one_model_diff.png"></a>
 </figure>
 
 A natural question will arise: will this method work with a linear model, say, logistic regression? Intuitively it should not work. By the nature of a linear model, the change caused by flipping the treatment indicator from 0 to 1 will be the same for all customers, therefore, everyone will get the same score. In the case of logistic regression, the change in logit for everyone is constant, and the final logistic function introduces some weak nonlinearity to spread the final scores. However, it is likely that such nonlinearity is not strong enough. Of course, we need proofs to be convinced: below are the results from a logistic regression model. The AUC for ROC for the classifier is 0.634, whereas the coefficient for treatment indicator is 0.448, with p-value less than 0.001. So far things are pointing at the right direction: the coefficient is positive (treatment increases the response probability), and statistically significant (small p-value). But the resulting Q coefficient is much smaller than any of that we have seen before, one can even argue that that Q coefficient is effectively zero. Not surprisingly, we don't observe any upgain either.
 
 <figure>
-<a href="/assets/images/upgain_one_model_diff_lr.png"><img src="/assets/images/upgain_one_model_diff_lr.png"></a>
+<a href="/assets/images/upgain_one_model_diff_lr.jpg"><img src="/assets/images/upgain_one_model_diff_lr.png"></a>
 </figure>
 
 ## Conclusion
