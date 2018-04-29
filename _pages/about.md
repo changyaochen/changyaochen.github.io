@@ -6,6 +6,7 @@ permalink: /about/
 read_time: false
 toc: true
 toc_label: "Table of Contents"
+comments: false
 ---
 
 ### Education

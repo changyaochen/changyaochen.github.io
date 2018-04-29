@@ -2,7 +2,7 @@
 layout: single
 title:  "The fundamental problem of causal inference, part 2"
 date:   2018-04-30 12:00:01 -0600
-published: true
+published: false
 tag: [algorithm]
 excerpt: Now we know what a good causal model look like, how to build one?
 toc: true
