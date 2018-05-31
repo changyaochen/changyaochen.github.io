@@ -56,7 +56,7 @@ The two-model-difference approach makes intuitive sense, and it is also straight
 
 There are different techniques to achieve this goal, here we will focus [one](https://pdfs.semanticscholar.org/6021/f9e1860548e59d7b9bfaca5684bd40f0fbc2.pdf)﻿ of them, called class-variable-transformation. The idea is rather simple: one just needs to "*flip the class in the control set*". 
 
-Before we dive into the details, let's first define some terminologies. Let \\(Y\\)denotes the binary response from the customer, as \\(Y \in \{0, 1\}\\). Let \\(G\\)denotes the group membership of the marketing action, and  \\(G \in \{T, C\}\\)whereas \\(T, C\\)indicates treatment and control, respectively. Let's also define a new random variable \\(Z\\)as:
+Before we dive into the details, let's first define some terminologies. Let \\(Y\\)denotes the binary response from the customer, as \\(Y \in \{0, 1\}\\). Let \\(G\\)denotes the group membership of the marketing action, and  \\(G \in \{T, C\}\\)whereas \\(T, C\\)indicates treatment and control, respectively. Let's also define a new random variable \\(Z\\) as:
 
 $$
 Z = 
