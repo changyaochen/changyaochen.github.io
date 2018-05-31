@@ -63,5 +63,8 @@ $$
 We can further prove that with this values of \\(\mu\\) and \\(\sigma^2\\), we actually have the maximum of \\(\ell(X; \mu, \sigma^2)\\). Therefore, MLE justifies our "fitting" procedure. 
 
 ### How about gradient descent
+Before we move on, how about that gradient descent method to calculate the maximum value? Sure, we can randomly pick a set of initial values for \\(\mu\\) and \\(\sigma^2\\), and the follow the standard recipe of gradient descent to find the maximal \\(\ell\\) and the corresponding \\(\mu\\) and \\(\sigma^2\\), but then we have to deal with the proper choices of initial values, learning rates (and its decay), etc. I actually tried to implement a vanilla version of gradient descent on this problem, only to manually tune the learning rate to make it coverage, yike! Since we already have such an easy way, why bother?
+
+# Mixture of two Gaussians
 blah
 
