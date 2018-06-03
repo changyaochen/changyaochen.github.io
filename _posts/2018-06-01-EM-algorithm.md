@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Fitting a Mixture of Gaussians"
-date:   2018-06-01 12:00:01 -0600
+date:   2018-06-03 12:00:01 -0600
 published: false
 tag: [algorithm, python]
 excerpt: Fitting one single Gaussian distribution is trivial, but how about more than one?
@@ -66,7 +66,7 @@ $$
 We can further prove that with this values of \\(\mu\\) and \\(\sigma^2\\), we actually have the maximum of \\(\ell(X; \mu, \sigma^2)\\). Therefore, MLE justifies our "fitting" procedure. 
 
 ### How about gradient descent
-Before we move on, how about that gradient descent method to calculate the maximum value? Sure, we can randomly pick a set of initial values for \\(\mu\\) and \\(\sigma^2\\), and the follow the standard recipe of gradient descent to find the maximal \\(\ell\\) and the corresponding \\(\mu\\) and \\(\sigma^2\\), but then we have to deal with the proper choices of initial values, learning rates (and its decay), etc. I actually tried to implement a vanilla version of gradient descent on this problem, only to manually tune the learning rate to make it coverage, yike! Since we already have such an easy way, why bother?
+Before we move on, how about that gradient descent method to calculate the maximum value? Sure, we can randomly pick a set of initial values for \\(\mu\\) and \\(\sigma^2\\), and the follow the standard recipe of gradient descent to find the maximal \\(\ell\\) and the corresponding \\(\mu\\) and \\(\sigma^2\\), but then we have to deal with the proper choices of initial values, learning rates (and its decay), etc. I actually [implemented](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/EM.ipynb#GD) a vanilla version of gradient descent on this problem, only to tune the learning rate carefully to make it coverage, yike! Since we already have such an easy way, why bother?
 
 So what have we learned? Here we are given a set of data (10,000 weights for adult women), and an assumed type of distribution (Gaussian), we are able to "learn" the parameters of the distribution (mean and variance). Therefore, if we are presented with new sample from the same population, we are able to make statistical inference. Really nothing fancy.
 
@@ -202,11 +202,13 @@ As an iterative algorithm, EM suffers from the pitfall that it is not guaranteed
 Finally, how about finding maximum log-likelihood with gradient descent? One surely can, and maybe with faster speed. However, as there are many knobs to turn in the gradient descent process, EM algorithm can be implemented more easily, with clear narratives. 
 
 ## He or she?
-Talk is cheap, we need to see that EM algorithm actually works. Of course we do. Remember the question that got us started? We want to fit the 30,000 weights with a mixture with two Gaussian distributions, 
+Talk is cheap, we need to see that EM algorithm actually works. Of course we do. Remember the question that got us started? We want to fit the 30,000 weights with a mixture with two Gaussian distributions, using the EM-algorithm outlined above. [Here](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/EM.ipynb#EM) you can find a quick implementation for this use case, and the animation below shows the fitting result from the first 20 iterations.
 
 <figure>
 <a href="/assets/images/EM_gaussian_mixture.gif"><img src="/assets/images/EM_gaussian_mixture.gif"></a>
 </figure>
+
+After we have let the EM algorithm to converge, we got the final parameters as: \\(\mu_1 = 170.032\\), \\(\sigma_1 = 4.957\\), \\(\pi_1 = 0.331\\), and \\(\mu_2 = 199.862\\), \\(\sigma_2 = 15.052\\), \\(\pi_2 = 0.669\\). Now we can comfortably answer the question: if someone is drawn from the same population, with a weight of 180 lb., then there is 0.322 of probability being a he, and a 0.678 probability being a she. This seems reasonable, given that there are more women than men in the given population. Unlike hard assignment methods such as k means, here we give a probabilistic answer, which is more natural.
 
 
 
