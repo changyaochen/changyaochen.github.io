@@ -107,10 +107,10 @@ $$
 \end{eqnarray}
 $$
 
-Well, this is simliar to the [single Gaussian case](#single_gaussian_ll), can we apply the same calculus trick? Not quite... the addition inside the \\(\ln{()}\\) makes things difficult if not impossible. We need a plan B (and hold off the urge of using the vanilla version of the gradient descent).
+Well, this is simliar to the [single Gaussian case](#single_gaussian_ll), can we apply the same calculus trick? Not quite... the addition inside the \\(\ln{()}\\) makes things difficult if not impossible. So, we need a plan B (and hold off the urge of using the vanilla version of the gradient descent).
 
-### The hidden variable
-So the addition is the killer, can we get rid of it? What if for each \\(x_i\\), we know its gender (*i.e.*, class), \\(z_i = W\\) or \\(M\\)? If we are geared with such information, then all terms inside the \\(\ln{()}\\) but one will vanish, then we are back into our comfort zone. Then the objective function becomes: <a name="two_gaussian_ll"></a>
+### The hidden (latent) variable
+So the addition is the killer, can we get rid of it? *What if for each \\(x_i\\), we know its gender (*i.e.*, class), call it \\(z_i = W\\) or \\(M\\)?* If we are geared with such information, then for each \\(x_i\\), all terms inside the \\(\ln{()}\\) but one will vanish, then we are back into our comfort zone! Accordingly, the objective function (log-likelihood) becomes: <a name="two_gaussian_ll"></a>
 
 $$
 \begin{eqnarray}
@@ -128,16 +128,85 @@ $$
 \end{eqnarray}
 $$
 
-Hooray! Now we get all the ducks in a row, ready for us to take derivatives, **only if** we know the value of \\(Z\\) (the vectorized \\(z_i\\)). But its value is hidden from us, thus the name of latent variable. To deal with that, we need the EM algorithm, not [Maxwell's EM](https://en.wikipedia.org/wiki/Maxwell%27s_equations), but the Expectation-Maximization. 
+Hooray! No additions inside \\(\ln()\\)! Now we get all the ducks lined up in a row, ready for us to take derivatives, **assuming** that we know the value of \\(Z\\) (the vectorized version of all \\(z_i\\)'s). But \\(Z\\) is hidden from us (not observed), thus it bears the name of latent variable. To deal with that, we need the EM algorithm, not [Maxwell's EM](https://en.wikipedia.org/wiki/Maxwell%27s_equations), but the [Expectation-Maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm). 
 
-Before we move on, let me do some re-orgnization of the symbols, to prevent the equations gets even longer. First let's abstract the gender as class, so we are dealing with 2 classes here, and I will map the subscript \\(M\\) to 1, and \\(W\\) to 2. Next I will introduce the [indicator function](https://en.wikipedia.org/wiki/Indicator_function) \\(\textbf{1}()\\) to make things concise. With this modification, the log-likelihood for our [mixture of two Gaussians](#two_gaussian_ll) becomes:
+Before we move on, let me do some re-orgnization of the symbols, to prevent the equations gets even longer. First let's abstract the gender as class. Clearly, we are dealing with 2 classes here, and I will map the subscript \\(M\\) to 1, and \\(W\\) to 2. Next I will introduce the [indicator function](https://en.wikipedia.org/wiki/Indicator_function) \\(\textbf{1}()\\) to make things concise. With these modifications, the log-likelihood for our [mixture of two Gaussians](#two_gaussian_ll) becomes:
 
 $$
 \begin{eqnarray}
 \ell(X; \theta, Z) 
 &=&
-\sum_{1}^N \sum_{j}^2 \textbf{1}(z_i=j) 
+\sum_{i=1}^N \sum_{j=1}^2 \textbf{1}(z_i=j) 
 \big(\ln{P(x_i|\mu_j, \sigma^2_j)} + \ln{\pi_j}
 \big)
 \end{eqnarray}
 $$
+
+Remember that we are interested in values of \\((\mu_j, \sigma^2_j, \pi_j)\\) that maximizes \\(\ell\\), so let's expand \\(P(x_i \| \mu_j, \sigma^2_j)\\) and take derivatives to get: <a name="EM_eqn_1"></a>
+
+$$
+\begin{eqnarray}
+\mu_j &=& \frac{\sum_{i=1}^N\textbf{1}(z_i=j) x_i}
+               {\sum_{i=1}^N\textbf{1}(z_i=j)},\\
+\sigma^2_j &=& \frac{\sum_{i=1}^N \textbf{1}(z_i=j) (x_i - \mu_j)^2}
+ 						{\sum_{i=1}^N \textbf{1}(z_i=j)},\\
+\pi_j &=& \frac{1}{N} \sum_{i=1}^N \textbf{1}(z_i=j).
+\end{eqnarray}
+$$
+
+Few things to notice here. First, the solution for \\(\pi_j\\) takes into the constrain that \\(\Sigma_{j=1}^2 \pi_j = 1\\), hence, it is obtained by using [Lagrange multiplier](https://en.wikipedia.org/wiki/Lagrange_multiplier). Second, this framework can be extended to \\(k\\) > 2 classes, as well \\(d\\) > 1 dimensions. In the latter case, we need to swtich to matrix representations.  
+
+## Expectation-Maximization
+We see that, we can maximize the log-likelihood function rather easily, **if** we know the values of all \\(z_i\\)'s. Sadly, we only observe \\(x_i\\)'s, but not \\(z_i\\)'s. What can we do? How about just guessing?
+
+Why not? In our running example, for each weight we observe, let's also flip a coin, to assign a randomly guessed gender to that person. Then we proceed to calculate the maximal \\(\ell(X; \theta, Z)\\) as oiutlined above. But the guessing part is still lingering, what if we start out guessing differently? Or alternatively, we if we can guess better?
+
+### Expectation: improving guesses
+Indeed we can improve our guess. The critical piece is that: instead of assigning "hard" values to \\(z_i\\) (0 or 1), we will do a "soft" assignment to \\(z_i\\), let it represents the probability of sample \\(x_i\\) is drawn from class \\(j\\). Given this paradigm change, we change the latent variable from \\(z_i\\) to \\((w_{i1}, w_{i2})\\), with the constrain that \\( \Sigma_{j=1}^2 w_{ij} = 1 \\). Effectively, \\( w_{ij} = P(z_i = j) \\).The hard assignment corresponds to the special case that \\(w_{ij} \in (0, 1)\\). 
+
+Once again, we will invoke Bayes' rule, since we need to update our belief from the prior (*i.e.*, initial guesses of \\(w_{ij}\\)), with the likelihood under this prior belief. Put that into equations, the improved guess are:
+
+$$
+\begin{eqnarray}
+w_{ij} = P(z_i = j | X; \theta) 
+&=& \frac{P(x_i | z_i=j; \theta) P(z_i = j)}
+		  {P(x_i; \theta)} \\
+&=& \frac{P(x_i | z_i=j; \theta) P(z_i = j)}
+		  {\sum_{j=1}^k P(x_i|z_i=j; \theta) P(z_i=j)}. 
+\end{eqnarray}
+$$
+
+Here, \\(P(z_i = j)\\) is the prior belief, namely, the previous guess.
+
+### Maximization: the old MLE
+
+Let's not lose sight of our goal: to find \\(\theta\\) that maximize the log-likeilhood \\(\ell\\). [Previously](#EM_eqn_1) we have found the recipe to calculate \\(\theta\\) based on known, albeit guessed, hard assignment of \\(w_{ij}\\)'s. Now we have a better guess of, soft assignment, \\(w_{ij}\\)'s, let's re-calculate \\(\theta\\) in a similar fashion, hoping that it will give larger \\(\ell\\). The only change is replace the discrete weights (by indicator function), with \\(w_{ij}\\)'s, as:
+
+$$
+\begin{eqnarray}
+\mu_j &=& \frac{\sum_{i=1}^N w_{ij} x_i}
+               {\sum_{i=1}^N w_{ij}},\\
+\sigma^2_j &=& \frac{\sum_{i=1}^N w_{ij} (x_i - \mu_j)^2}
+ 						{\sum_{i=1}^N w_{ij}},\\
+\pi_j &=& \frac{1}{N} \sum_{i=1}^N w_{ij}.
+\end{eqnarray}
+$$
+
+Notice that, here we using results from the Expectation step, namely, values of \\( w_{ij} \\)'s. In the meantime, the reuslts obtained from here (Maximization step), namely, (\\( \mu_{j}, \sigma_{j}^2, \pi_{j} \\))'s can be used to update \\( w_{ij} \\)'s. This natrually imply an iterative algorithm, aiming to maximize \\(\ell\\), which is our ultimate goal. 
+
+### Correctness and convergence
+The EM algorithm seems intuitive, with the help of the latent variable. But is it correct? If it is correct, will it converge? The answers for both questions are **yes**. The proof can be found from this nice [note](http://cs229.stanford.edu/notes/cs229-notes8.pdf) by Andrew Ng. At the heart of it is applying [Jensen’s inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality) of the \\(\ln()\\) function, which makes our objective function (log-likelihood). 
+
+As an iterative algorithm, EM suffers from the pitfall that it is not guaranteed to find the global maxima. But often time we would be happy with a good enough local maxima. From a more general view point, we can treat the [Lloyd's algorithm](https://en.wikipedia.org/wiki/Lloyd%27s_algorithm) for k-means clustering as a special case of EM algorithm, with hard assignments.
+
+Finally, how about finding maximum log-likelihood with gradient descent? One surely can, and maybe with faster speed. However, as there are many knobs to turn in the gradient descent process, EM algorithm can be implemented more easily, with clear narratives. 
+
+## He or she?
+Talk is cheap, we need to see that EM algorithm actually works. Of course we do. Remember the question that got us started? We want to fit the 30,000 weights with a mixture with two Gaussian distributions, 
+
+<figure>
+<a href="/assets/images/EM_gaussian_mixture.gif"><img src="/assets/images/EM_gaussian_mixture.gif"></a>
+</figure>
+
+
+
