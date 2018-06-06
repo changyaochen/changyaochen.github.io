@@ -77,10 +77,10 @@ Let's make things a bit more interesting: instead of \\(N\\) = 10,000 weights of
 <a href="/assets/images/gmm_two_gaussian.jpg"><img src="/assets/images/gmm_two_gaussian.png"></a>
 </figure>
 
-Clearly, there are two lumps, and very likely, one is made up of women and the other one of men. Now let's ask this question: *given someone with a weight of 180 lb., how likely this is a male, \\(M\\) (or a female, \\(W\\))?*
+Clearly, there are two humps, and very likely, one is made up of women and the other one of men. Now let's ask this question: *given someone with a weight of 180 lb., how likely this is a male, \\(M\\) (or a female, \\(W\\))?*
 
 ### What do we need to learn
-The question can be rephrased as, given a data point (\\(x_i\\)), what is the probability that it is drawn from one class (\\(M\\)). Written in equation, we are asking for \\(P(M|x_i)\\). Naturally, we like to apply Bayes' rule here:
+The question can be rephrased as, given a data point (\\(x_i\\)), what is the probability that it is drawn from one class (*e.g.*, \\(M\\)). Written in equation, we are asking for \\(P(M|x_i)\\). Naturally, we like to apply Bayes' rule here:
 
 $$
 \begin{eqnarray}
@@ -107,7 +107,7 @@ $$
 \end{eqnarray}
 $$
 
-Well, this is similar to the [single Gaussian case](#single_gaussian_ll), can we apply the same calculus trick? Not quite... the addition inside the \\(\ln{()}\\) makes things difficult if not impossible. So, we need a plan B (and hold off the urge of using the vanilla version of the gradient descent).
+Well, this is similar to the [single Gaussian case](#single_gaussian_ll), can we apply the same calculus trick? Not quite... the addition inside the \\(\ln{()}\\) makes things difficult if not impossible. So, we need a plan B (and hold off the urge of using the vanilla version of the gradient descent just for a bit).
 
 ### The hidden (latent) variable
 So the addition is the killer, can we get rid of it? *What if for each \\(x_i\\), we know its gender (*i.e.*, class), call it \\(z_i\\), to be \\(W\\) or \\(M\\)?* If we are geared with such information, then for each \\(x_i\\), all terms inside the \\(\ln{()}\\) but one will vanish, then we are back into our comfort zone! Accordingly, the objective function (log-likelihood) becomes: <a name="two_gaussian_ll"></a>
