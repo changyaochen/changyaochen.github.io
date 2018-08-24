@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Book roundup, Auguest 2018"
+title:  "Book roundup, August 2018"
 date:   2018-08-22 12:00:00 -0600
 published: true
 tag: book
