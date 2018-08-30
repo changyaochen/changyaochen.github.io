@@ -66,7 +66,7 @@ $$
 We can further prove that with this values of \\(\mu\\) and \\(\sigma^2\\), we actually have the maximum of \\(\ell(X; \mu, \sigma^2)\\). Therefore, MLE justifies our "fitting" procedure. 
 
 ### How about gradient descent
-Before we move on, how about that gradient descent method to calculate the maximum value? Sure, we can randomly pick a set of initial values for \\(\mu\\) and \\(\sigma^2\\), and then follow the standard recipe of gradient descent to find the maximal \\(\ell\\) and the corresponding \\(\mu\\) and \\(\sigma^2\\), but then we have to deal with the proper choices of initial values, learning rates (and its decay), etc. I actually [implemented](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/EM.ipynb#GD) a vanilla version of gradient descent on this problem, only to tune the learning rate carefully to make it coverage, yikes! Since we already have such an easy way, why bother?
+Before we move on, how about that gradient descent method to calculate the maximum value? Sure, we can randomly pick a set of initial values for \\(\mu\\) and \\(\sigma^2\\), and then follow the standard recipe of gradient descent to find the maximal \\(\ell\\) and the corresponding \\(\mu\\) and \\(\sigma^2\\), but then we have to deal with the proper choices of initial values, learning rates (and its decay), etc. I actually [implemented](http://nbviewer.jupyter.org/github/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/EM.ipynb#GD) a vanilla version of gradient descent on this problem, only to tune the learning rate carefully to make it coverage, yikes! Since we already have such an easy way, why bother?
 
 **So what have we learned?** Here we are given a set of data (10,000 weights for adult women), and an assumed type of distribution (Gaussian), we are able to "learn" the parameters of the distribution (mean and variance) from the data using MLE. Therefore, if we are presented with a new sample from the same population, we are able to make statistical inference. Really nothing fancy.
 
@@ -202,7 +202,7 @@ As an iterative algorithm, EM suffers from the pitfall that it is not guaranteed
 Finally, how about finding maximum log-likelihood with gradient descent? One surely can, and maybe with faster speed. However, as there are many knobs to turn in the gradient descent process, EM algorithm can be implemented more easily, with clear narratives. 
 
 ## He or she?
-Talk is cheap, we need to see that EM algorithm actually works. Of course we do. Remember the question that got us started? We need to fit the 30,000 weights with a mixture with two Gaussian distributions, using the EM-algorithm outlined above. [Here](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/EM.ipynb#EM) you can find a quick implementation of this use case, and the animation below shows the fitting result from the first 20 iterations.
+Talk is cheap, we need to see that EM algorithm actually works. Of course we do. Remember the question that got us started? We need to fit the 30,000 weights with a mixture with two Gaussian distributions, using the EM-algorithm outlined above. [Here](http://nbviewer.jupyter.org/github/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/EM.ipynb#EM) you can find a quick implementation of this use case, and the animation below shows the fitting result from the first 20 iterations.
 
 <figure>
 <a href="/assets/images/EM_gaussian_mixture.gif"><img src="/assets/images/EM_gaussian_mixture.gif"></a>

@@ -45,13 +45,13 @@ In addition, we can track the values of \\(f(\theta)\\) at each step, just to ma
 
 There you have it: gradient descent can be clearly understood through the lens of Taylor expansion. But remember that our first order Taylor expansion is only valid in the neighborhoods of its expansion loci, therefore if the step size is not chosen properly, namely, if the step size is too large, then all our previous derivation will go down the drain. But how large is too large?
 
-Let's go through an example to drive the point home. Say we have \\(f(\theta) = (\theta - 5)^2\\). It is clear that \\(\theta_\text{magical}\\) = 5, with $$f(\theta_\text{magical})$$ = 0 as its minimum. If I insist to use gradient descent, how should I do it? Simple enough, we have \\(\nabla f(\theta) = 2(\theta - 5)\\), the only other thing I need is to choose a *proper* step size, hmmm, how about 0.1? It turns out 0.1 works just fine, as you can find [here](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/gradient_descent.ipynb#1d_case).  
+Let's go through an example to drive the point home. Say we have \\(f(\theta) = (\theta - 5)^2\\). It is clear that \\(\theta_\text{magical}\\) = 5, with $$f(\theta_\text{magical})$$ = 0 as its minimum. If I insist to use gradient descent, how should I do it? Simple enough, we have \\(\nabla f(\theta) = 2(\theta - 5)\\), the only other thing I need is to choose a *proper* step size, hmmm, how about 0.1? It turns out 0.1 works just fine, as you can find [here](http://nbviewer.jupyter.org/github/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/gradient_descent.ipynb#1d_case).  
 
 <figure>
 <a href="/assets/images/gd_1d_good_case.jpg"><img src="/assets/images/gd_1d_good_case.png"></a>
 </figure>
 
-Starting from \\(\theta_0\\) = 12, it took us 29 steps to reach convergence. What if I want to get to the bottom faster, *i.e.* with less steps? Naturally, I would just increase the step size: let's do 1.01 instead of 0.1! The same procedure now turns against me, as \\(\theta\\) swings away from 5. 
+Starting from \\(\theta_0\\) = 12, it took us 29 steps to reach convergence. What if I want to get to the bottom faster, *i.e.* with less steps? Naturally, I would just increase the step size: let's do 1.01 instead of 0.1! The same procedure now turns against me, as startring from 10, \\(\theta\\) swings away from 5. 
 
 <figure>
 <a href="/assets/images/gd_1d_bad_case.jpg"><img src="/assets/images/gd_1d_bad_case.png"></a>
@@ -72,10 +72,15 @@ for i in range(max_iteration):
         break
 return step_size
 ~~~
+In the pesudo code above, the `threshold` will be calculated differently at each \\(\theta\\). Essentially, we are doing another lousy optimization to find the "good enough" step size: we don't really want to spend too much computation *just* to find the best step size. Compared to the previous "one-size-fits-all" step size, here we are changing the step size **adapatively**.
+
+Then how does this simple idea work in practice? Well, it works pretty well. Below you can find the optimization path for the aforementioned one-dimensional case, it is quite obvious that we like to use backtracking line search for sure.
 
 <figure>
 <a href="/assets/images/gd_1d.gif"><img src="/assets/images/gd_1d.gif"></a>
 </figure>
+
+Just for fun, let's try somewhat slightly "harder" case, to fit a univariant Gaussian distribution. There are two scalar values to be fitted: mean and variance, hence this can be considered as a two-dimensional case. The script can be found [here](http://nbviewer.jupyter.org/github/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/gradient_descent.ipynb#2d_case). Again, the backtracking line search gets us to the minima with less steps, as shown below. The scale bar indicates the values of the loss function (negative of the log likelihood).
 
 <figure>
 <a href="/assets/images/gd_2d.gif"><img src="/assets/images/gd_2d.gif"></a>
