@@ -36,7 +36,7 @@ Let's consider the following scenario: your clients ask for two models, one to p
 
 Now we understand that we do prefer a model whose predicted scores can be directly used as probabilities. Apparently, the histogram we have above would not make the cut. But how bad it is? To, at least visually, inspect the deviance, we can use a [reliability diagram](https://www.jstor.org/stable/pdf/2987588.pdf). The construction of the reliability diagram is very similar to that of the ROC. Given a set of samples with true labels, the procedure is: 
 1. The samples are ranked by their predicted scores output from the model. 
-2. Then the samples are bucketed in the \\(N\\) equal size bins.
+2. Then the samples are bucketed into \\(N\\) equal size bins.
 3. For samples in bin \\(i\\), we calculate two things: one is the mean of the predicted scores, as \\(x_i\\); the other is the fraction of the samples with true positive label, as \\(y_i\\).
 4. Plot all the \\((x_i, y_i)\\), calculated from all \\(N\\) bins.
 
