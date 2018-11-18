@@ -35,7 +35,7 @@ If I just ignore the higher order terms, then I got what I wanted: \\(f(\theta_0
 ~~~python
 # gradient descent
 for i in range(max_epoch):
-    gradient = gradient_f(param, data)
+    gradient = gradient_fn(param, data)
     param -= step_size * gradient
     if converge:
         break
@@ -63,9 +63,9 @@ So too big a step size is disastrous, too small a step size will cause us time, 
 ~~~python
 # backtracking line search
 for i in range(max_iteration):
-    current_loss = loss_f(param)
-    new_param = param - step_size * gradient_f(param)
-    new_loss = loss(new_param)
+    current_loss = loss_fn(param)
+    new_param = param - step_size * gradient_fn(param)
+    new_loss = loss_fn(new_param)
     if not new_loss - current_loss < threshold:
         step_size *= 0.5
     else:
