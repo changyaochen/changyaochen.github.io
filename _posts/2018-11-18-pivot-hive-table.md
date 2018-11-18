@@ -2,7 +2,7 @@
 layout: single
 title:  "Pivot a Hive table"
 date:   2018-11-18 12:00:01 -0600
-published: false
+published: true
 tag: [misc]
 excerpt: There is no built-in pivot function in Hive, but one can still do it with relative ease.
 toc: false
