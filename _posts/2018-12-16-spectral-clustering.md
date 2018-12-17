@@ -148,7 +148,7 @@ How does it work in more realistic problems? Taking a [page](http://scikit-learn
 
 <figure class="third">
 <a href="/assets/images/spectral_clustering_moon.png"><img src="/assets/images/spectral_clustering_moon.png" ></a>
-<a href="/assets/images/spectral_clustering_moon.blob"><img src="/assets/images/spectral_clustering_blob.png"></a>
+<a href="/assets/images/spectral_clustering_blob.png"><img src="/assets/images/spectral_clustering_blob.png"></a>
 <a href="/assets/images/spectral_clustering_aniso.png"><img src="/assets/images/spectral_clustering_aniso.png"></a>
 </figure>
 
