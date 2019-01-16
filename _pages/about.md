@@ -12,10 +12,11 @@ comments: false
 ### Education
   * **Ph.D.**, Mechanical Engineering, Columbia University, 2012
   * **M.Sc.**, Mechanical Engineering, Columbia University, 2007
-  * **B.S.**,   Precision Instrument, Tsinghua University, China, 2006
+  * **B.S.**, Precision Instrument, Tsinghua University, China, 2006
 
 ### Experience
-  * **Data Scientist**, [Macy's](https://www.macys.com/), 2017 - present
+  * **Senior Data Scientist**, [WeWork](https://www.wework.com/), 2019 - present
+  * **Data Scientist**, [Macy's](https://www.macys.com/), 2017 - 2019
   * **Quantitative Researcher**, [Neo Ivy Capital](http://www.neoivycapital.com/), 2017
   * **Fellow**, [Insight Data Science](https://www.insightdatascience.com/), 2017
   * **Director's Postdoctoral Fellow**, [Argonne National Laboratory](http://www.anl.gov/cnm/), 2014 - 2017
