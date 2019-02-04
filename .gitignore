@@ -1,0 +1,17 @@
+.ipynb_checkpoints
+*.gem
+*.sublime-project
+*.sublime-workspace
+.bundle
+.DS_Store
+.jekyll-metadata
+.sass-cache
+_asset_bundler_cache
+_site
+_site*
+codekit-config.json
+example/_site
+Gemfile.lock
+node_modules
+npm-debug.log*
+__pycache__/
