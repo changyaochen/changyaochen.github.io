@@ -17,7 +17,7 @@ In the past week, We hosted [Jérôme Petazzoni](http://jpetazzo.github.io/) for
 ## Why container (Docker)
 One of the biggest hurdles between moving your kick-ass algorithm/routine developed on your local laptop (often in the form of a jupyter notebook), and the production environment (*i.e.*, so everyone else can use it) is the "[dependency hell](https://en.wikipedia.org/wiki/Dependency_hell)". I once had to debug a model that I trained two years ago, only to realize the `pandas` version was not compatible with the latest one I have in my current dev environment. It was a gruesome experience to make it finally work. One obvious solution is to take a "snapshot" of the whole dev environment, and duplicate it in the prod environment, so everything will work! Now we are talking along the line of a virtual machine (VM). It would solve the problem all right, but VM can require quite some system resources (CPU, memory, and a full-fledged OS), to serve just the logistic regression model that you spent 5 seconds training. If someone else needs to run his/her applications, another VM will be needed, with more dedicated system resources (CPU, memory, OS, etc). That seems pretty wasteful. 
 
-Incomes the container. To solve the dependency hell issue, all one needs is to specify are the required packages and their respective versions, together with the codebase. Encapsulate all that essentials as your application, and **share** the system resources with other applications. Such reductions in system resource requirement directly translates to financial savings, be it on-premises hardware investment, or cloud-based billings. For more reasons why container is beneficial, check out [Chapter 1](https://container.training/intro-selfpaced.yml.html#17) of Jérôme's slides. 
+Incomes the container. To solve the dependency hell issue, all one needs is to specify the required packages and their respective versions, together with the codebase. Encapsulate all that essentials as your application, and **share** the system resources with other applications. Such reductions in system resource can directly translate to financial savings, be it on-premises hardware investment, or cloud-based billings. For more reasons why container is beneficial, check out [Chapter 1](https://container.training/intro-selfpaced.yml.html#17) of Jérôme's slides. 
 
 While container as a concept can be general, [Docker](https://www.docker.com/) is the most popular implementation of this concept, to the point it almost becomes synonyms to container. However, there are still some subtle terms, that should be better understood. Before going into the workshop, I found the concepts of container, image, layer quite confusing, until Jérôme showed the following slide, that drives the point home.
 
@@ -37,14 +37,14 @@ The second example truly convinces me the benefit of orchestration, that is to s
 
 <a href="/assets/images/docker_orchestration_1d.png"><img src="/assets/images/docker_orchestration_1d.png" ></a>
 
-A job is more likely to have more than just one system resource requirement, therefore we quickly move to high dimensional bin-packing problem, such as the 3D case illustrated below. This example along would persuade me to dive deeper.
+A job is more likely to have more than just one system resource requirement, therefore we quickly move to high dimensional bin-packing problem, such as the 3D case illustrated below. This example alone would persuade me to dive deeper.
 
 <a href="/assets/images/docker_orchestration_3d.png"><img src="/assets/images/docker_orchestration_3d.png" ></a>
 
 Just as Docker is almost synonyms to container, [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes) (also knows as k8s) is the name of container orchestration. With k8s overseeing all the services (applications that talk to the outside world), deployments (replica of containers running the same applications without interruption), and volumes (persistent file storages), one can *easily* manage a complex system (*easily* only after mastering all the concepts). On top of k8s, there are tools such as [Helm](https://helm.sh/) to manage k8s, and that was where I was truly lost... I guess I will revisit the slides later.
 
 ## What is next
-Get my hands dirty! I have already containerized some of my projects and deployed them on EC2 instances. That is done without k8s. Luckily WeWork has engineering teams maintaining multiple k8s clusters, and developed an internal k8s package. Can wait to use all the knowledge that I just acquired and apply them in real projects! 
+Get the hands dirty! I have already containerized some of my projects and deployed them on EC2 instances. That is done without k8s. Luckily WeWork has engineering teams maintaining multiple k8s clusters, and developed an internal k8s package. Can't wait to use all the knowledge that I just acquired and apply them in real projects! 
 
 
 
