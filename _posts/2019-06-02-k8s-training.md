@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Containers and their orchestration"
-date:   2019-06-03 12:00:01 -0600
+date:   2019-06-02 12:00:01 -0600
 published: true
 tag: [misc]
 excerpt: Recap of an excellent 3-day workshop on Docker and Kuberentes.
