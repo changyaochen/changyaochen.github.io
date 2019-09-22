@@ -11,7 +11,9 @@ class Simulation:
     """Look-then-leap simulations.
     """
 
-    def __init__(self, candidates: List[int], threshold: float = 0.3):
+    def __init__(self,
+                 candidates: List[int],
+                 threshold: float = 0.3):
         """
         Args:
             candidates: List of incoming candidates, represented by their
@@ -57,7 +59,9 @@ class Simulation:
 class Trials:
     """Runs multiple trails of the simulation.
     """
-    def __init__(self, n_trials: int = 100, **kwargs):
+    def __init__(self,
+                 n_trials: int = 100,
+                 **kwargs):
         """Setting a single trial.
         """
         self.n_trials = n_trials
@@ -67,8 +71,13 @@ class Trials:
         self.results = []
 
     def single_run(self, x):
+        """Single simulation, with n_candidates.
+
+        The argument x is to satisfy later multiprocess runs.
+        """
         np.random.seed(datetime.now().microsecond)
         candidates = np.random.permutation(self.n_candidates)
+
         S = Simulation(candidates, self.threshold)
         S.run()
 
@@ -89,9 +98,9 @@ if __name__ == '__main__':
     threshold = 0.37
 
     T = Trials(n_trials=n_trials,
-              n_candidates=n_candidates,
-              threshold=threshold,
-              n_jobs=12)
+               n_candidates=n_candidates,
+               threshold=threshold,
+               n_jobs=12)
     T.run()
 
     print("With {0} as the look-then-leap threshold, the chance to get the"
