@@ -30,10 +30,10 @@ Given the seeming simplicity of this strategy, it is hard to resist the temptati
 In the simulation settings, we set \\(N\\) = 1000 (number of total candidates), and let the threshold (\\(\left \lfloor{r / N}\right \rfloor \\)) changes from 0.01 to 0.99 with 0.01 step size. For each threshold, we will permutate the sequence of the incoming candidates for 10,000 times while applying the same strategy. **Only if the best candidate is hired, then we will call the trial a success.** 
 <figure>
 <center>
-<a href="/assets/images/secretary_problem_numerical.png"><img src="/assets/images/secretary_problem_numerical.png" style="width:80%;"></a>
+<a href="/assets/images/secretary_problem_numerical.png"><img src="/assets/images/secretary_problem_numerical.png" style="width:85%;"></a>
 </center>
 </figure>
-The simulated success rate for each threshold is shown in the figure above. The details can be found in [this notebook](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/secretary_problem.ipynb). The red vertical line corresponds to the value of \\(1/e\\). It fits rather well with the aforementioned theory, that \\(1/e\\) is the best threshold to use for this look-then-leap policy. 
+The simulated success rate for each threshold is shown in the figure above. The details can be found in [this notebook](https://github.com/changyaochen/changyaochen.github.io/blob/master/assets/notebooks/secretary_problem.ipynb). The red vertical line corresponds to the value of \\(1/e\\), and the red solid curve shows the result of Equation $$\eqref{eq_integral}$$ (see next section). It fits rather well with the aforementioned theory, that \\(1/e\\) is the best threshold to use for this look-then-leap policy. 
 
 ## View from the probability lens
 It is intelligently irresponsible not to ask why \\(1/e\\) is the magical answer. It turns out one only has to resort to conditional probability to arrive at the answer. 
@@ -46,7 +46,7 @@ P(r; N)
 &= 
 \sum_{i=1}^N P(i\text{ is selected}, i \text{ is the best}) \\
 &= 
-\sum_{i=1}^N P(i\text{ is selected}~|~i\text{ is the best}) ~\times P (i\text{ is the best})
+\sum_{i=1}^N P(i\text{ is selected}~|~i\text{ is the best}) ~\times P (i\text{ is the best}).
 \end{align*}
 $$
 
@@ -57,11 +57,11 @@ $$
 ~&\sum_{i=1}^N P(i\text{ is selected}~|~i\text{ is the best})\\
 =&
 \sum_{i=1}^r 0 + \sum_{i=r+1}^N P(i\text{ is selected}~|~i\text{ is the best})\\
-=& \sum_{i=r+1}^N \frac{r}{i-1}
+=& \sum_{i=r+1}^N \frac{r}{i-1}.
 \end{align*}
 $$
 
-The zero probability for the first $$r$$ items is quite straightforward: if the best candidate happens to be in the first $$r$$ (*i.e*, $$ i <= r $$), then we are luck out. The interesting part is from the second summation: if the best candidate is not in the first $$i$$, then under our policy, the only condition that it will be picked is that, **the second best candidate is in the first $$r$$ seen ones**, and the probability for this condition is $$r/(i-1)$$. The illustration below should help to demonstrate this logic.
+The zero probability for the first $$r$$ items is quite straightforward: if the best candidate happens to be in the first $$r$$ (*i.e*, $$ i \le r $$), then we are luck out. The interesting part is from the second summation: if the best candidate is not in the first $$i$$, then under our policy, the only condition that it will be picked is that, **the second best candidate in the first $$i-1$$ is in the first $$r$$**, and the probability for this condition is $$r/(i-1)$$. Note that here we only require the second best candidate in the first $$i-1$$, instead of that of the $$N$$ since we are dealing with conditional probability here. The illustration below should help to demonstrate this logic.
 <figure>
 <center>
 <a href="/assets/images/secretary_problem_proba.jpg"><img src="/assets/images/secretary_problem_proba.png" style="width:80%;"></a>
@@ -71,12 +71,25 @@ Coming back to $$P(r; N)$$, now we have:
 
 $$
 \begin{equation}
-P(r; N) = \frac{r}{N} \sum_{i=r+1}^N \frac{1}{i-1}
+P(r; N) = \frac{r}{N} \sum_{i=r+1}^N \frac{1}{i-1} \tag{1}\label{eq_master},
 \end{equation}
 $$
 
+and the goal will be for a given $$N$$ to find the $$r$$ that maixmize $$P(r; N)$$. However, for the sake of analytical purpose, we want to explore the limit where $$N \rightarrow \infty$$, what's the optimal threshold $$t = r/N$$. By doing so, the summation is converted to the integral as:
 
+$$
+\begin{align*}
+P(r; N) 
+&= p(t) \\
+&= t\int_x^1 \frac{1}{x} \text{d}x \\
+&= -t \ln(t), \tag{2}\label{eq_integral}
+\end{align*}
+$$
 
+whose maximum can be easily found at $$t = 1/e$$, with $$p(1/e) = 1/e$$. Not surprisingly, the plot of $$-t \ln(t)$$ agrees nicely with the numerical simulations.
 
 ## View from the dynamic programming lens
 blah
+
+## Conclusion
+How to make decisions under uncertainties.
