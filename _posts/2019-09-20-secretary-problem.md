@@ -89,7 +89,9 @@ $$
 whose maximum can be easily found at $$t = 1/e$$, with $$p(1/e) = 1/e$$. Not surprisingly, the plot of $$-t \ln(t)$$ agrees nicely with the numerical simulations.
 
 ## View from the dynamic programming lens
-blah
+All the preceding derivations are all nice, **except for** that we already assume the "look-then-leap" strategy is the optimal, whereas one only has to hone in the details. But can one prove the assumption?
+
+Of course one can, just some brain gymnastics exercises. 
 
 ## Conclusion
 How to make decisions under uncertainties.
