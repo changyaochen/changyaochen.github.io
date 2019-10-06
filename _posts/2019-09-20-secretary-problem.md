@@ -91,7 +91,23 @@ whose maximum can be easily found at $$t = 1/e$$, with $$p(1/e) = 1/e$$. Not sur
 ## View from the dynamic programming lens
 All the preceding derivations are all nice, **except for** that we already assume the "look-then-leap" strategy is the optimal, whereas one only has to hone in the details. But can one prove the assumption?
 
-Of course one can, just some brain gymnastics exercises. 
+Of course one can, just some brain gymnastics exercises. The key here is to properly describe the state of the process. Specifically, we need two numbers in this case: $$r$$ and  $$s$$, where $$r$$ is the number of candidates have seen so far, and $$s$$ is the **apparent** ranking of the **last**, *i.e.,* the $$r^\text{th}$$ candidate. The value function, $$V(r, s)$$ that is being sought here, is the **maximum expected probablity of choosing the absolute best candidate when the state is ($$r, s$$)**. As usual, there are $$N$$ total candidates to be considered.  
+
+After having all the semantics in place, the crucial next step is to derive the logical relation between different states. For a given state of ($$r, s$$), if $$ s \neq 1$$, there is no point of choosing this candidate, since he or she is not even the best among the first $$r$$. Therefore, the logical decision is to move on to the $$(r+1)^\text{th}$$, hoping that will be the best (among the first $$r+1$$). By doing so, the state is changed to ($$r+1, s'$$), since the apparent ranking of the $$(r+1)^\text{th}$$ can be anywhere between $$1$$ and $$r+1$$, with equal probability. 
+
+What if we are in the state of ($$r, 1$$)? Then the $$r^\text{th}$$ candidate is indeed the best among all $$r$$ candidates, shall we make the call and end the search, hoping he or she is also the best among all $$N$$ candidates (with absolute ranking of 1)? If so, then we are golden! However, given that we have only seen $$r$$ candidates out of total of $$N$$, this probability of being this lucky **can not be larger than $$r/N$$**. 
+
+Another decision at this ($$r, 1$$) state is, of course, to keep searching. After seeing one more (the $$(r+1)^\text{th}$$) candidate, one can either recurse back to the same situation, *i.e.*, to arrive at the ($$r+1, 1$$) state, with probability of $$1/(r+1)$$, or arrive at a state of ($$r+1, s$$) where $$s \neq 1$$, with probability of $$r/(r+1)$$. If the latter, after kicking oneself of letting go the $$r^\text{th}$$ candidate, we also want to quantify how unlucky we are. This nicely sets up the Bellman equation for this problem as:
+
+$$
+\begin{align*}
+V(r, 1) = \max{[
+\frac{r}{N}, \frac{1}{r+1}\sum_{s'=1}^{r+1}V(r+1, s')
+]}
+\end{align*}
+$$
+
+The $$1/(r+1)$$ factor in the second term represents that "unlucky" case (forego the previous best candidate only to find a worse one). How about the luck case, namely, we found out that the $$r^\text{th}$$ candidate
 
 ## Conclusion
 How to make decisions under uncertainties.
