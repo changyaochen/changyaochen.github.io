@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "The secretary problem"
-date:   2019-10-07 12:00:01 -0600
+date:   2019-10-06 12:00:01 -0600
 published: true
 tag: [algorithm, python]
 excerpt: How to maximize your chance to find the best candidate, apartment, or even soulmate, only if the world can be modeled simply.
