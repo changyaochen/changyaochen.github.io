@@ -166,16 +166,19 @@ $$
 
 As we have interviewed $$r$$ candidates, we are equally likely to be at any of the ($$r, s$$) states, each with probability of $$1/r$$. Since we will only stop if we hit the ($$r, 1$$) state, and there is a $$\max$$ function in $$V(r, 1)$$, we are more interested how this $$\max$$ is triggered with different $$r$$. Note that, the function $$f(r) = \sum_{i=r}^{N-1} \frac{1}{i}$$, it is monotonic decreasing, therefore, once its value dips below 1 (as we are interviewing more candidates), the best bet is stop searching as soon as we are in the ($$r, 1$$) state, as the $$1$$ term in the $$\max$$ function will take dominance. Essentially, one is looking for an $$r_o$$, such that $$f(r_o) > 1 \geq f(r_o + 1)$$.
 
-This, finally, justifies the "look-then-leap" strategy: we will keep looking (increasing $$r$$), until we pass a critical value of $$r_o$$, then we are ready to commit ourselves, for the next candidate with the apparent ranking of 1. Since for the first observation after $$r_o$$, the probability of arriving at state ($$r_o + 1, 1$$) is simply $$1/(r_o + 1)$$, and when we do, the winning probability is $$(r_o + 1)/N$$; when one arrives any of the $r_o$ ($$r_o + 1, s$$) state other than ($$r_o + 1, 1$$), the winning probability is $$V(r_o, s)$$, according to Eq. \eqref{eq_dp_bellman_final_1}, each with probability $$1/(r_o + 1)$$. Therefore, the total winning probability under this strategy $$P(r_o; N)$$ is:
+This, finally, justifies the "look-then-leap" strategy: we will keep looking (increasing $$r$$), until we pass the critical value of $$r_o$$, then we are ready to commit ourselves, for the next candidate with the apparent ranking of 1. Since for the first observation after $$r_o$$, the probability of arriving at state ($$r_o + 1, 1$$) is simply $$1/(r_o + 1)$$, and when we do, the winning probability is $$(r_o + 1)/N$$; when one arrives any of the other ($$r_o + 1, s$$) states, we will have to proceed to ($$r_o + 2, s$$) states, from which we have $$1/(r_o + 2)$$ chance of reaching the ($$r_o + 2, 1$$) state and stop, or $$(r_o + 1)/(r_o + 2)$$ chance to keep going. Taking the expected value of this recursive series, we have:
 
 $$
 \begin{align*}
-P(r_o; N) &= \frac{1}{r_o + 1} \frac{r_o + 1}{N} + \frac{r_o}{r_o + 1} \frac{r_o + 1}{N}\sum_{i=r_o + 1}^{N-1} \frac{1}{i}\\
-&= \frac{r_o}{N} \sum_{i=r_o}^{N-1} \frac{1}{i}.
+P(r_o; N) 
+&= \frac{1}{r_o + 1} \frac{r_o + 1}{N} + \frac{r_o}{r_o + 1}P(r_o + 1; N)\\
+&= \frac{1}{N} +  \frac{r_o}{r_o + 1}(\frac{1}{r_o + 2}\frac{r_o + 2}{N} + \frac{r_o + 1}{r_o + 2}P(r_o + 2; N))\\
+&= \frac{r_o}{N}(\frac{1}{r_o} + \frac{1}{r_o + 1} + ... + \frac{1}{N-1}) \\
+&= \frac{r_o}{N} \sum_{i=r_o}^{N-1} \frac{1}{i}
 \end{align*}
 $$
 
-This above equation agrees with Eq. \eqref{eq_master}, only now we have a rigorous proof of the optimality, the optimal solution, and what is the optimal solution, voilà!
+The above equation agrees with Eq. \eqref{eq_master}, only now we have a rigorous proof of the optimality, the optimal solution, and what is the optimal solution, voilà!
 
 ## Conclusion
 It is joyful to see how such a seemingly simple question can lead me to weeks of pondering: how can one make the best decisions when facing uncertainties, even the uncertainty is in its simplest form. For this secretary problem, the numerical simulation is rather straightforward, but it presents evidence of the optimal decision rules. Both routes to the optimality, especially the dynamic programming method really made me think hard and careful.
