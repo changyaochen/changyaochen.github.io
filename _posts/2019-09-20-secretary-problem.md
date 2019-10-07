@@ -91,9 +91,43 @@ whose maximum can be easily found at $$t = 1/e$$, with $$p(1/e) = 1/e$$. Not sur
 ## View from the dynamic programming lens
 All the preceding derivations are all nice, **except for** that we already assume the "look-then-leap" strategy is the optimal, whereas one only has to hone in the details. But can one prove the assumption?
 
-Of course one can, just some brain gymnastics exercises. The key here is to properly describe the state of the process. Specifically, we need two numbers in this case: $$r$$ and  $$s$$, where $$r$$ is the number of candidates have seen so far, and $$s$$ is the **apparent** ranking of the **last**, *i.e.,* the $$r^\text{th}$$ candidate. The value function, $$V(r, s)$$ that is being sought here, is the **maximum expected probablity of choosing the absolute best candidate when the state is ($$r, s$$)**. As usual, there are $$N$$ total candidates to be considered.  
+Of course one can, just some brain gymnastics exercises. The key here is to properly describe the **state** and **value** of the process. For this case, we need two numbers to express a state: $$r$$ and $$s$$, where $$r$$ is the number of candidates have seen so far, and $$s$$ is the **apparent** ranking of the last, *i.e.,* the $$r^\text{th}$$ candidate. The value function, $$V(r, s)$$ that is being sought here, is the **maximum expected probablity of choosing the absolute best candidate when the state is ($$r, s$$)**. As usual, there are $$N$$ total candidates to be considered.  
 
-After having all the semantics in place, the crucial next step is to derive the logical relation between different states. For a given state of ($$r, s$$), if $$ s \neq 1$$, there is no point of choosing this candidate, since he or she is not even the best among the first $$r$$. Therefore, the logical decision is to move on to the $$(r+1)^\text{th}$$, hoping that will be the best (among the first $$r+1$$). By doing so, the state is changed to ($$r+1, s'$$), since the apparent ranking of the $$(r+1)^\text{th}$$ can be anywhere between $$1$$ and $$r+1$$, with equal probability. 
+After having all the semantics in place, the crucial next step is to derive the logical relation of the value function between different states. Since there are only two state variables, it allows us to visualize the whole dynamic programming logic in a matrix form, as seen below.
+
+<figure>
+<center>
+<a href="/assets/images/secretary_problem_dp.png"><img src="/assets/images/secretary_problem_dp.png" style="width:85%;"></a>
+</center>
+</figure>
+
+The row and column indices of the matrix indicate $$r, s$$, respectively, whereas the value of each element of the matrix is the value function $$V(r, s)$$ as defined above. Due the nature of this problem, almost half the elements (namely, the upper right half) have no real meanings. 
+
+As in a typical dynamic programming scenario, we will start from the edge, as in this case, the last row. Here, the last row holds the maximum expected probability of selecting the best candidate, when in the state ($$N, s$$). Apparently, we can only "win" when $$s = 1$$, which probability of 1. Therefore, we can populate the last row with only the first element set to 1, with all zeros for the rest. 
+
+### What if we have interviewed all candidates
+Now let's move back the penultimate row, in which case we have observed all but one candidates. If the $$(N-1)^\text{th}$$ candidate's apparent ranking is not 1, we have no other choice but keeping interviewing the last candidate, hoping to arrive at the magical ($$N, 1$$) state. Since there is a probability of $$1/N$$ that the last candidate is the best, then the probability of winning at the state ($$N-1, s$$) where $$s \neq 1$$ is then:
+
+$$
+\begin{align*}
+V(N-1, r) = \frac{1}{N}V(N, 1), \text{for}~r = 2, 3, ..., N-1.
+\end{align*}
+$$
+
+### What if we have interviewed all but one candidates
+If we are in the state of ($$N-1, 1$$), there is an interesting decision have to be made: shall one end the search and pick this candidate, or keep searching? Given that we have observed $$N-1$$ candidates and this last one has the apparent ranking of 1, it is very likely that his or her abosulate ranking is also 1. Actually, the probability of this $$(N-1)/N$$, that is, if we stop here, the winning probablity is $$(N-1)/N$$. Of course, one can keep searching, hoping the last candidate can be even better, *i.e.*, to end up in the ($$N, 1$$) state. As described above, the probablity of such occurence is $$1/N$$. Putting these two cases together, we have for ($$N-1, 1$$):
+
+$$
+\begin{align*}
+V(N-1, 1) = \max{[
+\frac{N-1}{N}, \frac{1}{N}V(N, 1).
+]}
+
+\end{align*}
+$$
+
+### Generalization and the Bellman equations
+For a given state of ($$r, s$$), if $$ s \neq 1$$, there is no point of choosing this candidate, since he or she is not even the best among the first $$r$$. Therefore, the logical decision is to move on to the $$(r+1)^\text{th}$$, hoping that will be the best (among the first $$r+1$$). By doing so, the state is changed to ($$r+1, s'$$), since the apparent ranking of the $$(r+1)^\text{th}$$ can be anywhere between $$1$$ and $$r+1$$, with equal probability. 
 
 What if we are in the state of ($$r, 1$$)? Then the $$r^\text{th}$$ candidate is indeed the best among all $$r$$ candidates, shall we make the call and end the search, hoping he or she is also the best among all $$N$$ candidates (with absolute ranking of 1)? If so, then we are golden! However, given that we have only seen $$r$$ candidates out of total of $$N$$, this probability of being this lucky **can not be larger than $$r/N$$**. 
 
