@@ -106,7 +106,7 @@ The row and column indices of the matrix indicate $$r, s$$, respectively, wherea
 
 ### What if we have interviewed all candidates
 
-As in a typical dynamic programming scenario, we will start from the edge, as in this case, the last row. Here, the last row holds the maximum expected probability of selecting the best candidate, when in the state ($$N, s$$). Apparently, we can only "win" when $$s = 1$$, which probability of 1. Therefore, we can populate the last row with only the first element set to 1, as $$V(N, 1) = 1$$, with zeros for all the rest.
+As in a typical dynamic programming scenario, we will start from the edge, as in this case, the last row. Here, the last row holds the maximum expected probability of selecting the best candidate, when in the state ($$N, s$$). Apparently, we can only "win" when $$s = 1$$, with probability of 1. Therefore, we can populate the last row with only the first element set to 1, as $$V(N, 1) = 1$$, and zeros for the rest.
 
 ### What if we have interviewed all but one candidates
 
