@@ -1,6 +1,7 @@
 """Egg drop problem."""
 from copy import deepcopy
 from math import ceil, sqrt, inf
+from argparse import ArgumentParser
 
 
 class EggDrop:
@@ -75,6 +76,22 @@ class EggDrop:
 
 
 if __name__ == '__main__':
-    S = EggDrop(n=500, e=10)
+    parser = ArgumentParser(
+        description='Pass arguments for the egg drop problem.')
+    parser.add_argument(
+        '-n',
+        help='Number of floors',
+        type=int,
+        dest='n',
+        )
+    parser.add_argument(
+        '-e',
+        help='Number of eggs',
+        type=int,
+        dest='e',
+        )
+    args = parser.parse_args()
+
+    S = EggDrop(n=args.n, e=args.e)
     print(S.run())
     # print(S.prev_solutions)
