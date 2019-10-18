@@ -9,7 +9,7 @@ toc: true
 header:
   teaser: /assets/images/egg_drop_problem_teaser.jpeg
 ---
-A colleague brought this question yesterday after lunch, and I can't help but get to the bottom of it -- apparently this is a rather famous question, shame on me to only learn it now. 
+A colleague brought this question yesterday after lunch, and I can't help but get to the bottom of it -- apparently this is a rather famous question, shame on me to only learn it now. If you knew about it, you can still play with it [here](http://www.wisewheels.us/egg_drop).
 
 ## The problem
 The setting is very simple: you have $$e$$ eggs, and a building with $$n$$ floors. You want to find out what is the highest floor to drop an egg without breaking it. In addition, you want to obtain the answer with as little attempts as possible, **even for the worst-case scenario**. Then, what is the minimal number of drops one needs? 
