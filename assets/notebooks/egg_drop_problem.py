@@ -23,7 +23,7 @@ class EggDrop:
             raise ValueError("Number of eggs should be positive.")
         self.n = n
         self.e = e
-        self.result = 0
+        self.current_solutions = {0: 0}
 
         return None
 
@@ -35,16 +35,18 @@ class EggDrop:
         """Run the calculations."""
         # first some edge cases
         if self.n == 0:
-            return self.result
-        if self.n == 1:
-            self.result = 1
-            return self.result
-        if self.e == 1:
-            self.result = self.n
-            return self.result
-        if self.e == 2:
+            pass
+
+        elif self.n == 1:
+            self.current_solutions[1] = 1
+
+        elif self.e == 1:
+            self.current_solutions.update({x: x for x in range(self.n + 1)})
+
+        elif self.e == 2:
             self.result = self._two_eggs(self.n)
-            return self.result
+            self.current_solutions.update(
+                {x: self._two_eggs(x) for x in range(1, self.n + 1)})
 
         # real calculations
         else:
@@ -57,7 +59,7 @@ class EggDrop:
             for current_e in range(self.e - 2):
                 self.current_solutions = {0: 0, 1: 1}
                 for current_n in range(2, self.n + 1):
-                    current_min = inf
+                    current_min = current_n
                     for k in range(2, current_n):
                         # k is the floor where we drop the first egg
                         current_min = min(
@@ -70,9 +72,9 @@ class EggDrop:
                     self.current_solutions[current_n] = current_min
                 self.prev_solutions = deepcopy(self.current_solutions)
 
-            self.solution = self.current_solutions[self.n]
+        self.solution = self.current_solutions[self.n]
 
-            return self.solution
+        return self.solution
 
 
 if __name__ == '__main__':
@@ -83,15 +85,16 @@ if __name__ == '__main__':
         help='Number of floors',
         type=int,
         dest='n',
+        default=10,
         )
     parser.add_argument(
         '-e',
         help='Number of eggs',
         type=int,
         dest='e',
+        default=2,
         )
     args = parser.parse_args()
 
     S = EggDrop(n=args.n, e=args.e)
     print(S.run())
-    # print(S.prev_solutions)
