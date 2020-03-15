@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-assets/notebooks/.ipynb_checkpoints/*
-=======
->>>>>>> b102e676a2f4f6ea22206bcedaa7b1d2220957d3
-.ipynb_checkpoints
+**/.ipynb_checkpoints/*
+
+.jekyll-cache/
 *.gem
 *.sublime-project
 *.sublime-workspace
