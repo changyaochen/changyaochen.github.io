@@ -76,7 +76,7 @@ class Agent(ABC):
         self.arm_values = None  # values for each arm, same shape as arm counts
         self.arm_counts = None  # number of pulls for each arm
         self.arms_history = None  # histry of arms pulled for each step
-        self.values_history = None
+        self.rewards_history = None
 
         self.simulation_finished = False
 
@@ -98,7 +98,7 @@ class Agent(ABC):
 
     def update_logs(self, s: int):
         """Update the logs at step s."""
-        self.values_history[s] = self.current_value
+        self.rewards_history[s] = self.current_value
         self.arms_history[s] = self.current_arm
 
     @abstractmethod
@@ -119,7 +119,7 @@ class Agent(ABC):
             return
 
         self.arms_history = -1 * np.ones(steps)
-        self.values_history = np.zeros(steps)
+        self.rewards_history = np.zeros(steps)
         for s in tqdm(range(steps),
                       desc='Agent running',
                       disable=~self.verbose):
@@ -138,7 +138,7 @@ class Agent(ABC):
             tqdm.write('Agent has not run yet.')
         else:
             tqdm.write('\n======')
-            tqdm.write('value history: ', self.values_history)
+            tqdm.write('value history: ', self.rewards_history)
             tqdm.write('arm history: ', self.arms_history)
             tqdm.write('arm counts: ', self.arm_counts)
             tqdm.write('arm values: ', self.arm_values)
@@ -191,8 +191,8 @@ class Simulation:
         self.step = step
         self.random_seed = random_seed
 
-        self.agent_values_histories = []  # list of lists
-        self.avg_values_history = None
+        self.agent_rewards_histories = []  # list of lists
+        self.avg_rewards_history = None
         self.agent_arms_histories = []  # list of lists
         self.avg_arms_history = None
 
@@ -207,26 +207,25 @@ class Simulation:
             self.agent.run(self.step)
 
             # collect results
-            self.agent_values_histories.append(
-                self.agent.values_history)
+            self.agent_rewards_histories.append(
+                self.agent.rewards_history)
             self.agent_arms_histories.append(
                 self.agent.arms_history)
 
     def aggregate_results(self, make_plot: bool = True):
         """Collect aggregated result from all the agent/env pairs."""
-        self.avg_values_history = np.mean(
-            self.agent_values_histories, axis=0)
+        self.avg_rewards_history = np.mean(
+            self.agent_rewards_histories, axis=0)
         if make_plot:
             sns.set(font_scale=1.2)
             sns.set_style("whitegrid", {'grid.linestyle': '--'})
-            sns.lineplot(x=range(len(self.avg_values_history)),
-                         y=self.avg_values_history)
+            sns.lineplot(x=range(len(self.avg_rewards_history)),
+                         y=self.avg_rewards_history)
             plt.xlabel('Step')
             plt.ylabel('Average value')
             plt.title(f'Result from {self.num_agents} simulations.')
             plt.tight_layout()
             plt.show()
-
 
 
 if __name__ == '__main__':
