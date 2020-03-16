@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from tqdm import tqdm
+from typing import Dict
 from abc import ABC, abstractmethod
 
 
@@ -69,7 +70,7 @@ class Agent(ABC):
     """Abstract class for an agent."""
 
     @abstractmethod
-    def __init__(self, env: TestBed, verbose: bool, **kwargs):
+    def __init__(self, env: TestBed, verbose: bool = False, **kwargs):
         """Define the environment the agent will be in, and values."""
         self.env = env
         self.verbose = verbose
@@ -79,6 +80,7 @@ class Agent(ABC):
         self.rewards_history = None
 
         self.simulation_finished = False
+        self.current_step = 0  # note this is 0-index
 
         self.current_arm = None
         self.current_value = None
@@ -96,20 +98,28 @@ class Agent(ABC):
             self.arm_values = np.random.normal(
                 size=self.env.num_arms)
 
-    def update_logs(self, s: int):
-        """Update the logs at step s."""
-        self.rewards_history[s] = self.current_value
-        self.arms_history[s] = self.current_arm
+    @abstractmethod
+    def pick_arm(self) -> int:
+        """Pick an arm according to the agent's policy."""
+        raise NotImplementedError
 
     @abstractmethod
-    def update_values(self):
+    def update_values(self) -> None:
         """Update the values estimates."""
         raise NotImplementedError
 
-    @abstractmethod
-    def take_single_step(self):
-        """From the current value estimate, take an action."""
-        raise NotImplementedError
+    def take_single_step(self) -> None:
+        """Pick an arm, pull to take the reward.
+
+        Here we do NOT updating the arms values and counts.
+        """
+        self.current_arm = self.pick_arm()
+        self.current_value = self.env.emit(self.current_arm)
+
+    def update_logs(self) -> None:
+        """Update the logs at step s."""
+        self.rewards_history[self.current_step] = self.current_value
+        self.arms_history[self.current_step] = self.current_arm
 
     def run(self, steps: int):
         """Run the simulation."""
@@ -120,14 +130,16 @@ class Agent(ABC):
 
         self.arms_history = -1 * np.ones(steps)
         self.rewards_history = np.zeros(steps)
-        for s in tqdm(range(steps),
+
+        for _ in tqdm(range(steps),
                       desc='Agent running',
                       disable=~self.verbose):
             self.take_single_step()
 
             self.arm_counts[self.current_arm] += 1
             self.update_values()
-            self.update_logs(s)
+            self.update_logs()
+            self.current_step += 1
 
         self.simulation_finished = True
         return
@@ -138,23 +150,38 @@ class Agent(ABC):
             tqdm.write('Agent has not run yet.')
         else:
             tqdm.write('\n======')
-            tqdm.write('value history: ', self.rewards_history)
+            tqdm.write('reward history: ', self.rewards_history)
             tqdm.write('arm history: ', self.arms_history)
             tqdm.write('arm counts: ', self.arm_counts)
             tqdm.write('arm values: ', self.arm_values)
 
 
-class GreedyAgent(Agent):
-    """Greedy policy."""
+class EpsilonGreedyAgent(Agent):
+    """epsilon-greedy policy."""
 
-    def __init__(self, env: TestBed, verbose: bool = False, **kwargs):
+    def __init__(
+            self,
+            env: TestBed,
+            epsilon: float,
+            verbose: bool = False,
+            **kwargs):
         """Put the agent in an environment."""
-        super().__init__(env=env, verbose=verbose)
+        super().__init__(env=env, verbose=verbose, **kwargs)
+        self.epsilon = epsilon
+        assert 0. <= self.epsilon < 1.
 
-    def pick_largest(self) -> int:
+    def pick_arm(self):
         """Pick the arm that has largest value. Breaks tie randomly."""
-        return np.random.choice(
+        idx = np.random.choice(
             np.flatnonzero(self.arm_values == self.arm_values.max()))
+
+        if self.epsilon == 0:  # greedy
+            return idx
+        else:  # explore with probabilty of epsilon
+            if np.random.uniform() < self.epsilon:
+                idx = np.random.choice(np.flatnonzero(
+                    self.arm_values != self.arm_values.max()))
+            return idx
 
     def update_values(self):
         """Update the values estimates."""
@@ -163,10 +190,58 @@ class GreedyAgent(Agent):
             ((self.current_value - self.arm_values[self.current_arm]) /
              self.arm_counts[self.current_arm])
 
-    def take_single_step(self):
+
+class GreedyAgent(EpsilonGreedyAgent):
+    """Greedy policy as a special case of epsilon greedy policy."""
+
+    def __init__(
+            self,
+            env: TestBed,
+            verbose: bool = False, **kwargs):
+        """Enforce epsilon to zero."""
+        super().__init__(env=env, epsilon=0.0, verbose=verbose)
+
+
+class UCBAgent(Agent):
+    """Upper confidence bound policy."""
+
+    def __init__(
+            self,
+            env: TestBed,
+            c: float,
+            verbose: bool = False,
+            **kwargs):
+        """Put the agent in an environment."""
+        super().__init__(env=env, verbose=verbose, **kwargs)
+        self.c = c
+        self.arm_ucbs = None
+
+    def pick_arm(self):
+        """Find the arm to pull, according to UCB policy."""
+        # if there is any arm not pulled, pick randome one from them
+        if self.arm_counts.min() == 0:
+            idx = np.random.choice(
+                np.flatnonzero(self.arm_counts == self.arm_counts.min()))
+
+        # otherwise find the ucb
+        else:
+            self.arm_ucbs = []
+            for i in range(self.env.num_arms):
+                value = self.arm_values[i] + self.c * np.sqrt(
+                    (np.log(self.current_step + 1) /  # the step is 0-index
+                     self.arm_counts[i]))
+                self.arm_ucbs.append(value)
+            idx = np.random.choice(
+                np.flatnonzero(self.arm_ucbs == np.max(self.arm_ucbs)))
+
+        return idx
+
+    def update_values(self):
         """Update the values estimates."""
-        self.current_arm = self.pick_largest()
-        self.current_value = self.env.emit(self.current_arm)
+        # sample average
+        self.arm_values[self.current_arm] += \
+            ((self.current_value - self.arm_values[self.current_arm]) /
+             self.arm_counts[self.current_arm])
 
 
 class Simulation:
@@ -175,19 +250,25 @@ class Simulation:
     def __init__(
             self,
             env_type: TestBed,  # the Callable
-            num_arms: int,  # number of arms
             agent_type: Agent,  # the Callable
             num_agents: int,
             init_value: int,
             step: int,
             random_seed: int = 42,
+            env_kwargs: Dict = {},
+            agent_kwargs: Dict = {},
             **kwargs):
         """Combine the agent and the environment."""
         self.env_type = env_type
-        self.num_arms = num_arms
+        self.env_kwargs = env_kwargs
+        self.num_arms = self.env_kwargs.get('num_arms', 10)
+
         self.agent_type = agent_type
+        self.agent_kwargs = agent_kwargs
+        self.epsilon = self.agent_kwargs.get('epsilon', 0.0)
         self.num_agents = num_agents
         self.init_value = init_value
+
         self.step = step
         self.random_seed = random_seed
 
@@ -202,7 +283,7 @@ class Simulation:
             self.env = self.env_type(
                 num_arms=self.num_arms,
                 random_seed=self.random_seed + i)
-            self.agent = self.agent_type(self.env)
+            self.agent = self.agent_type(env=self.env, **self.agent_kwargs)
             self.agent.init_values(self.init_value)
             self.agent.run(self.step)
 
@@ -212,29 +293,35 @@ class Simulation:
             self.agent_arms_histories.append(
                 self.agent.arms_history)
 
-    def aggregate_results(self, make_plot: bool = True):
-        """Collect aggregated result from all the agent/env pairs."""
+    def aggregate_rewards(self, make_plot: bool = True):
+        """Collect aggregated rewards from all the agent/env pairs."""
         self.avg_rewards_history = np.mean(
             self.agent_rewards_histories, axis=0)
+        steps = list(range(len(self.avg_rewards_history)))
         if make_plot:
             sns.set(font_scale=1.2)
             sns.set_style("whitegrid", {'grid.linestyle': '--'})
-            sns.lineplot(x=range(len(self.avg_rewards_history)),
+            sns.lineplot(x=steps,
                          y=self.avg_rewards_history)
             plt.xlabel('Step')
-            plt.ylabel('Average value')
+            plt.ylabel('Average reward')
             plt.title(f'Result from {self.num_agents} simulations.')
             plt.tight_layout()
             plt.show()
+
+        return steps, self.avg_rewards_history
 
 
 if __name__ == '__main__':
 
     simulation = Simulation(
         env_type=TestBed,
-        num_arms=10,
-        agent_type=GreedyAgent,
-        num_agents=2,
-        init_value=0,
-        step=100)
+        agent_type=UCBAgent,
+        num_agents=10,
+        init_value=None,
+        step=1000,
+        env_kwargs={'num_arms': 10},
+        agent_kwargs={'c': 2}
+    )
+
     simulation.run_all_agents()
