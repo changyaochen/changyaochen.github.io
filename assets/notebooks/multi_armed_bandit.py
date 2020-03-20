@@ -37,9 +37,9 @@ class TestBed:
         tqdm.write(f"Stds of the arms: {self.stds}")
         tqdm.write(f"The best arm is {self.best_arm}")
 
-    def visualize(self):
+    def visualize(self, n_samples: int = 1000):
         """Visualize the distribution of the arms, with help of pandas."""
-        n_samples = 1000
+        n_samples = int(n_samples)
         values = []
         idx = []
         if len(self.distributions) == 0:
@@ -59,11 +59,14 @@ class TestBed:
         # plot
         sns.set(font_scale=1.2)
         sns.set_style("whitegrid", {'grid.linestyle': '--'})
+        fig = plt.Figure()
         sns.violinplot(
             x='arm_index', y='value', data=self.distributions,
-            inner=None)
+            inner=None, ax=fig.gca())
         plt.tight_layout()
         plt.show()
+
+        return fig
 
 
 class Agent(ABC):
