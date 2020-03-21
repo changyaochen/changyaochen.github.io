@@ -9,6 +9,8 @@ excerpt: Multi armed bandit is such a classic problem, here let's implement some
 header:
   teaser: /assets/images/slot_machines.jpg
 ---
+*You can play the 10-armed bandit with greedy, \\(\epsilon\\)-greedy, and UCB polices [here](http://www.wisewheels.us/bandit). For details, read on.*
+
 Like many people, when I first learned the concept of machine learning, the first split made is to categorize the problems to supervised and unsupervised, a soundly complete grouping. Since then, I have mostly been dealt with the supervised problems, until the reinforcement learning becomes the hottest kid around the block. 
 
 ## Exploration vs exploitation trade-off
