@@ -1,11 +1,11 @@
 ---
 layout: single
 title:  "Multi-armed bandit"
-date:   2020-03-17 12:00:00 -0600
+date:   2020-03-20 12:00:00 -0600
 published: false
 tag: [algorithm, python]
 toc: true
-excerpt: blah
+excerpt: Multi armed bandit is such a classic problem, here let's implement some simple policies from ground up to address this problem.  
 header:
   teaser: /assets/images/slot_machines.jpg
 ---
@@ -67,7 +67,7 @@ where \\(Q_i(t)\\) is the point estimate of \\(Q_i\\) prior to step \\(t\\), and
 We see that, everything else being equal, if a less-pulled arm would have a higher upper confidence bound than other arms that have been pulled more often, and we would prefer this arm precisely because we are less certain about it payoff, but we believe it would give us higher reward. Again, as in most machine learning problem, the exact setting and hyper-parameter tuning would matter quite a lot. 
 
 ## Conclusion
-The multi-armed bandit is such a classic problem yet I always find it a bit elusive -- the casino analogy fuels its popularity, what how exactly one can beat the house? Not until I implement the codes and run the simulations to see the results myself, that it becomes clear to me. Also this post is inspired by the book *Reinforcement Learning: An Introduction*, by Richard S. Sutton and Andrew G. Barto.
+The multi-armed bandit is such a classic problem yet I always find it a bit elusive -- the casino analogy fuels its popularity, what how exactly one can beat the house? Not until I implement the codes and run the simulations to see the results myself, that it becomes clear to me. Also this post is inspired by the book [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html), by Richard S. Sutton and Andrew G. Barto.
 
 
 
