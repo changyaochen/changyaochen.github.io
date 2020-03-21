@@ -2,7 +2,7 @@
 layout: single
 title:  "Multi-armed bandit"
 date:   2020-03-20 12:00:00 -0600
-published: false
+published: true
 tag: [algorithm, python]
 toc: true
 excerpt: Multi armed bandit is such a classic problem, here let's implement some simple policies from ground up to address this problem.  
