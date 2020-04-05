@@ -16,7 +16,7 @@ class SIR:
         """Only initialize the model parameters."""
         self.beta = param.get('beta', 0.1)
         self.gamma = param.get('gamma', 0.05)
-        self.p_d = param.get('p_d', 0.01)
+        self.eta = param.get('eta', 0.01)
         self.X_init = None
         self.X = None
         self.num_steps = 0
@@ -28,6 +28,15 @@ class SIR:
         """Run the simulation by solving the SIR ODE numerically."""
         self.X_init = X_init
         self.num_steps = num_steps
+
+        # sanity check for non-negative value
+        for x in self.X_init:
+            if x < 0:
+                print('Invalid value, needs a non-negative number.', x)
+        self.X_int = [min(0, x) for x in self.X_init]
+        # sanity check, for nomalization
+        norm = sum(self.X_init)
+        self.X_init = [x / norm for x in self.X_init]
 
         # we want to simulate S, I and R, plus D (death)
         m = 4
@@ -44,8 +53,8 @@ class SIR:
                 self.X[2][t - 1], self.X[3][t - 1]
             dS = -1. * self.beta * S * I / (S + I + R)
             dI = -1. * dS - self.gamma * I
-            dR = (1 - self.p_d) * self.gamma * I
-            dD = self.p_d * self.gamma * I
+            dR = (1 - self.eta) * self.gamma * I
+            dD = self.eta * self.gamma * I
 
             self.X[0][t] = S + dS  # update S
             self.X[1][t] = I + dI  # update I
