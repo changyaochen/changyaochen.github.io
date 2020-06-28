@@ -1,5 +1,6 @@
 **/.ipynb_checkpoints/*
 
+vendor/
 .jekyll-cache/
 *.gem
 *.sublime-project
