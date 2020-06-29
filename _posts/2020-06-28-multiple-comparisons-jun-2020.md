@@ -91,7 +91,9 @@ If we examine the distribution of the 500 *p* values, we will find it to be more
 </figure>
 
 ## A simple fix: Bonferroni correction
-It seems that, when we are conducting a family of tests on the same dataset, the chance of getting false positives becomes larger. To control for that, one needs to be more strict when deeming "statistically significant". The [Bonferroni correction](https://en.wikipedia.org/wiki/Dunn%E2%80%93Bonferroni_correction) is arguably the simplest fix: if there are $$m$$ comparisons carried out, adjust $$\alpha$$ to $$\alpha / m$$. Then, only when an observed *p* value that is smaller than $$\alpha / m$$, we reject the null hypothesis. 
+It seems that, when we are conducting a family of tests on the same dataset, the chance of getting false positives becomes larger. In fact, if there are $$m$$ comparisons carried out, then the probability of getting **no** type I error from all the comparisons is simply $$(1 - \alpha)^m$$. Thus the probability of getting at least one type I error is $$1 - (1 - \alpha)^m$$. Even for a medium value of $$m$$, this probablity (family-wise error rate) can be surpringly large.
+
+To control for that, one needs to be more strict when deeming "statistically significant". The [Bonferroni correction](https://en.wikipedia.org/wiki/Dunn%E2%80%93Bonferroni_correction) is arguably the simplest fix: for each of the $$m$$ comparisons, adjust $$\alpha$$ to $$\alpha / m$$. Then, only when an observed *p* value that is smaller than $$\alpha / m$$, we reject the null hypothesis. 
 
 If we use the Bonferroni correction to our running example, namely, using 0.0001 as the critical value, we will reject 0 test, as we should. 
 
@@ -107,7 +109,7 @@ print('Percentage of significant results: {:5.2%}'
 ~~~
 
 ## Get the power back: Benjamini–Hochberg procedure
-The major disadvantage of the Bonferroni correction is that, it is too *conservative*. It trades the power for the low familywise error rate. To illustrate this drawback, let's make half of the 500 comparisons with true differences. 
+The major disadvantage of the Bonferroni correction is that, it is too *conservative*. It trades the power for the low family-wise error rate. To illustrate this drawback, let's make half of the 500 comparisons with true differences. 
 
 To do so, we take the first 250 features, for each of them, whenever there is an `1`, we draw a sample from an $$N(1, 1)$$, and add it to `y`. If there is a `0`, we do nothing. Essentially, we create 250 independent $$N(1, 1)$$, each of 10000-long, and then multiply this (10000, 250) matrix, element-wise, to the first 250 columns of the dataset. By doing so, when we conduct a comparison along any of the first 250 dimensions, we should get a significant result. 
 
