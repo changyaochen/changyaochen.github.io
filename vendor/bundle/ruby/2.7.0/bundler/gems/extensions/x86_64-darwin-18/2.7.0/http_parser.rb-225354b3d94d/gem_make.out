@@ -1,0 +1,20 @@
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/http_parser.rb-225354b3d94d/ext/ruby_http_parser
+/Users/changyaochen/.rbenv/versions/2.7.1/bin/ruby -I /Users/changyaochen/.rbenv/versions/2.7.1/lib/ruby/2.7.0 -r ./siteconf20200627-34446-146xvoj.rb extconf.rb
+creating Makefile
+
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/http_parser.rb-225354b3d94d/ext/ruby_http_parser
+make "DESTDIR=" clean
+
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/http_parser.rb-225354b3d94d/ext/ruby_http_parser
+make "DESTDIR="
+compiling ruby_http_parser.c
+ruby_http_parser.c:349:17: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'long' [-Wsign-compare]
+    if (nparsed < len)
+        ~~~~~~~ ^ ~~~
+1 warning generated.
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.bundle
+
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/http_parser.rb-225354b3d94d/ext/ruby_http_parser
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 ruby_http_parser.bundle ./.gem.20200627-34446-mqnflm
