@@ -91,7 +91,7 @@ If we examine the distribution of the 500 *p* values, we will find it to be more
 </figure>
 
 ## A simple fix: Bonferroni correction
-It seems that, when we are conducting a family of tests on the same dataset, the chance of getting false positives becomes larger. In fact, if there are $$m$$ comparisons carried out, then the probability of getting **no** type I error from all the comparisons is simply $$(1 - \alpha)^m$$. Thus the probability of getting at least one type I error is $$1 - (1 - \alpha)^m$$. Even for a medium value of $$m$$, this probablity (family-wise error rate) can be surpringly large.
+It seems that, when we are conducting a family of tests on the same dataset, the chance of getting false positives becomes larger. In fact, if there are $$m$$ comparisons carried out, then the probability of getting **no** type I error from all the comparisons is simply $$(1 - \alpha)^m$$. Thus the probability of getting at least one type I error is $$1 - (1 - \alpha)^m$$. Even for a medium value of $$m$$, this probability (family-wise error rate) can be surprisingly large.
 
 To control for that, one needs to be more strict when deeming "statistically significant". The [Bonferroni correction](https://en.wikipedia.org/wiki/Dunn%E2%80%93Bonferroni_correction) is arguably the simplest fix: for each of the $$m$$ comparisons, adjust $$\alpha$$ to $$\alpha / m$$. Then, only when an observed *p* value that is smaller than $$\alpha / m$$, we reject the null hypothesis. 
 
