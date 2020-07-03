@@ -69,7 +69,7 @@ where \\(Q_i(t)\\) is the point estimate of \\(Q_i\\) prior to step \\(t\\), and
 We see that, everything else being equal, if a less-pulled arm would have a higher upper confidence bound than other arms that have been pulled more often, and we would prefer this arm precisely because we are less certain about it payoff, but we believe it would give us higher reward. Again, as in most machine learning problem, the exact setting and hyper-parameter tuning would matter quite a lot. 
 
 ## Conclusion
-The multi-armed bandit is such a classic problem yet I always find it a bit elusive -- the casino analogy fuels its popularity, what how exactly one can beat the house? Not until I implement the codes and run the simulations to see the results myself, that it becomes clear to me. Also this post is inspired by the book [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html), by Richard S. Sutton and Andrew G. Barto.
+The multi-armed bandit is such a classic problem yet I always find it a bit elusive -- the casino analogy fuels its popularity, what how exactly one can beat the house? Not until I implement the codes and run the simulations to see the results myself, that it becomes clear to me. Also this post is inspired by the book [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html), by Richard S. Sutton and Andrew G. Barto. [This blog post](https://lilianweng.github.io/lil-log/2018/01/23/the-multi-armed-bandit-problem-and-its-solutions.html) also offers an excellent explanation, using a slightly different example.
 
 
 
