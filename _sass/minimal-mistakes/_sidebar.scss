@@ -94,6 +94,13 @@
   }
 }
 
+.sidebar__top {
+  position: fixed;
+  bottom: 1.5em;
+  right: 2em;
+  z-index: 9;
+}
+
 /*
    Author profile and links
    ========================================================================== */

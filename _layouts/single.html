@@ -42,6 +42,9 @@ layout: default
             </nav>
           </aside>
         {% endif %}
+        <aside class="sidebar__top">
+          <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+        </aside>
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
@@ -69,24 +72,18 @@ layout: default
   </article>
 
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
-  {% if page.id and page.related and site.related_posts.size > 0 %}
-    <div class="page__related">
-      <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
-      <div class="grid__wrapper">
-        {% for post in site.related_posts limit:4 %}
+  <div class="page__related">
+    <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
+    <div class="grid__wrapper">
+      {% if page.id and page.related and site.related_posts.size > 0 %}
+        {% for post in site.related_posts limit:3 %}
           {% include archive-single.html type="grid" %}
         {% endfor %}
-      </div>
-    </div>
-  {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
-  {% elsif page.id and page.related %}
-    <div class="page__related">
-      <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
-      <div class="grid__wrapper">
-        {% for post in site.posts limit:4 %}
+      {% elsif page.id and page.related %}
+        {% for post in site.posts limit:3 %}
           {% include archive-single.html type="grid" %}
         {% endfor %}
-      </div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 </div>
