@@ -9,9 +9,7 @@ excerpt: Here we look into a good resource of practicing good machine learning d
 header:
   teaser: /assets/images/mldp.jpeg
 ---
-In Useful Overfitting, we forgo the use of a validation or testing dataset because we want to intentionally overfit on the training dataset. In Checkpoints, we store the full state of the model periodically, so that we have access to partially trained models. When we use checkpoints, we usually also use virtual epochs, wherein we decide to carry out the inner loop of the fit() function, not on the full training dataset but on a fixed number of training examples. In Transfer Learning, we take part of a previously trained model, freeze the weights, and incorporate these nontrainable layers into a new model that solves the same problem, but on a smaller dataset. In Distribution Strategy, the training loop is carried out at scale over multiple workers, often with caching, hardware acceleration, and parallelization. Finally, in Hyperparameter Tuning, the training loop is itself inserted into an optimization method to find the optimal set of model hyperparameters.
-
-In [continuing reading]({{ site.baseurl }}{% link _posts/2020-12-27-ML-design-pattern-1.md %}) the [Machine Learning Design Patterns](https://learning.oreilly.com/library/view/machine-learning-design/9781098115777/) book, in this post, I would like to summarize the takeaways from the Model Training section (Chapter 4). Most of the discussion are based on the neural network (NN) cases.
+As I [continue reading]({{ site.baseurl }}{% link _posts/2020-12-27-ML-design-pattern-1.md %}) the [Machine Learning Design Patterns](https://learning.oreilly.com/library/view/machine-learning-design/9781098115777/) book, in this post, I would like to summarize the takeaways from the Model Training section (Chapter 4). Most of the discussion are based on the neural network (NN) cases.
 
 ## Useful Overfitting
 
@@ -45,27 +43,38 @@ steps_per_epoch = (
 ~~~
 
 ### How checkpoints can help
-Aside from the benefit describe above,
+Aside from the benefit describe above, checkpoints saved after each virtual epoch can speed up the retraining with newer data, effectively providing a warm start state as more recent data are added, as illustrated in the figure below.
 
-Retraining, warm start
 <figure>
 <center>
 <a href="/assets/images/mldp_0411.png"><img src="/assets/images/mldp_0411.png"></a>
 </center>
 </figure>
 
-Training batch, step, epoch.
+Another benefit of more granular look of the training progression (with properly chosen virtual epoch size) is, we can also examine the evolution of the loss to better locate the minimal, in the face of noise, and to apply regularization.
+
 
 ## Transfer Learning
-Mostly used in the context of image of text domains, where you can apply a similar task to the same data domain, but not so much for tabular data, as there are potentially infinite number of possible prediction tasks and data types.
+This design pattern is mostly used in the context of image of text domains, where you can apply a similar task to the same data domain, but not so much for tabular data, as there are potentially infinite number of possible prediction tasks and data types. Since my work have mostly in the latter camp, I skim through this part rather quickly.
 
 ## Distribution Strategy
 
-synchronous versus asynchronous
+Nowadays, it is common for a large NN model to have millions of parameters and massive amount of data to train on, for good reasons (better model performance). However, this inevitably increases the computation resources, and time needed to train such models. Distribution Strategy aims to parallelize model training by utilizing multiple workers, to speed up the total training time.
 
-Data parallelism versus model parallelism
+### Data parallelism versus model parallelism
+Since stochastic gradient descent (SGD) only process one batch at a time to update the gradients, one can distribute data across different workers, this is the essence of data parallelism. In model parallelism, the model is split and different workers carry out the computation for different parts of the model. The former is more intuitive and generally easier to implement.
 
-Minimize I/O bottleneck
+### Synchronous versus asynchronous
+For data parallelism, a key question is how to coordinate the updates from different workers. There are two strategies: synchronous and asynchronous updates.
+
+In synchronous training, the workers train on different slices of data in parallel and the gradient values are aggregated at the end of each training step. This is performed via an *all-reduce* algorithm: each worker (CPU or GPU) has the same copy of the model, and SGD is performed on each worker with their share of the data. Once the locally updated gradients are computed, they are sent back to a central server to be aggregated (for example, averaged), so to produce a single gradient update for each parameter (hence updated model). This updated model is then broadcasted to all workers for next iteration.
+
+In asynchronous training, the workers train on different slices of the data independently, but the model parameters are updated asynchronously, typically through a parameter server architecture. This means that no one worker waits for updates to the model from any of the other workers.
+
+The trade-off between synchronous and asynchronous strategies should be clear from their construction. Asynchronous training wouldn't be bounded by slow/failed workers, whereas synchronous training may be preferable if all the workers are on a single host and with fast communication links.
+
+### Minimize I/O bottleneck
+As GPUs can perform arithmetic operations much faster than CPUs, we see more model trainings use GPU for speed up. However, one still needs CPUs to process other tasks that involves disk I/O. If not handled properly, the CPU tasks can become the bottleneck and diminish the benefit brought by GPUs and Distribution Strategy. A simple optimization is to overlap the CPU and GPU tasks, such as using the TensorFlow `tf.data.Dataset.prefetch` API (shown below).
 <figure>
 <center>
 <a href="/assets/images/mldp_0422.png"><img src="/assets/images/mldp_0422.png"></a>
@@ -74,9 +83,16 @@ Minimize I/O bottleneck
 
 ## Hyperparameter Tuning
 
-grid search and combinatorial explosion
-Bayesian optimization is a technique for optimizing black-box functions. Bayesian optimization defines a new function that emulates our model but is much cheaper to run. This is referred to as the surrogate function—the inputs to this function are your hyperparameter values and the output is your optimization metric.
+Aside from data munging, hyperparameter tuning is arguably where an ML practitioner spends most effort on. This design patterns aims to help us to do it better.
 
-I found [this video](https://www.youtube.com/watch?v=c4KKvyWW_Xk) a good introduction to Bayesian optimization (and the [corresponding tutorial](https://arxiv.org/pdf/1807.02811.pdf)),
+### Grid search
+This is the most common approach one would take, where one iterate through the combinations of a set of hyperparameter ranges. As simple as it is, the combinatorial explosion will kick in fairly quickly. This is particularly an issue for large models where a single training run can take hours or days.
 
+Instead of meticulously trying every single hyperparameter combination, one could specifies the total number of trials, and then for each trial, one *randomly* chooses a new hyperparameter combinations. This would bound the hyperparameter turning budget, but not necessary bring us the best outcome.
 
+### Bayesian optimization
+Bayesian optimization is a technique for optimizing black-box functions. In this case, we can conveniently consider the loss of the ML model as the output of this black-box function, and the hyperparameters as the input to the black-box function. A simple example to illustrate the general concept of Bayesian optimization if that, if we have observed that increasing the `max_depth` of our xgboost model has not led to reduction of error metrics, then we probably won't keep exploring deeper trees.
+
+There is another layer of optimization added to the process. Bayesian optimization defines a new function that emulates our model but is much cheaper to run. This is referred to as the surrogate function, and again, the inputs to this function are hyperparameter values and the output is the optimization metric (*e.g.*, loss).
+
+I found [this video](https://www.youtube.com/watch?v=c4KKvyWW_Xk) a good introduction to Bayesian optimization (and the [corresponding tutorial](https://arxiv.org/pdf/1807.02811.pdf)), and will probably learn more about it in the future.
