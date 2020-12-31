@@ -86,13 +86,13 @@ As GPUs can perform arithmetic operations much faster than CPUs, we see more mod
 Aside from data munging, hyperparameter tuning is arguably where an ML practitioner spends most effort on. This design pattern aims to help us to do it better.
 
 ### Grid search
-This is the most common approach one would take, where one iterate through the combinations of a set of hyperparameter ranges. As simple as it is, the combinatorial explosion will kick in fairly quickly. This is particularly an issue for large models where a single training run can take hours or days.
+This is the most common approach one would take: one simply iterates through the combinations of a set of hyperparameter ranges. As straightforward as it is, the combinatorial explosion will kick in fairly quickly. This is particularly an issue for large models where a single training run can take hours or days.
 
 Instead of meticulously trying every single hyperparameter combination, one could specify the total number of trials, and then for each trial, one *randomly* chooses a new hyperparameter combination. This would bound the hyperparameter turning budget, but not necessarily bringing us the best outcome.
 
 ### Bayesian optimization
-Bayesian optimization is a technique for optimizing black-box functions. In this case, we can conveniently consider the loss of the ML model as the output of this black-box function, and the hyperparameters as the input to the black-box function. A simple example to illustrate the general concept of Bayesian optimization is that, if we have observed that increasing the `max_depth` of our xgboost model has not led to reduction of error metrics, then we probably won't keep exploring deeper trees.
+Bayesian optimization is a technique for optimizing black-box functions. In this case, we can conveniently consider the hyperparameter values as the input to the black-box function, and the loss of the ML model as the output of this black-box function. A simple example to illustrate the general concept of Bayesian optimization is: if we have observed that increasing the `max_depth` of our xgboost model has not led to reduction of error metrics, then we probably won't keep exploring deeper trees.
 
-There is another layer of optimization added to the process. Bayesian optimization defines a new function that emulates our model but is much cheaper to run. This is referred to as the surrogate function, and again, the inputs to this function are hyperparameter values and the output is the optimization metric (*e.g.*, loss).
+There is another layer of optimization added to the process. Bayesian optimization defines a new function that emulates our model but is much cheaper to run. This is referred to as the *surrogate function*. Again, the inputs to this function are hyperparameter values and the output is the optimization metric (*e.g.*, loss).
 
 I found [this video](https://www.youtube.com/watch?v=c4KKvyWW_Xk) a good introduction to Bayesian optimization (and the [corresponding tutorial](https://arxiv.org/pdf/1807.02811.pdf)), and will probably learn more about it in the future.
