@@ -22,7 +22,3 @@ comments: false
   * **Ph.D.**, Mechanical Engineering, Columbia University, 2012
   * **M.Sc.**, Mechanical Engineering, Columbia University, 2007
   * **B.S.**, Precision Instrument, Tsinghua University, China, 2006
-
-  
-
-<a href="#" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
