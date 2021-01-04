@@ -2,7 +2,7 @@
 layout: single
 title:  "Book roundup, January 2021"
 date:   2021-01-31 12:00:00 -0600
-published: true
+published: false
 tag: book
 toc: true
 excerpt: blah.
