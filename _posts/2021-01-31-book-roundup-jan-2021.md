@@ -18,7 +18,11 @@ This [book](https://www.amazon.com/Mind-Numbers-Science-Flunked-Algebra-ebook/dp
 
 Focus mode vs. diffuse mode
 
-Spacing the repetitions
+Spacing the repetitions, move items in working memory to long-term memory.
+
+4 Steps to battle procastination: cue, routine, reward, belief.
+
+todo list the night before, eat the frog, pomodoro approach
 
 
 
