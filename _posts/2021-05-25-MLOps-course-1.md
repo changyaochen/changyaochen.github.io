@@ -13,12 +13,41 @@ A machine learning model is only useful when it is in production, however, going
 
 ## The Big Picture
 
-While the greatest and latest ML models or architectures often get the most excitements, putting them into practical use (_i.e._, used by the intended audience) usually takes much more effort. In reality, there won't be pristine data handed to you in a reliable fashion, ready for you to call the `.predict()` method. A lot of things can go wrong, and they will go wrong: missing data, 10 of the 5,000 features suddenly become unavailable, the data is too large to fit in a single machine's memory, the latency is more than 2 seconds, the list goes on and on. In the grand scheme of things, the ML models only occupy a small portion of the whole ecosystem, that makes the ML models *work*. The figure below sums up this situation quite succinctly ([reference](https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf))
+While the greatest and latest ML models or architectures often get the most excitements, putting them into practical use (_i.e._, used by the intended audience) usually takes much more effort. In reality, there won't be pristine data handed to you in a reliable fashion, ready for you to call the `.predict()` method. A lot of things can go wrong, and they will go wrong: missing data, 10 of the 5,000 features suddenly become unavailable, the data is too large to fit in a single machine's memory, the latency is more than 2 seconds, ..., the list goes on and on.
+
+In the grand scheme of things, the ML models only occupy a small portion of the whole ecosystem, that makes the ML models *work*. The figure below sums up this situation quite succinctly ([reference](https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)).
 <figure>
 <a href="/assets/images/ml_hidden_debt.png"><img src="/assets/images/ml_hidden_debt.png"></a>
 </figure>
+The gist of MLOps, therefore, it to build the end-to-end pipelines, so that your greatest and latest ML models can finally see the light of the day.
 
-Four parts: scoping, data, modeling, deployment.
+## The ML Project Lifecycle
+
+The general pattern (summarized by Andrew Ng and I can't agree more) is to encapsulate the ML project lifecycle to different components, and define clear interface between different components. Namely, the four components are scoping, data, modeling, deployment (figure screenshot from the course).
+<figure>
+<a href="/assets/images/mlops_lifecycle.png"><img src="/assets/images/mlops_lifecycle.png"></a>
+</figure>
+
+### Scoping
+This might be the least technical component, but can be the most difficult step.
+
+*Value of the project*. Not all the projects require a deep learning model, and often not even an ML model to start with. There are inevitable cost associated with developing and deploying ML models, and one needs to be convinced that the (long-term) return outweighs the cost.
+
+More importantly, the value of a ML project usually is to improve the business bottom line, _i.e_, the business metrics. If a ML model achieves out-of-chart technical metrics, but does not move the business needle, it will be hard to get the buy-in from the stakeholders. As such, making good estimations from the technical metrics to the business metrics should be part of this scoping step.
+
+*Feasibility of the project*. On the other end of the spectrum, there are tasks, neither domain experts nor some sophisticated ML models can seemingly tackle. For example, using the historical stock prices, to predict the future price of that given stock will almost certainly lead to, at best, random guesses. There are people trading stocks for living (_e.g._, hedge funds), but their scope won't be as narrow as a **single** stock.
+
+### Data
+
+An ML model is only as good as its training data. Put it differently, garbage in, garbage out. This step is where a real ML project differs most from a Kaggle competition: we are not only the mere consumer of the data, but also the producer and guardian of the data.
+
+*Data quality*. The majority of the ML projects are dealing with labelled data, however, getting the "correct" label might take more effort than one would assume. For example, in object detection problems,
+
+*Data pipeline*.
 
 Small data: make sure data, especially labels, are clean.
 Big data: investigate efforts on data processing.
+
+### Training
+
+### Deployment
