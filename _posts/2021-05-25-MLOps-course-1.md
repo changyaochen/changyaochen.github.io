@@ -41,13 +41,14 @@ More importantly, the value of a ML project usually is to improve the business b
 
 An ML model is only as good as its training data. Put it differently, garbage in, garbage out. This step is where a real ML project differs most from a Kaggle competition: we are not only the mere consumer of the data, but also the producer and guardian of the data.
 
-*Data quality*. The majority of the ML projects are dealing with labelled data, however, getting the "correct" label might take more effort than one would assume. For example, in object detection problems,
+*Data quality*. The majority of the ML projects deal with labelled data. However, getting the "correct" label might take more effort than one would expect, especially if there are human involved in making the labels. For example, in object detection problems, different labelers might draw (sometimes drastically) different bounding boxes for the same object. Ensuring the quality of the data (including both features and labels) is a worthy investment, than the most advanced ML model.
 
-*Data pipeline*.
+*Data pipeline*. It is often the case that the training data will accumulate over time (_e.g._, new clicks on the ads), therefore, a data pipeline is needed to process the influx of data (not necessarily streaming). To this end, one probably needs infrastructure support (_e.g._, Airflow, Spark, Kafka), and some monitoring guardrails to ensure the quality.
 
-Small data: make sure data, especially labels, are clean.
-Big data: investigate efforts on data processing.
+As summarized by Andrew Ng: if one is dealing with small data, then make sure the data, especially the labels, are clean. On the other hand, if one is dealing with big data, then investigate efforts on data processing.
 
 ### Training
+
+This is the more often discussed component in the ML project lifecycle.
 
 ### Deployment
