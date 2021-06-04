@@ -49,6 +49,8 @@ As summarized by Andrew Ng: if one is dealing with small data, then make sure th
 
 ### Training
 
-This is the more often discussed component in the ML project lifecycle.
+This is the more often discussed component in the ML project lifecycle, and most of the ML practitioners are familiar with. One thing I think worth mentioning is, try to establish a model performance baseline early on. This baseline can be either from previous model, or if one is dealing with a new problem, with a simple model (_e.g._, linear model). Aiming directly with the latest and greatest model architecture is exciting, but that would usually fail to deliver result in a reasonable time frame.
+
+Another interesting technique mentioned by Andrew Ng is data augmentation.
 
 ### Deployment
