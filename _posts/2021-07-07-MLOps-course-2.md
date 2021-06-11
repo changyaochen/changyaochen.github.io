@@ -2,7 +2,7 @@
 layout: single
 title:  "MLOps course: Data"
 date:   2021-07-07 12:00:00 -0600
-published: falsh
+published: false
 tag: [machine learning]
 toc: true
 excerpt: Summary of Coursera MLOps Course 2.
