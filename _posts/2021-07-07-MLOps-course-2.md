@@ -13,3 +13,7 @@ blah
 
 * Academic/Research ML vs Production ML
 * Feature coverage
+* Data collection: avoid bias in data
+* Labeling: process labeling (from log) and human labeling
+* Data validation:
+  * Data skew (distribution)
