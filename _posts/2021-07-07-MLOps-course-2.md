@@ -17,3 +17,6 @@ blah
 * Labeling: process labeling (from log) and human labeling
 * Data validation:
   * Data skew (distribution)
+  * How to validate the data?
+    * Check schema: summary statistics, min/max/mean/median, valency/cardinality
+    * Check distribution: L-infinity distance
