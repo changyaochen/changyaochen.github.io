@@ -20,3 +20,10 @@ blah
   * How to validate the data?
     * Check schema: summary statistics, min/max/mean/median, valency/cardinality
     * Check distribution: L-infinity distance
+* Feature engineering (It is kinda strange to put feature engineering here...)
+  * Feature selection
+    * Filter method (Check for correlation), one-shot
+    * Wrapper method (iterative process)
+    * Embedded method (???)
+* Data journey and data storage
+  * What are the data versioning tool? DVC, git-LFS
