@@ -27,3 +27,5 @@ blah
     * Embedded method (???)
 * Data journey and data storage
   * What are the data versioning tool? DVC, git-LFS
+  * MLMD (Machine Learning Meta Data). It is a library pushed by Google
+  * Data error should be treated the same as code bugs
