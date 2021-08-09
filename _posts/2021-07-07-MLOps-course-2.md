@@ -29,3 +29,10 @@ blah
   * What are the data versioning tool? DVC, git-LFS
   * MLMD (Machine Learning Meta Data). It is a library pushed by Google
   * Data error should be treated the same as code bugs
+* Feature store
+  * Avoid duplications
+  * Discoverability and documentation
+* Advanced Sampling
+  * Semi-supervise learning: use clustering approach to generate new labels.
+  * Active learning:
+    * Margin sampling: train a model with existing labels, then label the closest unlabelled sample to the decision boundary
