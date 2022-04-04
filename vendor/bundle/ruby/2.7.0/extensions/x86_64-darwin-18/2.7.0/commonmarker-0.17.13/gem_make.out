@@ -1,5 +1,5 @@
 current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
-/Users/changyaochen/.rbenv/versions/2.7.1/bin/ruby -I /Users/changyaochen/.rbenv/versions/2.7.1/lib/ruby/2.7.0 -r ./siteconf20200627-34446-1kt5a5j.rb extconf.rb
+/Users/changyaochen/.rbenv/versions/2.7.1/bin/ruby -I /Users/changyaochen/.rbenv/versions/2.7.1/lib/ruby/site_ruby/2.7.0 -r ./siteconf20220403-35290-1phvv2f.rb extconf.rb
 creating Makefile
 
 current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
@@ -118,4 +118,4 @@ linking shared-object commonmarker/commonmarker.bundle
 
 current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 commonmarker.bundle ./.gem.20200627-34446-13l49l1/commonmarker
+/usr/bin/install -c -m 0755 commonmarker.bundle ./.gem.20220403-35290-39rglk/commonmarker
