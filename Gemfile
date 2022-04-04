@@ -4,4 +4,5 @@ source "https://rubygems.org"
 gem "jemoji"
 gem "minimal-mistakes-jekyll"
 gem "github-pages", group: :jekyll_plugins
-gem 'http_parser.rb', git: "https://github.com/tmm1/http_parser.rb.git"
+gem "http_parser.rb", git: "https://github.com/tmm1/http_parser.rb.git"
+gem "ffi", "~>1.15.0"
