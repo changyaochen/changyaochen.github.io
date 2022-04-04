@@ -1,0 +1,16 @@
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.1/ext/unf_ext
+/Users/changyaochen/.rbenv/versions/2.7.1/bin/ruby -I /Users/changyaochen/.rbenv/versions/2.7.1/lib/ruby/site_ruby/2.7.0 -r ./siteconf20220403-37234-nx65gm.rb extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.1/ext/unf_ext
+make "DESTDIR=" clean
+
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.1/ext/unf_ext
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.bundle
+
+current directory: /Users/changyaochen/Google Drive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.1/ext/unf_ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.bundle ./.gem.20220403-37234-1itmd31
