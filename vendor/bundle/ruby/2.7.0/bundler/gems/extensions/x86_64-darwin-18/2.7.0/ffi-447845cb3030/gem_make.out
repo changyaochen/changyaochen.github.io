@@ -1,0 +1,227 @@
+current directory: /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c
+/Users/changyaochen/.rbenv/versions/2.7.1/bin/ruby -I /Users/changyaochen/.rbenv/versions/2.7.1/lib/ruby/site_ruby/2.7.0 -r ./siteconf20220404-70345-12kt4r7.rb extconf.rb
+checking for ffi_prep_closure_loc() in -lffi... no
+checking for ffi_prep_closure_loc() in -llibffi... no
+checking for ffi_prep_closure_loc() in -llibffi-8... no
+checking for whether -Wl,--exclude-libs,ALL is accepted as LDFLAGS... no
+checking for whether -pthread is accepted as LDFLAGS... yes
+creating extconf.h
+creating Makefile
+
+current directory: /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c
+make "DESTDIR=" clean
+
+current directory: /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c
+make "DESTDIR="
+Running autoreconf for libffi
+autoreconf: export WARNINGS=
+autoreconf: Entering directory '.'
+autoreconf: configure.ac: not using Gettext
+autoreconf: running: aclocal -I m4
+autoreconf: configure.ac: tracing
+autoreconf: running: glibtoolize --copy
+autoreconf: configure.ac: not using Intltool
+autoreconf: configure.ac: not using Gtkdoc
+autoreconf: running: aclocal -I m4
+autoreconf: running: /usr/local/Cellar/autoconf/2.71/bin/autoconf
+configure.ac:8: warning: The macro `AC_CANONICAL_SYSTEM' is obsolete.
+configure.ac:8: You should run autoupdate.
+./lib/autoconf/general.m4:2081: AC_CANONICAL_SYSTEM is expanded from...
+configure.ac:8: the top level
+configure.ac:41: warning: The macro `AC_PROG_LIBTOOL' is obsolete.
+configure.ac:41: You should run autoupdate.
+m4/libtool.m4:99: AC_PROG_LIBTOOL is expanded from...
+configure.ac:41: the top level
+configure.ac:71: warning: The macro `AC_TRY_COMPILE' is obsolete.
+configure.ac:71: You should run autoupdate.
+./lib/autoconf/general.m4:2847: AC_TRY_COMPILE is expanded from...
+lib/m4sugar/m4sh.m4:692: _AS_IF_ELSE is expanded from...
+lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+./lib/autoconf/general.m4:2249: AC_CACHE_VAL is expanded from...
+./lib/autoconf/general.m4:2270: AC_CACHE_CHECK is expanded from...
+acinclude.m4:3: AC_FUNC_MMAP_BLACKLIST is expanded from...
+configure.ac:71: the top level
+configure.ac:88: warning: The macro `AC_HEADER_STDC' is obsolete.
+configure.ac:88: You should run autoupdate.
+./lib/autoconf/headers.m4:704: AC_HEADER_STDC is expanded from...
+configure.ac:88: the top level
+configure.ac:115: warning: The macro `AC_TRY_COMPILE' is obsolete.
+configure.ac:115: You should run autoupdate.
+./lib/autoconf/general.m4:2847: AC_TRY_COMPILE is expanded from...
+lib/m4sugar/m4sh.m4:692: _AS_IF_ELSE is expanded from...
+lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+./lib/autoconf/general.m4:2249: AC_CACHE_VAL is expanded from...
+./lib/autoconf/general.m4:2270: AC_CACHE_CHECK is expanded from...
+m4/asmcfi.m4:1: GCC_AS_CFI_PSEUDO_OP is expanded from...
+configure.ac:115: the top level
+configure.ac:119: warning: The macro `AC_TRY_LINK' is obsolete.
+configure.ac:119: You should run autoupdate.
+./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+lib/m4sugar/m4sh.m4:692: _AS_IF_ELSE is expanded from...
+lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+./lib/autoconf/general.m4:2249: AC_CACHE_VAL is expanded from...
+./lib/autoconf/general.m4:2270: AC_CACHE_CHECK is expanded from...
+configure.ac:119: the top level
+configure.ac:135: warning: The macro `AC_TRY_COMPILE' is obsolete.
+configure.ac:135: You should run autoupdate.
+./lib/autoconf/general.m4:2847: AC_TRY_COMPILE is expanded from...
+lib/m4sugar/m4sh.m4:692: _AS_IF_ELSE is expanded from...
+lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+./lib/autoconf/general.m4:2249: AC_CACHE_VAL is expanded from...
+./lib/autoconf/general.m4:2270: AC_CACHE_CHECK is expanded from...
+configure.ac:135: the top level
+configure.ac:182: warning: The macro `AC_TRY_COMPILE' is obsolete.
+configure.ac:182: You should run autoupdate.
+./lib/autoconf/general.m4:2847: AC_TRY_COMPILE is expanded from...
+lib/m4sugar/m4sh.m4:692: _AS_IF_ELSE is expanded from...
+lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+./lib/autoconf/general.m4:2249: AC_CACHE_VAL is expanded from...
+./lib/autoconf/general.m4:2270: AC_CACHE_CHECK is expanded from...
+configure.ac:182: the top level
+configure.ac:307: warning: The macro `AC_HELP_STRING' is obsolete.
+configure.ac:307: You should run autoupdate.
+./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
+configure.ac:307: the top level
+configure.ac:401: warning: The macro `AC_HELP_STRING' is obsolete.
+configure.ac:401: You should run autoupdate.
+./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
+acinclude.m4:353: LIBFFI_ENABLE_SYMVERS is expanded from...
+configure.ac:401: the top level
+configure.ac:401: warning: The macro `AC_PROG_LD' is obsolete.
+configure.ac:401: You should run autoupdate.
+m4/libtool.m4:3325: AC_PROG_LD is expanded from...
+acinclude.m4:251: LIBFFI_CHECK_LINKER_FEATURES is expanded from...
+acinclude.m4:353: LIBFFI_ENABLE_SYMVERS is expanded from...
+configure.ac:401: the top level
+configure.ac:401: warning: The macro `AC_TRY_RUN' is obsolete.
+configure.ac:401: You should run autoupdate.
+./lib/autoconf/general.m4:2997: AC_TRY_RUN is expanded from...
+acinclude.m4:251: LIBFFI_CHECK_LINKER_FEATURES is expanded from...
+acinclude.m4:353: LIBFFI_ENABLE_SYMVERS is expanded from...
+configure.ac:401: the top level
+configure.ac:401: warning: The macro `AC_TRY_LINK' is obsolete.
+configure.ac:401: You should run autoupdate.
+./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+acinclude.m4:353: LIBFFI_ENABLE_SYMVERS is expanded from...
+configure.ac:401: the top level
+autoreconf: running: /usr/local/Cellar/autoconf/2.71/bin/autoheader
+autoreconf: running: automake --add-missing --copy --no-force
+configure.ac:31: installing './compile'
+configure.ac:19: installing './install-sh'
+configure.ac:19: installing './missing'
+Makefile.am: installing './depcomp'
+doc/Makefile.am:3: installing 'doc/mdate-sh'
+doc/Makefile.am:3: installing 'doc/texinfo.tex'
+autoreconf: Leaving directory '.'
+Configuring libffi
+/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/configure: line 19516: readelf: command not found
+clang: error: unsupported option '-print-multi-os-directory'
+clang: error: no input files
+cd "/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi-x86_64-darwin18" && /Library/Developer/CommandLineTools/usr/bin/make
+/Library/Developer/CommandLineTools/usr/bin/make  all-recursive
+Making all in include
+make[3]: Nothing to be done for `all'.
+Making all in testsuite
+make[3]: Nothing to be done for `all'.
+Making all in man
+make[3]: Nothing to be done for `all'.
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/prep_cif.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/prep_cif.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/prep_cif.c  -fno-common -DPIC -o src/.libs/prep_cif.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/types.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/types.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/types.c  -fno-common -DPIC -o src/.libs/types.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/raw_api.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/raw_api.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/raw_api.c  -fno-common -DPIC -o src/.libs/raw_api.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/java_raw_api.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/java_raw_api.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/java_raw_api.c  -fno-common -DPIC -o src/.libs/java_raw_api.o
+/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/java_raw_api.c:328:46: warning: 'ffi_java_raw_size' is deprecated [-Wdeprecated-declarations]
+  ffi_java_raw *raw = (ffi_java_raw*)alloca (ffi_java_raw_size (cif));
+                                             ^
+include/ffi.h:299:56: note: 'ffi_java_raw_size' has been explicitly marked deprecated here
+size_t ffi_java_raw_size (ffi_cif *cif) __attribute__((deprecated));
+                                                       ^
+/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/java_raw_api.c:331:3: warning: 'ffi_java_ptrarray_to_raw' is deprecated [-Wdeprecated-declarations]
+  ffi_java_ptrarray_to_raw (cif, avalue, raw);
+  ^
+include/ffi.h:295:93: note: 'ffi_java_ptrarray_to_raw' has been explicitly marked deprecated here
+void ffi_java_ptrarray_to_raw (ffi_cif *cif, void **args, ffi_java_raw *raw) __attribute__((deprecated));
+                                                                                            ^
+2 warnings generated.
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/closures.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/closures.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/closures.c  -fno-common -DPIC -o src/.libs/closures.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/x86/ffi64.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/ffi64.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/ffi64.c  -fno-common -DPIC -o src/x86/.libs/ffi64.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src  -c -o src/x86/unix64.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/unix64.S
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/unix64.S  -fno-common -DPIC -o src/x86/.libs/unix64.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wall -fexceptions -c -o src/x86/ffiw64.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/ffiw64.c
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -O3 -Wall -fexceptions -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/ffiw64.c  -fno-common -DPIC -o src/x86/.libs/ffiw64.o
+/bin/sh ./libtool  --tag=CC   --mode=compile clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi  -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src  -c -o src/x86/win64.lo /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/win64.S
+libtool: compile:  clang -DHAVE_CONFIG_H -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -DRUBY_EXTCONF_H=\"extconf.h\" -I/Users/changyaochen/.rbenv/versions/2.7.1/include -I/usr/local/opt/readline/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT -I. -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/include -Iinclude -I/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src -c /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/src/x86/win64.S  -fno-common -DPIC -o src/x86/.libs/win64.o
+/bin/sh ./libtool  --tag=CC   --mode=link clang  -O3 -Wall -fexceptions  -L/usr/local/opt/readline/lib -o libffi_convenience.la  src/prep_cif.lo src/types.lo src/raw_api.lo src/java_raw_api.lo src/closures.lo   src/x86/ffi64.lo src/x86/unix64.lo src/x86/ffiw64.lo src/x86/win64.lo 
+libtool: link: ar cru .libs/libffi_convenience.a src/.libs/prep_cif.o src/.libs/types.o src/.libs/raw_api.o src/.libs/java_raw_api.o src/.libs/closures.o src/x86/.libs/ffi64.o src/x86/.libs/unix64.o src/x86/.libs/ffiw64.o src/x86/.libs/win64.o 
+libtool: link: ranlib .libs/libffi_convenience.a
+libtool: link: ( cd ".libs" && rm -f "libffi_convenience.la" && ln -s "../libffi_convenience.la" "libffi_convenience.la" )
+/bin/sh ./libtool  --tag=CC   --mode=link clang  -O3 -Wall -fexceptions -no-undefined -version-info `grep -v '^#' /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi/libtool-version`   '-L/usr/local/opt/readline/lib'  -L/usr/local/opt/readline/lib -o libffi.la -rpath /usr/local/lib src/prep_cif.lo src/types.lo src/raw_api.lo src/java_raw_api.lo src/closures.lo  src/x86/ffi64.lo src/x86/unix64.lo src/x86/ffiw64.lo src/x86/win64.lo 
+libtool: link: clang -dynamiclib  -o .libs/libffi.8.dylib  src/.libs/prep_cif.o src/.libs/types.o src/.libs/raw_api.o src/.libs/java_raw_api.o src/.libs/closures.o src/x86/.libs/ffi64.o src/x86/.libs/unix64.o src/x86/.libs/ffiw64.o src/x86/.libs/win64.o   -L/usr/local/opt/readline/lib  -O3   -install_name  /usr/local/lib/libffi.8.dylib -compatibility_version 10 -current_version 10.0 -Wl,-single_module
+libtool: link: (cd ".libs" && rm -f "libffi.dylib" && ln -s "libffi.8.dylib" "libffi.dylib")
+libtool: link: ( cd ".libs" && rm -f "libffi.la" && ln -s "../libffi.la" "libffi.la" )
+compiling AbstractMemory.c
+compiling ArrayType.c
+compiling Buffer.c
+compiling Call.c
+compiling ClosurePool.c
+compiling DynamicLibrary.c
+compiling Function.c
+compiling FunctionInfo.c
+compiling LastError.c
+compiling LongDouble.c
+compiling MappedType.c
+compiling MemoryPointer.c
+compiling MethodHandle.c
+compiling Platform.c
+compiling Pointer.c
+compiling Struct.c
+compiling StructByValue.c
+compiling StructLayout.c
+compiling Thread.c
+compiling Type.c
+compiling Types.c
+compiling Variadic.c
+compiling ffi.c
+linking shared-object ffi_c.bundle
+
+current directory: /Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c
+make "DESTDIR=" install
+cd "/Users/changyaochen/GoogleDrive/changyaochen.github.io/vendor/bundle/ruby/2.7.0/bundler/gems/ffi-447845cb3030/ext/ffi_c/libffi-x86_64-darwin18" && /Library/Developer/CommandLineTools/usr/bin/make
+/Library/Developer/CommandLineTools/usr/bin/make  all-recursive
+Making all in include
+make[3]: Nothing to be done for `all'.
+Making all in testsuite
+make[3]: Nothing to be done for `all'.
+Making all in man
+make[3]: Nothing to be done for `all'.
+make[3]: Nothing to be done for `all-am'.
+compiling AbstractMemory.c
+compiling ArrayType.c
+compiling Buffer.c
+compiling Call.c
+compiling ClosurePool.c
+compiling DynamicLibrary.c
+compiling Function.c
+compiling FunctionInfo.c
+compiling LastError.c
+compiling LongDouble.c
+compiling MappedType.c
+compiling MemoryPointer.c
+compiling MethodHandle.c
+compiling Platform.c
+compiling Pointer.c
+compiling Struct.c
+compiling StructByValue.c
+compiling StructLayout.c
+compiling Thread.c
+compiling Type.c
+compiling Types.c
+compiling Variadic.c
+compiling ffi.c
+linking shared-object ffi_c.bundle
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20220404-70345-ghtqwr
