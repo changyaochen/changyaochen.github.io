@@ -5,4 +5,4 @@ gem "jemoji"
 gem "minimal-mistakes-jekyll"
 gem "github-pages", group: :jekyll_plugins
 gem "http_parser.rb", git: "https://github.com/tmm1/http_parser.rb.git"
-gem "ffi", "~>1.15.0"
+gem "ffi", github: "ffi/ffi", submodules: true
