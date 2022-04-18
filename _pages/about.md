@@ -10,7 +10,7 @@ comments: false
 ---
 
 ### Experience
-  * **Senior Machine Learning Engineer**, [Instacart](https://www.instacart.com/), 2020 - present
+  * **Staff / Senior Machine Learning Engineer**, [Instacart](https://www.instacart.com/), 2020 - present
   * **Senior Data Scientist**, [WeWork](https://www.wework.com/), 2019 - 2020
   * **Data Scientist**, [Macy's](https://www.macys.com/), 2017 - 2019
   * **Quantitative Researcher**, [Neo Ivy Capital](http://www.neoivycapital.com/), 2017
