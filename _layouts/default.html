@@ -12,6 +12,7 @@
   <head>
     {% include head.html %}
     {% include head/custom.html %}
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
@@ -38,4 +39,5 @@
     {% include scripts.html %}
 
   </body>
+
 </html>
