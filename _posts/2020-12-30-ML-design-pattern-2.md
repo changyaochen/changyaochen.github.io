@@ -5,6 +5,7 @@ date:   2020-12-30 12:00:00 -0600
 published: true
 tag: [book, machine learning]
 toc: true
+toc_sticky: true
 excerpt: Here we look into a good resource of practicing good machine learning design patterns.
 header:
   teaser: /assets/images/mldp.jpeg

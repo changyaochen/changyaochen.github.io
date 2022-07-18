@@ -5,6 +5,7 @@ date:   2022-03-27 12:00:00 -0600
 published: true
 tag: [misc, machine learning]
 toc: true
+toc_sticky: true
 excerpt: A series of study notes of optimization, including convex optimization, linear programming, linear simplex method, and KKT conditions.
 header:
   teaser: /assets/images/LP.png

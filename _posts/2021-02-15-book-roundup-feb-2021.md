@@ -5,6 +5,7 @@ date:   2021-02-15 12:00:00 -0600
 published: true
 tag: book
 toc: true
+toc_sticky: true
 excerpt: Two diagonally different topics, but equally enlightening books.
 header:
   teaser: /assets/images/book_a_mind_for_numbers.jpg

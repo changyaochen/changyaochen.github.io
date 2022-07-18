@@ -5,6 +5,7 @@ date:   2021-06-07 12:00:00 -0600
 published: true
 tag: [machine learning]
 toc: true
+toc_sticky: true
 excerpt: Summary of Coursera MLOps Course 1.
 header:
   teaser: /assets/images/coursera-logo-full-rgb.png

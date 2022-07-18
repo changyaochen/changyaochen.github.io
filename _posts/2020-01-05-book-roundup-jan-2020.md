@@ -5,6 +5,7 @@ date:   2020-01-05 12:00:00 -0600
 published: true
 tag: book
 toc: true
+toc_sticky: true
 excerpt: Statistics, how to build intuition to see everything from a different angle.
 header:
   teaser: /assets/images/book_drunkard_walk.jpg
@@ -26,15 +27,15 @@ Strangely, even I finished this book a couple of months ago, there are two examp
 
 The other example is about Simpson's paradox. The Wikipedia page provides [a very good example](https://en.wikipedia.org/wiki/Simpson%27s_paradox#UC_Berkeley_gender_bias) already, but the one shown in the book is even more striking. It is about admission rates at Cambridge University by different genders, only in this case, for *every* department, women have a higher admission rate, yet as a whole, the men have a higher admission rate. Can it be more paradoxical than that?
 
-&nbsp; | Women| | | Men| | |
-:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:
-&nbsp; | Applied| Accepted| %| Applied| Accepted| %|
-Computer Science|26|7| 27%|228|58| 25%|
-Economics|240|63| 26%|512|112| 22%|
-Engineering|164|52| 32%|972|252| 26%|
-Medicine|416|99| 24%|578|140| 24%|
-Veterinary Medicine|338|53| 16%|180|22| 12%|
-Total|1,184|274| 23%|2,470|584| 24%|
+|       &nbsp;        |  Women  |          |       |   Men   |          |       |
+| :-----------------: | :-----: | :------: | :---: | :-----: | :------: | :---: |  |
+|       &nbsp;        | Applied | Accepted |   %   | Applied | Accepted |   %   |
+|  Computer Science   |   26    |    7     |  27%  |   228   |    58    |  25%  |
+|      Economics      |   240   |    63    |  26%  |   512   |   112    |  22%  |
+|     Engineering     |   164   |    52    |  32%  |   972   |   252    |  26%  |
+|      Medicine       |   416   |    99    |  24%  |   578   |   140    |  24%  |
+| Veterinary Medicine |   338   |    53    |  16%  |   180   |    22    |  12%  |
+|        Total        |  1,184  |   274    |  23%  |  2,470  |   584    |  24%  |
 
 ### [The Drunkard's Walk: How Randomness Rules Our Lives](https://en.wikipedia.org/wiki/The_Drunkard%27s_Walk)
 *by Leonard Mlodinow*
