@@ -6,6 +6,7 @@ published: true
 tag: [algorithm]
 excerpt: Now we know what a good causal model look like, the next question is, how to build one?
 toc: true
+toc_sticky: true
 toc_label: "Table of Contents"
 header:
   teaser: /assets/images/fpci_teaser.png
@@ -17,7 +18,7 @@ In the [last post]({{ site.baseurl }}{% link _posts/2018-04-22-the-fundamental-p
 * The issue at hand: identifying causal relation;
 * Its difficulty: the fundamental problem of causal inference, FPCI;
 * One modeling framework to solve the problem: randomized treatment and control group;
-* The corresponding evaluation metric to assess the quality of a model: Q coefficient. 
+* The corresponding evaluation metric to assess the quality of a model: Q coefficient.
 
 In this post, we will discuss few different types of models under this theme, and apply them to a sample dataset for comparisons.
 
@@ -52,14 +53,14 @@ What is also shown as the right-most figure is the **upgain** of the cumulative 
 Other than directly express gain between the treatment and control group, there is another advantage of using the upgain chart. Recall that there is some unit cost associated with the marketing action, therefore, as we target more customers (moving from left to right in the upgain chart), the total cost increases accordingly, diminishing the upgain, as well as return on investment (ROI) along the process. If the a maximum ROI is the goal of the campaign, then the upgain chart can be used to advise the total number of marketing actions.
 
 ### Class-variable-transformation approach
-The two-model-difference approach makes intuitive sense, and it is also straightforward to implement. However, it is not designed to directly optimize the objective function that we care about, namely, the upgain. It can be argued that, the two models are designed to minimize their individual loss, and ignore the (possibly) weaker 'upgain signals'. A single model that aims to directly maximize the increased probability, \\(P_T(X) - P_C(X)\\), would be better suited. 
+The two-model-difference approach makes intuitive sense, and it is also straightforward to implement. However, it is not designed to directly optimize the objective function that we care about, namely, the upgain. It can be argued that, the two models are designed to minimize their individual loss, and ignore the (possibly) weaker 'upgain signals'. A single model that aims to directly maximize the increased probability, \\(P_T(X) - P_C(X)\\), would be better suited.
 
-There are different techniques to achieve this goal, here we will focus [one](https://pdfs.semanticscholar.org/6021/f9e1860548e59d7b9bfaca5684bd40f0fbc2.pdf)﻿ of them, called class-variable-transformation. The idea is rather simple: one just needs to "*flip the class in the control set*". 
+There are different techniques to achieve this goal, here we will focus [one](https://pdfs.semanticscholar.org/6021/f9e1860548e59d7b9bfaca5684bd40f0fbc2.pdf)﻿ of them, called class-variable-transformation. The idea is rather simple: one just needs to "*flip the class in the control set*".
 
 Before we dive into the details, let's first define some terminologies. Let \\(Y\\)denotes the binary response from the customer, as \\(Y \in \{0, 1\}\\). Let \\(G\\)denotes the group membership of the marketing action, and  \\(G \in \{T, C\}\\)whereas \\(T, C\\)indicates treatment and control, respectively. Let's also define a new random variable \\(Z\\) as:
 
 $$
-Z = 
+Z =
 \begin{cases}
 1, ~~~~&\text{if}~G = T~\text{and}~Y=1;\\
 1, ~~~~&\text{if}~G = C~\text{and}~Y=0;\\
@@ -85,7 +86,7 @@ P(Z=1|X) &=& P(Y=1|X)P(G=T) \\
 \end{eqnarray}
 $$
 
-Furthermore, we can treat \\(P(G=T)\\) and \\(P(G=C)\\) as the portions of the treatment / control group to the total available customer base. For the sake of simplicity, let's assume the sizes of the treatment and control group are identical, therefore \\(P(G=T) = P(G=C) = 0.5\\). If we are dealing with different group size, we  can either resample or reweight the datasets. 
+Furthermore, we can treat \\(P(G=T)\\) and \\(P(G=C)\\) as the portions of the treatment / control group to the total available customer base. For the sake of simplicity, let's assume the sizes of the treatment and control group are identical, therefore \\(P(G=T) = P(G=C) = 0.5\\). If we are dealing with different group size, we  can either resample or reweight the datasets.
 
 Once we "get rid of" the group membership piece (with the equal size simplification), the last equation can be expressed as:
 
@@ -108,7 +109,7 @@ The left-hand side is exactly the quantity that we aim to maximize, namely, the 
 
 Now we are back into our comfort zone: to build a binary classifier. When handed the data from both treatment and control datasets, we first flip the class assignment in the control dataset, then concatenate both datasets, and build a binary classifier to predict \\(P(Z=1)\\). Bring out your favorite tools, be it random forest, gradient boosted trees, neural networks, go crazy. The final 'score' can then be calculated in a straightforward manner, as in the above simplified case, as \\(2P(Z=1) - 1\\). If we care the relative ranking more than the absolute scores, we can even skip this final step.
 
-We still apply the same evaluation metric as what we have described in part 1, following the three steps outlined in last section. The result is shown in the figure below. 
+We still apply the same evaluation metric as what we have described in part 1, following the three steps outlined in last section. The result is shown in the figure below.
 <figure>
 <a href="/assets/images/upgain_class_xform.jpg"><img src="/assets/images/upgain_class_xform.png"></a>
 </figure>
@@ -133,7 +134,7 @@ A natural question will arise: will this method work with a linear model, say, l
 ## Conclusion and references
 In this two-post series, we describe a framework to address the causal inference problem, with few different simple implementations demonstrated with a sample dataset. For more information, please refer to the [Rubin Casual Model](https://en.wikipedia.org/wiki/Rubin_causal_model) and the references within. At the heart of this framework is the random treatment / control group assignment. However, in real life, we might not afford such luxury condition. Then casual inference becomes difficult since we can only rely on observational data (*e.g.*, to find the two (almost) identical group of individuals **after** the action). This will require more effort than just few blog posts (at least for me).
 
-In the space of marketing, there are few excellent works as well. To the best of my knowledge, [Radcliffe and Surry](http://www.maths.ed.ac.uk/~mthdat25/uplift/cscc99-1) started such exploration in 1999, followed by [Lo](https://dl.acm.org/citation.cfm?id=772872) in 2002. These authors have since published series of papers improving their previous works. [Rzepakowski and Jaroszewicz](http://www.ipipan.waw.pl/~sj/pdf/ICDM10web.pdf) have also explored this space, from [where](http://www.cs.put.poznan.pl/sigml/wp-content/uploads/2013/11/Uplift_Modeling_web.pdf) I learned the class variable transfromation approach. Above all, this [book](https://algorithmicweb.wordpress.com/) provides a thorough oerview of how to apply algorithmic thinking in marketing. 
+In the space of marketing, there are few excellent works as well. To the best of my knowledge, [Radcliffe and Surry](http://www.maths.ed.ac.uk/~mthdat25/uplift/cscc99-1) started such exploration in 1999, followed by [Lo](https://dl.acm.org/citation.cfm?id=772872) in 2002. These authors have since published series of papers improving their previous works. [Rzepakowski and Jaroszewicz](http://www.ipipan.waw.pl/~sj/pdf/ICDM10web.pdf) have also explored this space, from [where](http://www.cs.put.poznan.pl/sigml/wp-content/uploads/2013/11/Uplift_Modeling_web.pdf) I learned the class variable transfromation approach. Above all, this [book](https://algorithmicweb.wordpress.com/) provides a thorough oerview of how to apply algorithmic thinking in marketing.
 
 As always, we have to acknowledge the admission of ignorance. If there is any logical fallacy, please [let me know](mailto:changyao.chen@gmail.com).
 

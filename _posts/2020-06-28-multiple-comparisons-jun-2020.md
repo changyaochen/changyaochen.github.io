@@ -5,6 +5,7 @@ date:   2020-06-28 12:00:00 -0600
 published: true
 tag: [statistics]
 toc: true
+toc_sticky: true
 excerpt: We are often spoiled by the amount of data at our disposal, but it is still easy to make mistakes when making statistical inferences if we exploit too much.
 header:
   teaser: /assets/images/type_I_II_errors.png

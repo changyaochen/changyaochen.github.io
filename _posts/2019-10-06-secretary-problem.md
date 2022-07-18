@@ -6,6 +6,7 @@ published: true
 tag: [algorithm, python]
 excerpt: How to maximize your chance to find the best candidate, apartment, or even soulmate, only if the world can be modeled simply.
 toc: true
+toc_sticky: true
 header:
   teaser: /assets/images/secretary_problem_teaser.png
 ---
@@ -170,7 +171,7 @@ This, finally, justifies the "look-then-leap" strategy: we will keep looking (in
 
 $$
 \begin{align*}
-P(r_o; N) 
+P(r_o; N)
 &= \frac{1}{r_o + 1} \frac{r_o + 1}{N} + \frac{r_o}{r_o + 1}P(r_o + 1; N)\\
 &= \frac{1}{N} +  \frac{r_o}{r_o + 1}(\frac{1}{r_o + 2}\frac{r_o + 2}{N} + \frac{r_o + 1}{r_o + 2}P(r_o + 2; N))\\
 &= \frac{r_o}{N}(\frac{1}{r_o} + \frac{1}{r_o + 1} + ... + \frac{1}{N-1}) \\

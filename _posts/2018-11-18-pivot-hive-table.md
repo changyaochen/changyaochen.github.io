@@ -6,12 +6,13 @@ published: true
 tag: [misc]
 excerpt: There is no built-in pivot function in Hive, but one can still do it with relative ease.
 toc: false
+toc_sticky: true
 header:
   teaser: /assets/images/hive_teaser.png
 ---
 [Pivoting a table](https://en.wikipedia.org/wiki/Pivot_table) is a handy function in much of our data analysis, and one can do it easily with Excel or [pandas](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.pivot.html), but there is no built-in Hive function that will do the same job for us. However, there are days one really wish such function exists, let me describe just one of them.
 
-Let's say we have a large sparse matrix, with a dimension of 1 million rows, and 1,000 columns. For each row, there are only 10 non-zero elements. To represent this matrix as a table in its natural form, there will be 1 billion (= 1 million x 1,000) entries required, that's very wasteful for those many zeros. One solution is to represent the matrix in the long format, such that this table will have only 3 columns: row index, column index, and value. Only the non-zero elements of the matrix will be recorded in this table. Therefore, this table will have only 30 million (= 1 million x 10 x 3) elements. That is substantially smaller than the previous solution, and yet we don't lose any information. 
+Let's say we have a large sparse matrix, with a dimension of 1 million rows, and 1,000 columns. For each row, there are only 10 non-zero elements. To represent this matrix as a table in its natural form, there will be 1 billion (= 1 million x 1,000) entries required, that's very wasteful for those many zeros. One solution is to represent the matrix in the long format, such that this table will have only 3 columns: row index, column index, and value. Only the non-zero elements of the matrix will be recorded in this table. Therefore, this table will have only 30 million (= 1 million x 10 x 3) elements. That is substantially smaller than the previous solution, and yet we don't lose any information.
 
 However, there are situations we would prefer the nice 1 million x 1,000 wide format, for example, in certain machine learning scenario. Here we need to convert the matrix from long format to the wide format. This is where pivoting comes into play, and below is how you can do it in Hive.
 
@@ -24,7 +25,7 @@ CREATE TABLE test_table
     key2 STRING,
     value INT
 ) STORED AS ORC;
- 
+
 INSERT INTO TABLE test_table VALUES
     (1001, 'key_11', 'key_21', 111),
     (1002, 'key_11', 'key_22', 222),
@@ -37,7 +38,7 @@ INSERT INTO TABLE test_table VALUES
 Here I spiced things up a little bit. The `id` column corresponds to the row index, but the column index is represented as the combination of the `key1` and `key2` columns. In this way, if I know for sure (*e.g.*, by design) that, there are only `p` unique values of `key1`, and `q` unique values for `key2`, then instead for spell out all the unique column indices multiplicatively (`p x q`), I can just represent them additively (`p + q`).
 
 ### Method 1:
-The first method is rather straightforward: since we know, a priori, all the column indices, let's just scan the long table row by row, checking for this row index (`id` in the toy table), what is the corresponding column index. Therefore, it will just be an exhaustive `CASE` statements, such as the one below: 
+The first method is rather straightforward: since we know, a priori, all the column indices, let's just scan the long table row by row, checking for this row index (`id` in the toy table), what is the corresponding column index. Therefore, it will just be an exhaustive `CASE` statements, such as the one below:
 ~~~sql
 SELECT
     id,
@@ -79,13 +80,13 @@ FROM
         SELECT
             id,
             MAP(CONCAT_WS('_', key1, key2), value) AS group_map
-        FROM       
+        FROM
             test_table
     ) mapped
 GROUP BY mapped.id
 ;
 ~~~
-If you trust me, this will return the same results. 
+If you trust me, this will return the same results.
 
 What is going on here? We have first make a sub-query, whose results is assigned with the alias `mapped`. In this sub-query, we have only a simple `MAP` function (this is the first trick), as well as the [`CONCAT_WS` function ](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF)to stitch all the "key"s together, as the column index. Below is what `mapped` looks like:
 ~~~sql
