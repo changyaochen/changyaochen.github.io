@@ -25,6 +25,8 @@ Off-policy evaluation (OPE): to estimate $$V(\pi_e) \approx \hat{V}(\pi_e, \math
 where $$\mathcal{D}_0$$ is data collected from policy $$\pi_0$$.
 
 ### Model-based OPE
+"Model the world".
+
 Traditional machine learning, train models to predict the counterfactual outcomes.
 What's the problem? The data used from training might not coming from the same population where the trained policy is going to be applied.
 As such, the model is biased.
@@ -33,3 +35,12 @@ As such, the model is biased.
 $$\hat{V}_\text{IPS} = \frac{1}{n} \sum \frac{\pi_e(a_i | x_i)}{\pi_0(a_i | x_i)}r_i$$
 
 This is unbiased.
+
+### Practical use
+What data to log? The 4-tuple: $$\mathcal{D}_0 = (x, a, r, p)_i$$, whereas the last is the propensity.
+Here the policy used is $$\pi_0$$.
+
+The hard problem: accurately predict the rewards, then the optimal policy falls out naturally, _e.g._, via $$argmin$$.
+The easy problem: find the optimal policy, _i.e._, pick the correct action, whereas the reward prediction can be wrong.
+
+The latter inspires the model-free approach. Empirical risk minimization.
