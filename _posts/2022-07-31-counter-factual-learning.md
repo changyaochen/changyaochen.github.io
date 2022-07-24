@@ -8,7 +8,7 @@ toc: true
 toc_sticky: true
 excerpt: TODO
 header:
-  teaser: /assets/images/LP.png
+  teaser: /assets/images/wip.png
 ---
 
 # Agenda
