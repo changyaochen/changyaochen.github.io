@@ -90,10 +90,15 @@ Bellman equation defines the relationship between the value of a state (or a sta
 
 $$
 \begin{align}
-v_{\pi}(s) &= \sum_{a} \pi(a | s) \sum_{s', r} p(s', r | s, a)\big[r + \gamma ~ \color{red}{v_{\pi}(s')}\big]\\
-q_{\pi}(s, a) &= \sum_{s', r} p(s', r | s, a)\big[r + \gamma ~ \sum_{a'} \pi(a' | s') \color{red}{q_{\pi}(s', a')}\big]
+v_{\pi}(s) &= \sum_{a} \pi(a | s) \sum_{s', r} p(s', r | s, a)\big[r + \gamma ~ \color{red}{v_{\pi}(s')}\big] \\
+  &\text{for all } s \in \mathcal{S}\\
+q_{\pi}(s, a) &= \sum_{s', r} p(s', r | s, a)\big[r + \gamma ~ \sum_{a'} \pi(a' | s') \color{red}{q_{\pi}(s', a')}\big]\\
+  &\text{for all }s \in \mathcal{S}, a \in \mathcal{A}
 \end{align}
 $$
+
+Bellman optimality equations are almost identical to the Bellman equations, expect replacing the "sum over all action $$a$$",
+with "select the action that has the maximum value, _i.e._, $$\mathrm{max}_a$$.
 
 ## TODO
 Calculate the value function of the random policy of the gridworld, figure 3.2 in the textbook.
