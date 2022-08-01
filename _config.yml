@@ -59,7 +59,7 @@ reCaptcha:
 #   path                   : # blank (default) uses feed.xml
 search                   : true #, false (default)
 search_full_content      : true #, false (default)
-search_provider          : algolia # lunr (default), algolia
+search_provider          : lunr # lunr (default), algolia
 lunr:
   search_within_pages: true
 algolia:
