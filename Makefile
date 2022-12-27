@@ -1,4 +1,4 @@
-.PHONY: build serve
+.PHONY: build serve all
 
 image = github-page:latest
 
@@ -13,3 +13,5 @@ serve:
 		$(image) \
 		bundle exec jekyll serve --source /home/tmp \
 		--host 0.0.0.0 --future --unpublished --incremental
+
+all: build serve
