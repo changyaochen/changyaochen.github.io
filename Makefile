@@ -10,9 +10,9 @@ serve:
 	docker run \
   		-it --rm \
 		-p 4000:4000 \
-		-v '$(PWD)':/home/tmp \
+		-v '$(PWD)':/home \
 		$(image) \
-		bundle exec jekyll serve --source /home/tmp \
-		--host 0.0.0.0 --future --unpublished --incremental
+		bundle exec jekyll serve \
+		--future --unpublished --verbose --incremental --host 0.0.0.0
 
 all: build serve
