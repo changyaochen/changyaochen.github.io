@@ -90,4 +90,44 @@ What are the other approaches?
 * Monte Carlo method (sample based), for policy evaluation, *i.e.*, to find $v_\pi$. Also, here one does not need to know the model, $p(s', r \mid s, a)$.
 * Brute-force method, for deterministic policy.
 
-END.
+
+Monte-Carlo methods. In the DP paradigm, it requires us to know the transition probability, $$p(s', a \mid s, a)$$, this can be a tall task in reality.
+
+DP is the means for policy evaluation, that is, for a given policy $$\pi$$, finding its state-value functions.
+
+MC uses sample average as the estimate of the value functions (only applies to episodic case).
+
+In the context of episodic tasks (with terminal states), with a given policy, after an episode is finished and collected the total rewards $$G$$, we can count from the back, and update the discounted rewards of the previous states. We can run through many episodes, so that we can collect multiple values of each state, and the state-value function can be estimated as the simple average. The same procedure can be used to estimate the action-value function.
+
+How to ensure exploration in MC? Exploring starts: the initiate state, and more importantly, the initiate action is randomly chosen. In the following states, the agent will follow the prescribed policy.
+
+How to use MC for control (_i.e._, policy improvement)? Simple, after each episode, when we are updating the state and action value functions, we can also update the policy by greedily select the action that has the largest action-value. Then for the next episode, we can follow the updated policy.
+
+Limitation of exploring start? Maybe this is not feasible in reality. Taking a page from the $$\epsilon$$-greedy policy in the multi-armed bandit setting: when deciding which action to take, instead of deterministically follow the current policy, there is a small probability, _e.g._, $$\epsilon$$, the agent will choose a random action.
+
+This will work for the control problem as well. In this way, we will have a stochastic policy, which might not be optimal, but we will bite the bullet.
+
+## On-policy vs off-policy
+
+On-policy: evaluates and improves the policy being used to select actions.
+Off-policy: evaluates and improves a different policy from the ones used to select actions.
+
+Target policy $$\pi(a \mid s)$$ vs behavior policy $$b(a \mid s)$$.
+
+## Important sampling
+This is how we do off-policy learning. In short, importance sampling uses samples from one probability distribution $$b(x)$$, to estimate the expectation of a different distribution $$\pi$$.
+
+Simply put, we want to learn $$E_{\pi}[X]$$, however, we can only observe the outcome from following the behavior policy $$b$$. As a trick, we can expand the expectation under the target policy $$\pi$$ as:
+
+$$
+\begin{eqnarray}
+E_{\pi}[X]
+&= \sum_{x \in X} x \pi(x) \frac{b(x)}{b(x)} \\
+&= \sum_{x \in X} x b(x) \frac{\pi(x)}{b(x)} \\
+&\approx \frac{1}{N} \sum_i^N x_i \rho(x)
+\end{eqnarray}
+$$
+
+## Off-policy prediction
+Use the behavior policy to evaluate the target policy, _i.e._, what's the state-value functions.
+

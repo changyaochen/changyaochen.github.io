@@ -6,6 +6,7 @@ build:
 	docker build -t $(image) .
 
 serve:
+	rm -rf _site && \
 	docker run \
   		-it --rm \
 		-p 4000:4000 \
