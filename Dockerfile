@@ -13,11 +13,8 @@ RUN apk add ruby ruby-bundler ruby-dev ruby-irb ruby-rdoc \
 RUN export PATH="/root/.rbenv/bin:$PATH"
 RUN rm -rf /var/cache/apk/*
 
-# Install Jekyll and required gems
+# Install bundler
 RUN gem install bundler
-RUN gem install jekyll
-RUN gem install github-pages
-
 
 # Copy files over
 WORKDIR /home
