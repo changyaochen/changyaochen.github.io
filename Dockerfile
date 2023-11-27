@@ -1,7 +1,7 @@
 # Docker image for Jekyll to build github-pages
 FROM alpine:latest
 
-# Install base, Ruby, Headers, Jekyll, Bundler, github-pages Export Path
+# Install basic packages
 RUN apk update
 RUN apk upgrade
 RUN apk add curl wget bash cmake
@@ -13,13 +13,14 @@ RUN apk add ruby ruby-bundler ruby-dev ruby-irb ruby-rdoc \
 RUN export PATH="/root/.rbenv/bin:$PATH"
 RUN rm -rf /var/cache/apk/*
 
-# Install bundler
-RUN gem install bundler
+# Install Jekyll and bundler
+RUN gem install jekyll bundler
 
 # Copy files over
 WORKDIR /home
 COPY . .
 
+RUN bundle update
 RUN bundle config set force_ruby_platform true
 RUN bundle install
 
