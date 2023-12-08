@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Large Language Model (LLM) learning notes, part 1"
-date:   2023-12-05 12:00:00 -0600
+date:   2023-12-08 12:00:00 -0600
 published: false
 tag: [machine learning]
 toc: true
@@ -10,7 +10,18 @@ excerpt: "blah more"
 header:
   teaser: /assets/images/reinforcement-learning-fig.jpeg
 ---
+I have been putting off formerly learning about Large Language Models (LLMs)
+for a while, with the excuse that I don't have time. Excuses are, at the end of
+the day, excuses, so I try to do the easiest thing first: follow a Coursera
+[course](https://www.coursera.org/learn/generative-ai-with-llms),
+and try to take notes. This is the first part of my notes.
 
+## Rise of LLMs: transformer architecture
+
+LLMs, at the simplest level, are models to "finish sentences". To do so, we first
+need to provide the "prompt" to the model, _i.e._, ask a question, so that the
+model, which is so knowledgeable (since it is trained on massive amount of data),
+can answer it.
 Text generation before transformer: RNN.
 RNN has a problem: long-term dependency, namely,
 it can only remember the last few words, or it takes a long training time
