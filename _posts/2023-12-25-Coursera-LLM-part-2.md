@@ -2,7 +2,7 @@
 layout: single
 title:  "Large Language Model (LLM) learning notes, part 2"
 date:   2023-12-25 12:00:00 -0600
-published: false
+published: true
 tag: [machine learning]
 toc: true
 toc_sticky: true
