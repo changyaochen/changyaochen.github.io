@@ -8,7 +8,7 @@ toc: true
 toc_sticky: true
 excerpt: "Scratch notes when reading the O'Reilly book of 'Generative Deep Learning, 2nd Edition'"
 header:
-  teaser: assets/images/oreilly_gen_ai_book.png
+  teaser: assets/images/oreilly_gen_ai_book.jpeg
 ---
 
 ## Chapter 1 and 2
