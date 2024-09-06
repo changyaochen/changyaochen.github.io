@@ -56,6 +56,7 @@ correctly identified by the discriminator as real (giving a high probability), t
 reward such a situation by setting the label as "1" and use the binary cross-entropy as the loss function.
 
 At the end of the day, we want the generator to generate images that are indistinguishable from the real images.
+
 <figure>
 <center>
 <a href="/assets/images/gan_training.png"><img src="/assets/images/gan_training.png"></a>
@@ -71,7 +72,9 @@ In WGAN, the output (prediction), $$p_i$$ for the discriminator is not a probabi
 ranging from negative infinity to positive infinity. As such, the discriminator is now also called the **critic**.
 The labels, $$y_i$$, also change from 0 and 1 to -1 and 1.
 After this modification, the (Wasserstein) loss function is defined as
-$$ -\frac{1}{n} \sum_{i=1}^{n} y_i p_i $$
+
+$$ -\frac{1}{n} \sum_{i=1}^{n} y_i p_i, $$
+
 where $$n$$ is the number of samples.
 
 There are few other tricks in WGAN to stabilize the training, _e.g._,
@@ -85,7 +88,7 @@ To summarize:
 * Train the critic multiple times for each update of the generator.
 * There are no batch normalization layers in the critic.
 
-#### Conditional GAN (CGAN)
+### Conditional GAN (CGAN)
 In the case of VAE, we can find a way to find meanings in the latent space,
 such as "smiling", by labeling the corresponding images.
 In the case of GAN, we can also do this, given the image labels, and
