@@ -11,6 +11,9 @@ header:
   teaser: assets/images/oreilly_gen_ai_book.jpeg
 ---
 
+This is my notes when reading the book "Generative Deep Learning, 2nd Edition" by David Foster,
+published by O'Reilly ([link](https://learning.oreilly.com/library/view/generative-deep-learning/9781098134174/)).
+
 ## Chapter 1 and 2
 
 Mostly introductory to generative models and neural networks. Nothing very new to me.
