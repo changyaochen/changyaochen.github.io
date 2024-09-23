@@ -6,7 +6,7 @@ published: true
 tag: [machine learning]
 toc: true
 toc_sticky: true
-excerpt: "Scratch notes when reading the O'Reilly book of 'Generative Deep Learning, 2nd Edition'"
+excerpt: This post is for chapter 5 (Autoregressive Models) and chapter 6 (Normalizing Flow Models).
 header:
   teaser: assets/images/oreilly_gen_ai_book.jpeg
 ---
@@ -134,7 +134,8 @@ However, it is a good example
 to show how one can combine different types of neural networks, in this case,
 spatial and sequential, to learn the underlying patterns of the data.
 
-Again, like the vanilla GAN, the PixelCNN learns $$P(x)$$, instead of $$P(x|z)$$.
+Again, like the vanilla GAN, the PixelCNN learns
+$$P(x)$$, instead of $$P(x|z)$$.
 
 ## Chapter 6. Normalizing Flow Models
 
