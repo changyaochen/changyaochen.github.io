@@ -6,7 +6,8 @@ published: true
 tag: [machine learning]
 toc: true
 toc_sticky: true
-excerpt: "Scratch notes when reading the O'Reilly book of 'Generative Deep Learning, 2nd Edition'"
+excerpt: Scratch notes when reading the O'Reilly book of 'Generative Deep Learning, 2nd Edition'.
+  This post is for the first 4 chapters.
 header:
   teaser: assets/images/oreilly_gen_ai_book.jpeg
 ---
