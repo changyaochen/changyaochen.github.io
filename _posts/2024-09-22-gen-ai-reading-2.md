@@ -1,8 +1,8 @@
 ---
 layout: single
 title:  "Notes for Generative AI learning, part 2"
-date:   2024-09-18 12:00:00 -0600
-published: false
+date:   2024-09-22 12:00:00 -0600
+published: true
 tag: [machine learning]
 toc: true
 toc_sticky: true
@@ -133,3 +133,89 @@ such as a text prompt, or a latent vector (maybe not so meaningful...).
 However, it is a good example
 to show how one can combine different types of neural networks, in this case,
 spatial and sequential, to learn the underlying patterns of the data.
+
+Again, like the vanilla GAN, the PixelCNN learns $$P(x)$$, instead of $$P(x|z)$$.
+
+## Chapter 6. Normalizing Flow Models
+
+The central idea for a generative model is to learn the underlying distribution
+$$P(x)$$ of the data, so that we can generate new data by sampling from it.
+However, $$P(x)$$ is usually complex, and we usually resort to a "simpler" distribution,
+as in the case of VAE, the distribution of the latent variable $$P(z | x)$$.
+
+The idea of normalizing flow models is similar, but we want to learn the distribution
+of the latent variable $$P(z) directly. Also, we want to impose some constraints
+on the functional form of this "base" distribution, _e.g._, as a Normal distribution.
+
+<figure>
+<center>
+<a href="/assets/images/normalizing_flow_basic.png"><img src="/assets/images/normalizing_flow_basic.png"></a>
+<figcaption>
+Change of variables in the normalizing flow model. Here the data is denoted as \(y\),
+instead of the usual \(x\). <a href="https://arxiv.org/abs/1908.09257">Reference</a>.
+</figcaption>
+</center>
+</figure>
+
+This technique, known as "change of variables", is common in probability theory.
+The function $$f$$ can be viewed as the encoder in the VAE model, mapping data ($$x$$ or $$y$$)
+to the latent variable $$z$$, and the function $$g$$ can be viewed as the decoder,
+mapping $$z$$ back to the data space.
+However, unlike VAE where the encoder and decoder are learned independently,
+here $$f$$ is the inverse of $$g$$. Therefore, once $$g$$ is learned, $$f$$ is also set.
+Such a pair of functions is called "[bijection](https://en.wikipedia.org/wiki/Bijection)",
+or bijective function.
+
+In the context of generative models, the function $$g$$
+(a generator) "pushes forward" the base density $$P(z)$$ (sometimes referred to as the “noise”)
+to a more complex density.
+This movement from base density to final complicated density is the _generative_ direction.
+
+The inverse function $$f$$ moves (or "flows") in the opposite, normalizing direction:
+from a complicated and irregular data distribution towards the simpler, more regular or
+"normal" form, of the base measure $$P(z)$$. This view is what gives
+rise to the name "normalizing flows" as $$f$$ is "normalizing" the data distribution.
+This term is doubly accurate if the base
+measure $$P(z)$$ is chosen as a Normal distribution as it often is
+in practice.
+
+### Coupling flows
+
+We still need to learn the function (_i.e._, mapping, transformation) $$f$$,
+which is usually done by a neural network.
+There are different families of functions that can be used to model $$f$$,
+for example, a simple linear transformation of $$x$$. In this book, the authors
+focus on the "coupling flows", which is a type of function that splits the input
+to two parts, and the mapping (transformation) is done by applying a function
+to one part, and conditioning on the other part. For example, if the input $$x$$ has
+4 dimensions, we can split it to two parts, the first two dimensions $$[x_1, x_2]$$
+and the rest, $$[x_3, x_4]$$. The transformation can then be:
+
+$$
+\begin{align*}
+[y_1, y_2] &= [x_1, x_2] \odot \exp(s([x_3, x_4])) + t([x_3, x_4]),\\
+[y_3, y_4] &= [x_3, x_4],
+\end{align*}
+$$
+
+where $$\odot$$ is the element-wise multiplication, and $$s$$ and $$t$$ are the
+scaling and translation functions, respectively.
+In practice, we can pass data with all the 4 dimensions to both of above operations,
+but setting the unwanted dimensions to zero, _e.g._, $$x_3$$ and $$x_4$$ in
+the first operation.
+
+In this way, we ensure:
+
+* The inverse transformation (from $$y$$ to $$x$$) is well-defined.
+* The Jacobian of the transformation is easy to compute. The Jacobian is required
+  to compute the probability density of the transformed data, and an efficiently
+  computed Jacobian is crucial for the training process.
+
+Now we have described how **one step** of coupling flow works. In practice,
+we can stack multiple coupling layers, and importantly, alternating the split,
+that is, which part of the input is transformed and which part is kept unchanged.
+This is the basic of the "realNVP" (Real-valued Non-Volume Preserving) model.
+
+When training the realNVP model, the loss function is the negative log-likelihood,
+taken with respect to the target distribution $$P(x)$$. This can be easily
+translated to the base distribution $$P(z)$$, and the Jacobian of the transformation.
