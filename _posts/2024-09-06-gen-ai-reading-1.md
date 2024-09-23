@@ -11,9 +11,18 @@ header:
   teaser: assets/images/oreilly_gen_ai_book.jpeg
 ---
 
+This is my notes when reading the book "Generative Deep Learning, 2nd Edition" by David Foster,
+published by O'Reilly ([link](https://learning.oreilly.com/library/view/generative-deep-learning/9781098134174/)).
+
 ## Chapter 1 and 2
 
-Mostly introductory to generative models and neural networks. Nothing very new to me.
+Mostly introductory to generative models and neural networks. One main takeaway is that,
+in supervised learning (arguably the most common type of machine learning), we try to learn
+$$P(y | x)$$, where $$y$$ is the label and $$x$$ is the input. In generative models, we try to
+learn $$P(x)$$, and to sample from it to generate new data.
+
+At times, we try to decompose  $$P(x)$$ into $$P(x | z)$$, where $$z$$ is a latent variable.
+This is the main idea behind Autoencoder which we will discuss in the next chapter.
 
 ## Chapter 3. Variational Autoencoders (VAEs)
 
@@ -89,9 +98,18 @@ To summarize:
 * There are no batch normalization layers in the critic.
 
 ### Conditional GAN (CGAN)
+
 In the case of VAE, we can find a way to find meanings in the latent space,
-such as "smiling", by labeling the corresponding images.
-In the case of GAN, we can also do this, given the image labels, and
+such as "smiling", by labeling the corresponding images. More importantly,
+we can ask the model to generate the desired outcome, by providing the
+corresponding latent vector. Namely, we have learned $$P(x | z)$$,
+and then we can provide $$z$$ to generate the corresponding $$x$$.
+
+In the vanilla GAN, we cannot do this, as the input to the generator is a
+random noise. What we have achieved, is to learn $$P(x)$$, and to sample from it.
+We have little control of the outcome, say, to generate an image with a car.
+
+In the case of GAN, we can still fix this by giving the image labels, and
 modify the architecture of the GAN with an additional input
 (to both critic/discriminator and generator) to reflect this
 information. This is called a conditional GAN (CGAN).
