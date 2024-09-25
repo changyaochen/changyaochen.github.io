@@ -139,8 +139,8 @@ $$P(x)$$, instead of $$P(x|z)$$.
 
 ## Chapter 6. Normalizing Flow Models
 
-The central idea for a generative model is to learn the underlying distribution
-$$P(x)$$ of the data, so that we can generate new data by sampling from it.
+The central idea for a generative model is to learn the underlying distribution $$P(x)$$
+of the data, so that we can generate new data by sampling from it.
 However, $$P(x)$$ is usually complex, and we usually resort to a "simpler" distribution,
 as in the case of VAE, the distribution of the latent variable $$P(z | x)$$.
 
@@ -217,6 +217,14 @@ we can stack multiple coupling layers, and importantly, alternating the split,
 that is, which part of the input is transformed and which part is kept unchanged.
 This is the basic of the "realNVP" (Real-valued Non-Volume Preserving) model.
 
-When training the realNVP model, the loss function is the negative log-likelihood,
-taken with respect to the target distribution $$P(x)$$. This can be easily
-translated to the base distribution $$P(z)$$, and the Jacobian of the transformation.
+When training the realNVP model,
+we want to learn the scaling and translation functions $$s$$ and $$t$$
+for each coupling layer,
+while the loss function is the negative log-likelihood,
+taken with respect to the target distribution $$P(x)$$.
+
+Although we do not know the target distribution $$P(x)$$, however, the
+negative log-likelihood can be computed by the change of variables formula,
+given the base distribution $$P(z)$$, the transformation ($$s$$s and $$t$$s),
+and the Jacobian of the transformation.
+
