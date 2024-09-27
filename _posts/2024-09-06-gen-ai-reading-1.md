@@ -3,7 +3,7 @@ layout: single
 title:  "Notes for Generative AI learning, part 1"
 date:   2024-09-06 12:00:00 -0600
 published: true
-tag: [machine learning]
+tag: [machine learning, book]
 toc: true
 toc_sticky: true
 excerpt: Scratch notes when reading the O'Reilly book of 'Generative Deep Learning, 2nd Edition'.

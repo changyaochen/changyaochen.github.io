@@ -3,7 +3,7 @@ layout: single
 title:  "Notes for Generative AI learning, part 2"
 date:   2024-09-22 12:00:00 -0600
 published: true
-tag: [machine learning]
+tag: [machine learning, book]
 toc: true
 toc_sticky: true
 excerpt: This post is for chapter 5 (Autoregressive Models) and chapter 6 (Normalizing Flow Models).
