@@ -17,3 +17,28 @@ to the diffusion models (chapter 7). I will combine these two chapters in this p
 
 My understandings are mostly from [this](https://yang-song.net/blog/2021/score/) blog.
 
+We want to learn $$p(x)$$, and the obvious approach is the maximum likelihood estimation (MLE),
+where given a candidate model $$p(x; \theta)$$, we learn the parameters $$\theta$$ by maximizing
+the log likelihood of the training data $$\Sigma_i \log p(x_i; \theta)$$.
+
+We can learn an arbitrary function $$f(x; \theta)$$ to approximate the true distribution $$p(x)$$,
+but the issue is that: first $$f(x; \theta)$$ is not guaranteed to be positive,
+and second, it is not guaranteed to satisfy the probability distribution
+function constraint of $$\int_y f(y; \theta) = 1$$.
+To address them,
+we can transform and normalize the score function as
+$$p(x; \theta) = \frac{e^{-f(x; \theta)}}{Z(\theta)}$$, where $$Z(\theta)$$ is a
+normalization constant to ensure the distribution is valid.
+
+VAE and GAN bypass this by enforcing the latent variable follows a Gaussian distribution
+to start with; normalizing flow models bypass this by starting from a latent Gaussian distribution and applying a series of invertible transformations to the latent variable.
+
+## Learning the gradient of the distribution
+
+Instead of directly learning the distribution of $$p(x)$$ (via MLE),
+we can learn the **gradient** of the (log-) distribution
+to maximize the likelihood. Note here the gradient is with respect to the
+input $$x$$, not the parameters $$\theta$$. This gradient is also called the
+**score function**, namely, $$s_\theta(x) = \nabla_x \log p(x; \theta)$$.
+
+
