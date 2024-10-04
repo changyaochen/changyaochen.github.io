@@ -26,12 +26,26 @@ but the issue is that: first $$f(x; \theta)$$ is not guaranteed to be positive,
 and second, it is not guaranteed to satisfy the probability distribution
 function constraint of $$\int_y f(y; \theta) = 1$$.
 To address them,
-we can transform and normalize the score function as
-$$p(x; \theta) = \frac{e^{-f(x; \theta)}}{Z(\theta)}$$, where $$Z(\theta)$$ is a
+we can transform and normalize the score function as:
+
+\begin{equation}
+p(x; \theta) = \frac{e^{-f(x; \theta)}}{Z(\theta)}, \tag{1}
+\label{eq:probability_definition}
+\end{equation}
+
+where $$Z(\theta) = \int_y p(y; \theta) \textbf{d}y$$ is a
 normalization constant to ensure the distribution is valid.
 
 VAE and GAN bypass this by enforcing the latent variable follows a Gaussian distribution
 to start with; normalizing flow models bypass this by starting from a latent Gaussian distribution and applying a series of invertible transformations to the latent variable.
+
+## Energy-based models
+
+We can draw an analogy between equation ($$\ref{eq:probability_definition}$$)
+and [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution)
+in statistical physics, which prescribes the probability of a system being in a certain energy state. The higher the energy, the smaller the probability.
+
+Contrastive Divergence (CD) is a popular method to train energy-based models.
 
 ## Learning the gradient of the distribution
 
