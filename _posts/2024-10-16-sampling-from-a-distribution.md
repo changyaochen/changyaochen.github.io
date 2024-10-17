@@ -192,11 +192,11 @@ proposal distribution. We can also use other distributions as long as they are e
 to sample from.
 
 The rejection method is the most generic method, however, it does have some constraints,
-at least for the vanilla version discussed here. The pdf of the proposal distribution
+at least for the vanilla version discussed here. For example, the pdf of the proposal distribution
 must "contain" the pdf of the target distribution, and in practice, we can multiply
 a large constant to the proposal distribution to ensure this.
 
-Another drawbacks of the rejection method is that it can be inefficient,
+Another drawback of the rejection method is that it can be inefficient,
 as we might reject multiple samples before accepting one.
 
 ## Conclusion
@@ -204,6 +204,6 @@ as we might reject multiple samples before accepting one.
 Here we showed how to sample from almost any distribution, as long as we know
 its pdf. Obviously there are more advanced approaches, some don't even require
 the pdf to be normalized, _e.g._,
-[MCMC methods](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo).
+[MCMC method](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo).
 But the basic idea should be similar to what we discussed here.
 
