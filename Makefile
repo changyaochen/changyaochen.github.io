@@ -11,6 +11,7 @@ serve:
 		-it --rm \
 		-p 4000:4000 \
 		-v ${PWD}/_posts:/home/_posts \
+		-v ${PWD}/assets:/home/assets \
 		${image} \
 		bundle exec jekyll serve \
 		--future --unpublished --verbose --incremental --host 0.0.0.0
