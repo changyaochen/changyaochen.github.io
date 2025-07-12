@@ -145,7 +145,7 @@ However, $$P(x)$$ is usually complex, and we usually resort to a "simpler" distr
 as in the case of VAE, the distribution of the latent variable $$P(z | x)$$.
 
 The idea of normalizing flow models is similar, but we want to learn the distribution
-of the latent variable $$P(z) directly. Also, we want to impose some constraints
+of the latent variable $$P(z)$$ directly. Also, we want to impose some constraints
 on the functional form of this "base" distribution, _e.g._, as a Normal distribution.
 
 <figure>
@@ -163,7 +163,7 @@ The function $$f$$ can be viewed as the encoder in the VAE model, mapping data (
 to the latent variable $$z$$, and the function $$g$$ can be viewed as the decoder,
 mapping $$z$$ back to the data space.
 However, unlike VAE where the encoder and decoder are learned independently,
-here $$f$$ is the inverse of $$g$$. Therefore, once $$g$$ is learned, $$f$$ is also set.
+here $$f$$ is the inverse of $$g$$. Therefore, once $$g$$ is learned, $$f$$ is also set, and vice versa.
 Such a pair of functions is called "[bijection](https://en.wikipedia.org/wiki/Bijection)",
 or bijective function.
 
@@ -200,7 +200,7 @@ $$
 $$
 
 where $$\odot$$ is the element-wise multiplication, and $$s$$ and $$t$$ are the
-scaling and translation functions, respectively.
+(to-be-learned) scaling and translation functions, respectively.
 In practice, we can pass data with all the 4 dimensions to both of above operations,
 but setting the unwanted dimensions to zero, _e.g._, $$x_3$$ and $$x_4$$ in
 the first operation.
