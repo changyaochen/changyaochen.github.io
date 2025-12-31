@@ -1,28 +1,37 @@
 # Docker image for Jekyll to build github-pages
 FROM alpine:latest
 
-# Install basic packages
-RUN apk update
-RUN apk upgrade
-RUN apk add curl wget bash cmake
-RUN apk add ruby ruby-bundler ruby-dev ruby-irb ruby-rdoc \
-    libatomic readline readline-dev \
-    libxml2 libxml2-dev libxslt libxslt-dev zlib-dev zlib \
-    libffi-dev build-base git nodejs
-
-RUN export PATH="/root/.rbenv/bin:$PATH"
-RUN rm -rf /var/cache/apk/*
+# Install Ruby and build dependencies in a single layer
+RUN apk add --no-cache \
+    ruby \
+    ruby-bundler \
+    ruby-dev \
+    libxml2 \
+    libxml2-dev \
+    libxslt \
+    libxslt-dev \
+    zlib \
+    zlib-dev \
+    libffi \
+    libffi-dev \
+    build-base \
+    git
 
 # Install Jekyll and bundler
-RUN gem install jekyll bundler
+RUN gem install --no-document jekyll bundler
 
-# Copy files over
+# Set working directory
 WORKDIR /home
+
+# Copy Gemfile first for better layer caching
+COPY Gemfile Gemfile.lock* ./
+
+# Install gems
+RUN bundle config set force_ruby_platform true && \
+    bundle install --jobs 4 --retry 3
+
+# Copy rest of the site
 COPY . .
 
-RUN bundle update
-RUN bundle config set force_ruby_platform true
-RUN bundle install
-
-EXPOSE 4000 4000
-CMD bundle exec jekyll serve --host 0.0.0.0
+EXPOSE 4000
+CMD ["bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0"]
